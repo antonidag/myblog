@@ -10,7 +10,7 @@ As a self-motivated and attentive team player, I approach challenges in a struct
 Whether working on a solo project or as part of a larger team, I am always looking for ways to deliver top-quality results to my clients and colleagues.
 
 ## Experience
-### Integration Devloper
+### Integration Developer
 #### Epical AB
 Working as an Integration Developer focusing on Microsoft Azure Integration Services.
 
