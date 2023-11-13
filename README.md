@@ -1,15 +1,5 @@
 # myblog
 
-## Prerequisites
-
-- Python version 3.11.4 or higher.
-- Install the Blag tool using the following command:
-
-```bash
-  pip install blag
-```
-
-
 ## Installation
 Make sure you have Python installed. You can download it from [python.org](https://www.python.org/downloads/).
 
@@ -17,7 +7,7 @@ Open a terminal or command prompt.
 
 Run the following command to install the Blag tool:
 ```bash
-    pip install blag
+pip install blag
 ```
 
 ## Usage
