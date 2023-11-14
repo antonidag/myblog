@@ -56,6 +56,10 @@ main {
   border-radius: 5px;
 }
 
+
+img {
+  max-width: 100%;
+}
 /* Adjustments for smaller screens */
 @media screen and (max-width: 768px) {
   main {
