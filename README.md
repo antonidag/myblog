@@ -10,6 +10,35 @@ Run the following command to install the Blag tool:
 pip install blag
 ```
 
+### Add extension [Run on Save](https://marketplace.visualstudio.com/items?itemName=emeraldwalk.RunOnSave)
+
+Open vscode preferences `json`
+Add the following settings: 
+```json
+{
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": ".*",
+                "isAsync": true,
+                "cmd": "blag build"
+            }
+        ]
+    }
+}
+```
+
+### Add extension [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+
+Open terminal 
+```bash
+cd build
+code .
+```
+Right click `index.html` -> Open with 'Five Server'
+
+Open web browser locally and view generated pages.  
+
 ## Usage
 Create your markdown files in the `content` directory.
 
