@@ -10,6 +10,7 @@ description: Explore a groundbreaking perspective on workflow development. This 
 
 kom på ett snitsit namn med förkortningarna 
 
+![methology](1.jpg)
 
 ## Introduction
 

@@ -4,7 +4,7 @@ baseURL = 'https://hba.sid.one/'
 # This is what goes in <html lang="">
 languageCode = 'en-us'
 
-theme = "hugo-blog-awesome"
+theme = ""
 
 # This defines how dates are formatted
 defaultContentLanguage = "en-gb"
