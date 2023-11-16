@@ -1,7 +1,10 @@
-Title: Revolutionizing Workflow Development with Azure Logic Apps
-Description: Explore a groundbreaking perspective on workflow development using Azure Logic Apps. This blog post introduces a methodology that seamlessly combines ETL and microservices principles, dividing workflows into distinct areas of responsibility. Learn how this approach enhances modularity, reusability, and maintainability, using a real-world scenario of integrating System X and System Y. Discover the power of orchestration, specialized workflows for data retrieval and transformation, and the benefits of a trigger workflow. Unleash the potential of Azure Logic Apps for agile, scalable, and easily maintainable integration solutions.
-Date: 2023-11-13 12:00
-Tags: Azure,LogicApps,Workflow,ETL,Microservices,Modularity,Reusability,Maintainability
+---
+title: Revolutionizing Workflow Development with Azure Logic Apps
+date: 2023-11-16T12:45:23+01:00
+draft: true
+description: Explore a groundbreaking perspective on workflow development using Azure Logic Apps. This blog post introduces a methodology that seamlessly combines ETL and microservices principles, dividing workflows into distinct areas of responsibility. Learn how this approach enhances modularity, reusability, and maintainability, using a real-world scenario of integrating System X and System Y. Discover the power of orchestration, specialized workflows for data retrieval and transformation, and the benefits of a trigger workflow. Unleash the potential of Azure Logic Apps for agile, scalable, and easily maintainable integration solutions.
+---
+
 
 # A Paradigm Shift in Workflow Development: Unleashing the Power of Azure Logic Apps
 
@@ -14,13 +17,6 @@ In the ever-evolving landscape of application integration, developers are consta
 
 ## Current Workflow Landscape:
 Dive into the current, somewhat lackluster, methods developers employ in Azure Logic Apps. Paint a vivid picture of the existing routine and its underwhelming aspects.
-
-![Test Screenshot](test.png)
-
-
-![Test Screenshot](test2.png)
-
-![Test Screenshot](test4.gif)
 
 ## Challenges and Issues:
 Unveil the pain points and roadblocks developers encounter in the existing workflow landscape. Highlight the frustrations and limitations, making it clear that change is overdue.
@@ -78,3 +74,4 @@ Remember, the key is to engage your readers with vivid language, captivating met
 
 
 In the realm of Azure Logic Apps, embracing a methodology that combines ETL and microservices principles brings a new level of sophistication to workflow development. By dividing responsibilities and creating modular workflows, developers can build agile, scalable, and easily maintainable integration solutions that adapt seamlessly to evolving business requirements.
+
