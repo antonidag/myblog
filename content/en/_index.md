@@ -1,4 +1,4 @@
 ---
 title: "Home"
-author : "Hugo Authors"
+author : "Anton Björkman"
 ---
