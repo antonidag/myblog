@@ -1,24 +1,13 @@
 # myblog
 
 ## Installation
-Make sure you have Python installed. You can download it from [python.org](https://www.python.org/downloads/).
+Install Go
 
-Open a terminal or command prompt.
 
-Run the following command to install the Blag tool:
+
+## Usage  
+
+Create new post run the command
 ```bash
-pip install blag
+hugo new posts/my-first-post.md
 ```
-
-## Usage
-Create your markdown files in the `content` directory.
-
-Run the following command to build static HTML files:
-```bash
-blag build
-```
-Your generated HTML files will be available in the `build` directory.
-
-## Resources
-[Python](https://www.python.org/)
-[Blag Documentation](https://blag.readthedocs.io/en/latest/)
