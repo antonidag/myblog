@@ -29,7 +29,9 @@
                 {{ .Content }}
             </div>
         </article>
-        {{- partial "comments.html" . -}}
+        {{- if and (not (isset .Params "hideComments")) (not (isset .Site.Params "hideComments")) (ne .Params.hideComments true) (ne .Site.Params.hideComments true) }}
+            {{- partial "comments.html" . -}}
+        {{- end }}
     </main>
 </div>
 {{ end }}
