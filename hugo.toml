@@ -60,11 +60,11 @@ disqusShortname = 'Disqus'
 
 [Languages.en-gb.params]
   sitename = "Anton Björkman"
-  defaultColor = "dark" # set color mode: dark, light, auto
+  defaultColor = "auto" # set color mode: dark, light, auto
   # Setting it to 'auto' applies the color scheme based on the visitor's device color preference.If you don't specify anything, ignore this parameter, or leave it blank,
   # the default value is set to 'auto'.
   # You can take a look at layouts/index.html for more information.
-  description = "Minimal Hugo blog theme with light and dark mode support"
+  description = "Anton Björkman personal site & blog"
   mainSections = ['posts']
   toc = true # set to false to disable table of contents 'globally'
   tocOpen = false # set to true to open table of contents by default
@@ -77,7 +77,7 @@ disqusShortname = 'Disqus'
   dateFormat = "" # date format used to show dates on various pages. If nothing is specified, then "2 Jan 2006" format is used.
   # See https://gohugo.io/functions/format/#hugo-date-and-time-templating-reference for available date formats.
   rssFeedDescription = "summary" # available options: 1) summary 2) full
-  # summary - includes a short summary of the blog post in the RSS feed. Generated using Hugo .Summary .
+  # summary - includes a short summary of the blog post in the RSS feed.
   # full - includes full blog post in the RSS feed. Generated using Hugo .Content .
   # By default (or if nothing is specified), summary is used.
 
@@ -86,7 +86,7 @@ disqusShortname = 'Disqus'
   # Note: image is not rendered if the resource(avatar image) is not found. No error is displayed.
   intro = "Anton Björkman"
   name = "Anton Björkman"
-  description = "A fast, minimalistic Hugo theme with light and dark mode support, for running a personal site or blog."
+  description = "As an Integration developer, I craft seamless connections using various cloud services. Whether tackling solo projects or collaborating within a team, I turn challenges into tech adventures."
 
 # Allow to override webmanifest options
 [Languages.en-gb.params.webmanifest]
