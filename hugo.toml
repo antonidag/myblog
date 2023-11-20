@@ -6,6 +6,8 @@ languageCode = 'en-us'
 
 theme = ""
 
+themesDir = "themes"
+
 # This defines how dates are formatted
 defaultContentLanguage = "en-gb"
 
