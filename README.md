@@ -35,3 +35,5 @@ git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke.git theme
 echo "theme = 'ananke'" >> hugo.toml
 hugo server
 ````
+
+
