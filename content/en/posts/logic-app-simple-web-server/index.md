@@ -7,17 +7,17 @@ description: test
 
 
 # Intro
-Its fun to challenge yourself and push the bounders of what and how things could be done, therefore we will build simple web app for submitting registration to an event with only Logic Apps (Standard) resources.
+Logic Apps is great tool for automation bussines processes and can be used for muiltple different use cases, however building a web pages is not one of them! As tech savy guy I find it fun to challenge myself to think out side box! Therefore we will build simple web app for submitting registration to an event with only Logic Apps (Standard) resources.
 
-Since Logic Apps does not really support this kind of use case it comes with a few challenges, however it can still be done! :slimily_face:
+Since Logic Apps does not really support this kind of use case it will come with a few challenges, however it can still be done! :slimily_face:
 
 ## Background
-Before we head into Logic App development I think it is important to understand the fundamentals of web server works and server side rendering, because thats whats we need to solve. 
+Before we head into Logic App development I think it is important to understand the fundamentals of how a web server works and server side rendering, because that is what we are going to need inorder to get this to work.
 
 ### Web Server 
-A simple way to explain a web server is a host that serves files to clients and this is done by through the [HTTP protocol]().
+A simple way to explain a web server is a host that serves files to clients and the communication between the client and server is done through the [HTTP protocol]().
 The client makes a request to web server, the web server can either response with the file or if something went bad happened return a error response.
-This way of hosting web sites is in common words called a static site.
+This simple way of hosting web sites is normally referred to whats called a static site.
 
 Gif img to show the it works...
 
@@ -29,9 +29,12 @@ Gif img to explain how it works.
 There is a lot more to be said about this topic and since this is not an blog post regarding web server & SSR, I think this general understanding about the concepts will be enuf to continue.
 
 ## Turing Logic App into a web app 
-Since Logic Apps does not provide this funcunallity out of the box, we will need to mimic a web server. 
+As mentiond earlier Logic Apps does not have this funcunallity out of the box, but it sure be created! 
 
-How can we achieve this? Easy. 
+How do we achieve this?
+Logic Apps provide built in HTTP actions to both react on incomming request and return a reaponse back to the client. This means that we have the basic funcunallity of a web server. 
+To create more that just a static site, we can utalize Liquid as it comes with the built in actions. Explain a bit about Liquid.
+
 Create a new workflow, choose sateless. We are choosing stateless to keep the response times low and fast. As a trigger for the workflow "Request" -> "When a request is received" and then the action "Request" -> "Response" in the end of our workflow. The last action will be the actual "page" returned to the client with the html content.
 
 Img show how this is done.
