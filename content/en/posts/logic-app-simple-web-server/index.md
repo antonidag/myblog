@@ -9,6 +9,10 @@ description:
 # Intro
 Let's build simple web app to submit registration to an event with only Logic Apps (Standard) resources.
 
+Write something about Server Side rendering vs Cross Site Rendering.
+
+Add some fun gif and to explain it.
+
 ## Challenge
 
 How should we serve html, css and javascript? 
