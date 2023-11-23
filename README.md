@@ -4,7 +4,12 @@
 
 The aim of this project is to eventually become my personal site and blog. I wanted to make a blog without depending on WordPress or any other fancy content management system (CMS). Additionally, I'm not a big fan of using front-end frameworks like React, as it can become to much of a hassle. I simply want a straightforward site for creating content.
 
-Therefore, I have chosen to use Hugo. You can read more about Hugo [here](https://gohugo.io/). It's a "engine" that can generate static HTML files from markdown, aligning perfectly with my preferences for a simple way to manage and create content.
+[Hugo](https://gohugo.io/) is a SSG (Static Site Generator) that can generate static HTML files from markdown, aligning perfectly with my preferences for a simple way to manage and create content.
+
+## Blog stack
+- Github Pages for hosting
+- [Hugo](https://gohugo.io/) for static site generation
+- [utterances](https://utteranc.es/) for blog posts comments
 
 ## Getting Started
 
