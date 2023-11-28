@@ -16,6 +16,6 @@ As of now I work as an Integration Developer at [Epical](https://www.epicalgroup
 
 My goal of this blog is inspire and help out other developers working with integrations. The content on this blog will be focused on the Microsoft Integration Services, however CI/CD, infrastructure as code and DevOps are the same whatever platform you are working with!
 
-Make sure to connect with on LinkedIn!
+Make sure to connect with me on LinkedIn!
 <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="sv_SE" data-type="horizontal" data-theme="dark" data-vanity="anton-björkman-447a1a1b1"></div>
 <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
