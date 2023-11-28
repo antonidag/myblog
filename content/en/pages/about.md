@@ -1,24 +1,21 @@
 ---
 title: About
-description: 'Hugo, the world''s fastest framework for building websites'
+description: "About and personal page"
 author: Anton Björkman
 hideComments: true
 ---
 
-Written in Go, Hugo is an open source static site generator available under the [Apache Licence 2.0.](https://github.com/gohugoio/hugo/blob/master/LICENSE) Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
+# A world full of integrations
 
-Hugo makes use of a variety of open source projects including:
+Hi, I'am Anton and warm welcome to my blog about the exciting topic of integrations!
 
-* https://github.com/yuin/goldmark
-* https://github.com/alecthomas/chroma
-* https://github.com/muesli/smartcrop
-* https://github.com/spf13/cobra
-* https://github.com/spf13/viper
+My journey forwards integrations started with game development. I scripted simple games using the game engine [GameMaker](https://gamemaker.io/en), which in turn lead me to study Game Development at Malmö University. However, after realizing that there is much more fun to develop sorting algos, databases and applications, I ended up changing my degree to a Bc in Computer Science instead!
 
-Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.
+Since then I have had a the **luxury** of working close to business processes and therefor I have naturally been supporting and developed integrations!
+As of now I work as an Integration Developer at [Epical](https://www.epicalgroup.com/en) with the focus on Microsoft Integration Services.
 
-Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.
+My goal of this blog is inspire and help out other developers working with integrations. The content on this blog will be focused on the Microsoft Integration Services, however CI/CD, infrastructure as code and DevOps are the same whatever platform you are working with!
 
-Websites built with Hugo are extremely fast, secure and can be deployed anywhere including, AWS, GitHub Pages, Heroku, Netlify and any other hosting provider.
-
-Learn more and contribute on [GitHub](https://github.com/gohugoio).
+Make sure to connect with on LinkedIn!
+<div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="sv_SE" data-type="horizontal" data-theme="dark" data-vanity="anton-björkman-447a1a1b1"></div>
+<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
