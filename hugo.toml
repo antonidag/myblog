@@ -88,7 +88,7 @@ disqusShortname = 'Disqus'
   # Note: image is not rendered if the resource(avatar image) is not found. No error is displayed.
   intro = "Anton Björkman"
   name = "Anton Björkman"
-  description = "As an Integration developer, my primary task is to craft seamless connections between application, using various cloud services. Whether tackling solo projects or collaborating within a team, I turn challenges into tech adventures."
+  description = "A world full of integrations! 👨‍💻"
 
 # Allow to override webmanifest options
 [Languages.en-gb.params.webmanifest]
