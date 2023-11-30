@@ -11,7 +11,6 @@ hideComments: true
 # A world full of integrations 🌐
 
 Hi, I'm Anton, and a warm welcome to my blog about the exciting topic of integrations! 🚀
-Hi, I'm Anton, and a warm welcome to my blog about the exciting topic of integrations! 🚀
 
 My journey into integrations began with game development. I scripted simple games using the game engine [GameMaker](https://gamemaker.io/en), which, in turn, led me to study Game Development at Malmö University. However, after realizing that there is much more fun in developing sorting algorithms, databases, and applications, I ended up changing my degree to a BSc in Computer Science instead! 🕹️📚
 My journey into integrations began with game development. I scripted simple games using the game engine [GameMaker](https://gamemaker.io/en), which, in turn, led me to study Game Development at Malmö University. However, after realizing that there is much more fun in developing sorting algorithms, databases, and applications, I ended up changing my degree to a BSc in Computer Science instead! 🕹️📚
