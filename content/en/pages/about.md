@@ -16,7 +16,7 @@ Since then, I've had the luxury of working closely with business processes, and 
 
 The goal of this blog is to inspire and help other developers working with integrations. The content on this blog will be focused on Microsoft Integration Services; however, CI/CD, infrastructure as code, and DevOps are the same, whatever platform you are working with! 🔗💻
 
-Make sure to connect with me on LinkedIn to stay updated on the latest posts and engage in discussions!
+Make sure to connect with me on [LinkedIn](https://se.linkedin.com/in/anton-bj%C3%B6rkman-447a1a1b1) to stay updated on the latest posts!
 
 Make sure to connect with me on LinkedIn!
 <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="sv_SE" data-type="horizontal" data-theme="dark" data-vanity="anton-björkman-447a1a1b1"></div>
