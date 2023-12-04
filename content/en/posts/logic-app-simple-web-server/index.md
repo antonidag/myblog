@@ -2,14 +2,14 @@
 title: "Exploring Logic App: SSR for Dynamic Web Apps"
 date: 2023-11-17T12:45:23+01:00
 draft: false
-description: Logic App, a service designed for integrations and business processes. But in this post we will be transforming Logic Apps into a engaging web experience by using server-side rendering (SSR).
+description: Logic App, a service designed for integrations and business processes. But in this post we will be transforming Logic Apps into a web experience by using server-side rendering (SSR).
 ---
 
 
 ## Background
 Logic Apps is great tool for integrating business processes and can be used for multiple different use cases, however building a web pages is not one of them! Let's change that and build simple web app for submitting registration to an event with only [Logic Apps (Standard)](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview) resources.
 
-Before we head into Logic App development I think it is important to understand the fundamentals of how a web server works, server side rendering and a little about response times, because we need that to get great experience for the user.⚒️
+Before we head into Logic App development I think it is important to understand the fundamentals of web servers, server side rendering and a little about response times! Because we need this to get fully functional web app.
 
 ### Web Server 💻
 A simple way to explain a web server is a host that serves files to clients and that the communication between the client and server is done through the [HTTP protocol](https://developer.mozilla.org/en-US/docs/Glossary/HTTP).
@@ -24,23 +24,23 @@ SSR often refers to when a webpage is generated each time a client requests it. 
 Gif img to explain how it works.
 
 ### Response times 
-When building web apps or anything user related, the less time a user waits the better it is. Response time is usually a measurement on how long it takes for the client to receive the requested content from the server. [📖](https://developer.mozilla.org/en-US/docs/Web/Performance/How_long_is_too_long)
+When building web apps or anything user related, the less time a user waits the better it is. Response time is a measurement on how long it takes for the client to receive the requested content from the server. Response times that lies around 200ms, is a good reference point to have. [📖](https://developer.mozilla.org/en-US/docs/Web/Performance/How_long_is_too_long)
 
 There is a lot more to be said about these topic's, however, I think a general understanding about the concepts will be enuf to continue.
 
 ## Turing Logic App into a web app 🌐
-As menton earlier Logic Apps does not have this funcunallity out of the box, but it can sure be created! 
+As menton earlier Logic Apps does not provide this features out of the box, but we can build it!⚒️
 
 **How do we achieve this?**
 1) Logic App provide built-in HTTP actions to both react on incoming request and return a response back to the client. This means that we somewhat have the basics of a web server. 
 2) We also want to present dynamic content on our webpage, and for this we can use [Liquid](https://shopify.github.io/liquid). [DotLiquid](https://github.com/dotliquid/dotliquid) is a .NET port of the popular open source project Liquid, and it comes as built-in action in Logic Apps. 
 3) Logic App is perhaps not know for its fast operations, but in this case I believe Stateless workflows could be a good fit. [Stateless workflows](https://learn.microsoft.com/en-us/azure/logic-apps/single-tenant-overview-compare) is a type of Logic App workflow with less overhead and some other features, resulting in faster performance and quicker response times.
 
-So we have a way to communicate to the clients, present dynamic content and give fast response times, I think we have meet the requirements for our web app!
+So we have a way to communicate to the clients, present dynamic content and give fast response times, I think we have some tools to start building our web app!
 
 **Creating a Logic App Web App**
 
-Each page will live inside of a workflow, we will need to create three workflows:
+Each page will live inside of a workflow:
 - a workflow page that save/store data and confirms the user registration  
 - a workflow page where the user can submit their registration
 - a workflow page where user can view registrations
