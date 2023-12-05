@@ -16,7 +16,7 @@ A simple way to explain a web server is a host that serves files to clients and 
 The client makes a request to web server, the web server can either response with the file or if something went bad happened return a error response. [📖](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_web_server)
 This simple way of hosting webpages is normally referred to whats called a static site. 
 
-![Client & Web Server](test.gif)
+![Client & Web Server](clientwebserver.gif)
 
 ### Server Side Rendering
 SSR often refers to when a webpage is generated each time a client requests it. In other words, a page returned to the client at request time is a server-side rendered webpage. Compared to static site where pages are pre-generated. [📖](https://dev.to/ebereplenty/server-side-rendering-ssr-vs-static-site-generation-ssg-214k)
