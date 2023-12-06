@@ -46,10 +46,10 @@ Each page will live inside of a workflow:
 
 describe more about the general "framework" and how it should work.
 
-Create local logic app project in Visual Code, or create a Logic App in the Azure Portal. All workflows will start with the Response trigger "When a request is received" and always end with a Response action. The Response action has to set the 'Content-type: text/html' in the headers.  
+Create base liquid input for map is the following:
+- Body
 
-
-For the submit page, add the following html in the response action: 
+Add Head, Style, Header, footer html in the base liquid template. Like this: 
 ```
 <!DOCTYPE html>
 <html lang="en">
@@ -77,6 +77,15 @@ For the submit page, add the following html in the response action:
 </body>
 
 </html>
+```
+For each dynamic content such as displaying user name and etc we will create an own liquid template.
+
+Create local logic app project in Visual Code, or create a Logic App in the Azure Portal. All workflows will start with the Response trigger "When a request is received" and always end with a Response action. The Response action has to set the 'Content-type: text/html' in the headers.  
+
+
+For the submit page, add the following html in the response action: 
+```
+
 
 ```
 If you open up the workflow url in a browser it will look something like this:  
