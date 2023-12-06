@@ -13,30 +13,29 @@ Before we head into Logic App development I think it is important to understand 
 
 ### Web Server 💻
 A simple way to explain a web server is a host that serves files to clients and that the communication between the client and server is done through the [HTTP protocol](https://developer.mozilla.org/en-US/docs/Glossary/HTTP).
-The client makes a request to web server, the web server can either response with the file or if something went bad happened return a error response. [📖](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_web_server)
-This simple way of hosting webpages is normally referred to whats called a static site. 
+The client makes a request to web server, the web server can either response with the file or if something went wrong or an error occurred return a error response. [📖](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_web_server)
+This simple way of hosting webpages is normally referred to what's called a static site. 
 
 ![Client & Web Server](clientwebserver.gif)
 
 ### Server Side Rendering
-SSR often refers to when a webpage is generated each time a client requests it. In other words, a page returned to the client at request time is a server-side rendered webpage. Compared to static site where pages are pre-generated. [📖](https://dev.to/ebereplenty/server-side-rendering-ssr-vs-static-site-generation-ssg-214k)
+SSR often refers to when a webpage is generated each time a client requests it. In other words, a page returned to the client upon request is a server-side rendered webpage. Compared to static site where pages are pre-generated. [📖](https://dev.to/ebereplenty/server-side-rendering-ssr-vs-static-site-generation-ssg-214k)
 
-Gif img to explain how it works.
 
 ### Response times 
-When building web apps or anything user related, the less time a user waits the better it is. Response time is a measurement on how long it takes for the client to receive the requested content from the server. Response times that lies around 200ms, is a good reference point to have. [📖](https://developer.mozilla.org/en-US/docs/Web/Performance/How_long_is_too_long)
+When building web apps or anything user related, the less time a user waits the better it is. Response time is a measurement on how long it takes for the client to receive the requested content from the server. Response times that lie around 200ms, is a good reference point to have. [📖](https://developer.mozilla.org/en-US/docs/Web/Performance/How_long_is_too_long)
 
-There is a lot more to be said about these topic's, however, I think a general understanding about the concepts will be enuf to continue.
+There is a lot more to be said about these topics, however, I think a general understanding about the concepts will be enuf to continue.
 
 ## Turing Logic App into a web app 🌐
-As menton earlier Logic Apps does not provide this features out of the box, but we can build it!⚒️
+As mentioned earlier, Logic Apps does not provide these features out of the box, but we can build it!⚒️
 
 **How do we achieve this?**
-1) Logic App provide built-in HTTP actions to both react on incoming request and return a response back to the client. This means that we somewhat have the basics of a web server. 
-2) We also want to present dynamic content on our webpage, and for this we can use [Liquid](https://shopify.github.io/liquid). [DotLiquid](https://github.com/dotliquid/dotliquid) is a .NET port of the popular open source project Liquid, and it comes as built-in action in Logic Apps. 
-3) Logic App is perhaps not know for its fast operations, but in this case I believe Stateless workflows could be a good fit. [Stateless workflows](https://learn.microsoft.com/en-us/azure/logic-apps/single-tenant-overview-compare) is a type of Logic App workflow with less overhead and some other features, resulting in faster performance and quicker response times.
+1) Logic Apps provide built-in HTTP actions to both react on incoming request and return a response back to the client. This means that we somewhat have the basics of a web server. 
+2) We also want to present dynamic content on our webpage. For this, we can use [Liquid](https://shopify.github.io/liquid), with [DotLiquid](https://github.com/dotliquid/dotliquid) being a .NET port of the popular open source project Liquid, and it comes as built-in action in Logic Apps. 
+3) Logic Apps are perhaps not known for their fast operations, but in this case I believe Stateless workflows could be a good fit. [Stateless workflows](https://learn.microsoft.com/en-us/azure/logic-apps/single-tenant-overview-compare) is a type of Logic Apps workflow with less overhead and some other features, resulting in faster performance and quicker response times.
 
-So we have a way to communicate to the clients, present dynamic content and give fast response times, I think we have some tools to start building our web app!
+So we have a way to communicate with clients, present dynamic content and give fast response times, I believe we have the necessary tools to start building our web app!
 
 **Creating a Logic App Web App**
 
@@ -45,34 +44,42 @@ Each page will live inside of a workflow:
 - a workflow page where the user can submit their registration
 - a workflow page where user can view registrations
 
-Create a new workflow for the registration page, choose sateless. We are choosing stateless to keep the response times low and fast. As a trigger for the workflow "Request" -> "When a request is received" and then the action "Request" -> "Response" in the end of our workflow. The last action will be the actual "page" returned to the client with the html content.
+describe more about the general "framework" and how it should work.
 
-Img show how this is done.
+Create local logic app project in Visual Code, or create a Logic App in the Azure Portal. All workflows will start with the Response trigger "When a request is received" and always end with a Response action. The Response action has to set the 'Content-type: text/html' in the headers.  
 
-In the "Response" action the following settings is applied: 
-Content-Type: text/html
-Body:
+
+For the submit page, add the following html in the response action: 
 ```
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+</head>
+
 <body>
+    <h1>Event Registration</h1>
+    <form action="{Replace with 'Save/Store' workflow url}" method="post">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
-<h1>Hello,</h1>
-<p>world!</p>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
 
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+
+        <button type="submit">Submit</button>
+    </form>
 </body>
+
 </html>
-```
-
-If we get the workflow url and paste that in a browser it will look something like this:
-img on how it looks.
-
-Yay, we have created simple web server using SSR! :emorey:
-
-
-Now let's create a html form with a submit button 
 
 ```
-<html></html>
-```
+If you open up the workflow url in a browser it will look something like this:  
+![Submit_Workflow](submit1.png)
 
+So, lets move on to the "Save/Store" workflow. For simplicity we will hardcode a value to compare if the email can be added to the event or not. 
