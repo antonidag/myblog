@@ -7,7 +7,7 @@ description: Logic App, a service designed for integrations and business process
 
 
 ## Background
-Logic Apps is great tool for integrating business processes and can be used for multiple different use cases, however building a web pages is not one of them! Let's change that and build simple web app for submitting registration to an event with only [Logic Apps (Standard)](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview) resources.
+Logic Apps is great tool for integrating business processes and can be used for multiple different use cases, however building a web pages is not one of them! Let's change that and build simple web app with [Logic Apps (Standard)](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview).
 
 Before we head into Logic App development I think it is important to understand the fundamentals of web servers, server side rendering and a little about response times! Because we need this to get fully functional web app.
 
@@ -39,56 +39,39 @@ So we have a way to communicate with clients, present dynamic content and give f
 
 **Creating a Logic App Web App**
 
-Each page will live inside of a workflow:
-- a workflow page that save/store data and confirms the user registration  
-- a workflow page where the user can submit their registration
-- a workflow page where user can view registrations
+For simplicity sakes we will build a simple web app to search and display movies using the [Open Movie Database API](https://www.omdbapi.com/). There will be two pages, Home and About section.  
 
-describe more about the general "framework" and how it should work.
+Each page will live inside of a workflow. The workflow will start with the Response trigger "When a request is received" and end with an Response action back to the client. The last Response action need to return html code and have the http header ```Content-Type``` set to ```text/html```, otherwise the browser will not interpitate it correctly. 
 
-Create base liquid input for map is the following:
-- Body
+In between the request and response action is where all the logic will be placed. Here we will call 3-th parties API:s and use Liquid to transform json into html code.
+![Workflow](workflow.gif)
 
-Add Head, Style, Header, footer html in the base liquid template. Like this: 
+Create base html liquid template: 
 ```
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
+    <title>{{content.title}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body>
-    <h1>Event Registration</h1>
-    <form action="{Replace with 'Save/Store' workflow url}" method="post">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="address">Address:</label>
-        <input type="text" id="address" name="address" required>
-
-        <button type="submit">Submit</button>
+<div class="container">
+  <nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <form class="d-flex" role="search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
+  </div>
+</nav>
+
+{{content.body}}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>
 ```
-For each dynamic content such as displaying user name and etc we will create an own liquid template.
-
-Create local logic app project in Visual Code, or create a Logic App in the Azure Portal. All workflows will start with the Response trigger "When a request is received" and always end with a Response action. The Response action has to set the 'Content-type: text/html' in the headers.  
-
-
-For the submit page, add the following html in the response action: 
-```
-
-
-```
-If you open up the workflow url in a browser it will look something like this:  
-![Submit_Workflow](submit1.png)
-
-So, lets move on to the "Save/Store" workflow. For simplicity we will hardcode a value to compare if the email can be added to the event or not. 
