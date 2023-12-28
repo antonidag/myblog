@@ -8,7 +8,7 @@
     };
 
     const body = document.body;
-    const config = body.getAttribute("data-theme");
+    const config = THEMES.DARK
 
     const getThemeState = () => {
         const lsState = localStorage.getItem(LS_THEME_KEY);
