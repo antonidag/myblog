@@ -41,10 +41,7 @@ So we have a way to communicate with clients, present dynamic content and give f
 
 For simplicity sakes we will build a simple web app to search and display movies using the [Open Movie Database API](https://www.omdbapi.com/). There will be two pages, Home and About section.  
 
-Each page will live inside of a workflow. The workflow will start with the Response trigger "When a request is received" and end with an Response action back to the client. The last Response action need to return html code and have the http header ```Content-Type``` set to ```text/html```, otherwise the browser will not interpitate it correctly. 
-
-In between the request and response action is where all the logic will be placed. Here we will call 3-th parties API:s and use Liquid to transform json into html code.
-![Workflow](workflow.gif)
+Each page will live inside of a workflow. The workflow will start with the Response trigger "When a request is received" and end with an Response action back to the client. The last Response action need to return html code and have the http header ```Content-Type``` set to ```text/html```, otherwise the browser will not understand it correctly. In between the request and response action is where API calls and etc can be placed. 
 
 Create base html liquid template: 
 ```
@@ -53,73 +50,52 @@ Create base html liquid template:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{content.title}}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
-
 <body>
 <div class="container">
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="#">Moive Database</a>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search" action="{{content.postUrl}}" method="post">
-          <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search" minlength="2">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
+  <nav>
+    <form class="d-flex" role="search" action="{{content.postUrl}}" method="post">
+      <input type="search" placeholder="Search" name="search" aria-label=" minlength="2">
+      <button type="submit">Search</button>
+    </form>
   </nav>
   {{content.body}}
-
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-    <div class="col-md-4 d-flex align-items-center">
-      <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-        <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-      </a>
-      <span class="text-muted">© 2021 Company, Inc</span>
-    </div>
-    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-      <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
-      <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-      <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
-    </ul>
-  </footer>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
-
 </html>
+<!-- This is just the raw html, without styling-->
 ```
-And then create a liquid template for the movie search results: 
+Take note on the `content.postUrl` that will be the url of the workflow that calls the omdb API, and the `content.body` is where we will display the result of the omdb API. 
+
+Let's create a liquid template for the movie search results: 
 ```
 {% for array in content.movies -%}
-<div class="card-group">
+<div>
   {% for item in array -%}
   <div class="card">
-    <img src="{{item.Poster}}" class="card-img-top" alt="{{item.Title}}" width="100px">
+    <img src="{{item.Poster}}" alt="{{item.Title}}" width="100px">
     <div class="card-body">
-      <h5 class="card-title">{{item.Title}}</h5>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Year: {{item.Year}}</li>
-        <li class="list-group-item">Type: {{item.Type}}</li>
-        <li class="list-group-item">IMDB: #{{item.imdbID}}</li>
+      <h5>{{item.Title}}</h5>
+      <ul>
+        <li>Year: {{item.Year}}</li>
+        <li>Type: {{item.Type}}</li>
+        <li>IMDB: #{{item.imdbID}}</li>
+        <!-- omdb API has more properties that can be used, but for simplicity this will work-->
       </ul>
     </div>
   </div>
   {%- endfor -%}
 </div>
 {%- endfor -%}
+<!-- This is just the raw html, without styling-->
 ```
-Now we can start and create the new workflow to represent the index page. 
+This template will take in an array of object and loop over each item and populate the html for us.
+
+Now we can create our two workflows, one for our landing page and another when a user searches on a movie.
+
+The home/landing workflow will have the following actions: 
+![Workflow](workflow_home.gif)
+We will just return the base liquid we created.
+
+The search workflow will look something similar to this: 
+![Workflow](workflow_search.gif)
