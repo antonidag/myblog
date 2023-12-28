@@ -23,4 +23,4 @@
         "display" (.Site.Params.webmanifest.display | default "standalone")
     )
 }}
-<link rel="manifest" href="{{ (resources.Get "icons/site.webmanifest" | resources.ExecuteAsTemplate "site.webmanifest" $ctx).Permalink }}">
+<link rel="manifest" href="{{ (resources.Get "icons/site.webmanifest" | resources.ExecuteAsTemplate "site.webmanifest" $ctx).RelPermalink }}">
