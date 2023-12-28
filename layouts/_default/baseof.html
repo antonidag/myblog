@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
-    {{- partial "head.html" . -}}
-    <body data-theme = "{{ .Site.Params.defaultColor }}" class="notransition">
-        {{- partial "scriptsBodyStart.html" . -}}
-        {{- partial "header.html" . -}}
-        {{- block "main" . }}{{- end }}
-        {{- partial "footer.html" . -}}
-        {{- partial "scriptsBodyEnd.html" . -}}
-    </body>
+  {{- partial "head.html" . -}}
+  <body data-theme="{{ .Site.Params.defaultColor }}" class="notransition">
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-SQ7MCJZ7VX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-SQ7MCJZ7VX");
+    </script>
+
+    {{- partial "scriptsBodyStart.html" . -}} {{- partial "header.html" . -}}
+    {{- block "main" . }}{{- end }} {{- partial "footer.html" . -}} {{- partial
+    "scriptsBodyEnd.html" . -}}
+  </body>
 </html>

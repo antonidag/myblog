@@ -13,7 +13,7 @@ defaultContentLanguage = "en-gb"
 
 # To enable Google Analytics 4 (gtag.js) provide G-MEASUREMENT_ID below.
 # To disable Google Analytics, simply leave the field empty or remove the next line
-googleAnalytics = 'G-SQ7MCJZ7VX' # G-MEASUREMENT_ID
+googleAnalytics = '' # G-MEASUREMENT_ID
 
 # Enable emojis globally
 enableEmoji = true
