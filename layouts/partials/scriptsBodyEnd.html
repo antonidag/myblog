@@ -15,19 +15,19 @@
 {{ end }}
 
 {{ if hugo.IsProduction }}
-    {{ $main = $main | resources.Concat "myblog/js/main.js" | resources.Minify | resources.Fingerprint }}
-    <script src="{{  $main.Permalink }}" integrity="{{ $main.Data.Integrity }}"></script>
+    {{ $main_script := resources.Get "js/main.js" | minify | fingerprint }}
+    <script src="{{ $main_script.RelPermalink }}" integrity="{{ $main_script.Data.Integrity }}"></script>
 
     {{ if gt (len $custom) 0 }}
-        {{ $custom = $custom | resources.Concat "myblog/js/custom.js" | resources.Minify | resources.Fingerprint }}
-        <script src="{{  $custom.Permalink }}" integrity="{{ $custom.Data.Integrity }}"></script>
+        {{ $main_script := resources.Get "js/main.js" | minify | fingerprint }}
+    <script src="{{ $main_script.RelPermalink }}" integrity="{{ $main_script.Data.Integrity }}"></script>
     {{ end }}
 {{ else }}
-    {{ $main = $main | resources.Concat "myblog/js/main.js" }}
-    <script async src="{{  $main.Permalink }}" ></script>
+    {{ $main_script := resources.Get "js/main.js" }}
+    <script src="{{ $main_script.RelPermalink }}" ></script>
 
     {{ if gt (len $custom) 0 }}
-        {{ $custom = $custom | resources.Concat "myblog/js/custom.js" }}
-        <script async src="{{  $custom.Permalink }}" ></script>
+        {{ $main_script := resources.Get "js/main.js" }}
+        <script src="{{ $main_script.RelPermalink }}"></script>
     {{ end }}
 {{ end }}
