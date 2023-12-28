@@ -15,19 +15,19 @@
 {{ end }}
 
 {{ if hugo.IsProduction }}
-    {{ $main = $main | resources.Concat "js/main.js" | resources.Minify | resources.Fingerprint }}
+    {{ $main = $main | resources.Concat "myblog/js/main.js" | resources.Minify | resources.Fingerprint }}
     <script src="{{  $main.Permalink }}" integrity="{{ $main.Data.Integrity }}"></script>
 
     {{ if gt (len $custom) 0 }}
-        {{ $custom = $custom | resources.Concat "js/custom.js" | resources.Minify | resources.Fingerprint }}
+        {{ $custom = $custom | resources.Concat "myblog/js/custom.js" | resources.Minify | resources.Fingerprint }}
         <script src="{{  $custom.Permalink }}" integrity="{{ $custom.Data.Integrity }}"></script>
     {{ end }}
 {{ else }}
-    {{ $main = $main | resources.Concat "js/main.js" }}
+    {{ $main = $main | resources.Concat "myblog/js/main.js" }}
     <script async src="{{  $main.Permalink }}" ></script>
 
     {{ if gt (len $custom) 0 }}
-        {{ $custom = $custom | resources.Concat "js/custom.js" }}
+        {{ $custom = $custom | resources.Concat "myblog/js/custom.js" }}
         <script async src="{{  $custom.Permalink }}" ></script>
     {{ end }}
 {{ end }}
