@@ -102,10 +102,13 @@ The search workflow will look something similar to this:
 Once the workflow is created, save the url and make sure to update your liquid templates to use the new url in the `content.postUrl`. 
 
 
-That's it! We have now created a Logic App Web App. To view the web app locate the trigger url, copy paste that into your web browser. If you add and bit of styling and it can look something similar to this: 
+That's it!🎉🙌 
+
+We have now created a Logic App Web App. To view the web app locate the trigger url, copy paste that into your web browser. If you add and bit of styling and it can look something similar to this: 
 ![Show_case](show_case.gif) 
 
-The full project, including workflow files and other resources, can be found on my  <a href="https://github.com/antonidag/logic-app-web-app" target="_blank" rel="noopener noreferrer">GitHub repository</a>! 
+The full project, including workflow files and other resources, can be found on my  <a href="https://github.com/antonidag/logic-app-web-app" target="_blank" rel="noopener noreferrer">GitHub</a>! 
 
 
 ## Reflections
+
