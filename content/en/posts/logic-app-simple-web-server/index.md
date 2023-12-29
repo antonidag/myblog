@@ -87,9 +87,8 @@ Let's create a liquid template for the movie search results:
   {%- endfor -%}
 </div>
 {%- endfor -%}
-<!-- This is just the raw html, without styling-->
+<!-- This is the raw HTML liquid template, without styling. -->
 ```
-Once the workflow is created, save the URL and make sure to explicitly update the liquid templates to use the new URL in the content.postUrl
 
 We can now create our two workflows, one for our landing page and another when a user searches on a movie. For debugging purpose it is easier to start with the Stateful and once your done debugging, switch over to Stateless for that optimized low latency performance. 
 
