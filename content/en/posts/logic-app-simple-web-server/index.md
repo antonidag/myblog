@@ -37,7 +37,7 @@ As mentioned earlier, Logic Apps does not provide these features out of the box,
 
 So we have a way to communicate with clients, present dynamic content and give fast response times, I believe we have the necessary tools to start building our web app!
 
-**Creating a Logic App Web App**
+**Creating a Logic App web app**
 
 For the sake of simplicity, we will build a simple web app to search and display movies using the <a href="https://www.omdbapi.com/" target="_blank" rel="noopener noreferrer">Open Movie Database API</a>. There will be two pages, Home and About section.  
 
@@ -104,7 +104,7 @@ Once the workflow is created, save the url and make sure to update your liquid t
 
 That's it!🎉🙌 
 
-We have now created a Logic App Web App. To view the web app locate the trigger url, copy paste that into your web browser. If you add and bit of styling and it can look something similar to this: 
+We have now created a Logic App web app. To view the web app locate the trigger url, copy paste that into your web browser. If you add and bit of styling and it can look something similar to this: 
 ![Show_case](show_case.gif) 
 
 The full project, including workflow files and other resources, can be found on my <a href="https://github.com/antonidag/logic-app-web-app" target="_blank" rel="noopener noreferrer">GitHub</a>! 
