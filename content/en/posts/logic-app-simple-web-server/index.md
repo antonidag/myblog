@@ -107,8 +107,25 @@ That's it!🎉🙌
 We have now created a Logic App Web App. To view the web app locate the trigger url, copy paste that into your web browser. If you add and bit of styling and it can look something similar to this: 
 ![Show_case](show_case.gif) 
 
-The full project, including workflow files and other resources, can be found on my  <a href="https://github.com/antonidag/logic-app-web-app" target="_blank" rel="noopener noreferrer">GitHub</a>! 
+The full project, including workflow files and other resources, can be found on my <a href="https://github.com/antonidag/logic-app-web-app" target="_blank" rel="noopener noreferrer">GitHub</a>! 
 
 
 ## Reflections
+Running Logic Apps as a web app had its challenges. Logic Apps are built for orchestrating large enterprise integrations scenarios. Making Logic Apps work as a potential use case for a web apps with its hard requirements such as presenting dynamic content, fast response times and etc, required a thoughtful approach. But it was really fun to see that it works as well as it does!
+
+As for the developer experience, I think if you know your way around with HTML and CSS you can produce results quite rapidly. I began working with the Stateless mode but it made the development painful, so I switched to Stateful mode. The productivity when up and it felt as more natural way of working, mostly due to debugging. Developing the actual web app was a great experience once the trail & error period was over, why? Because of the Logic Apps Run History, you can easily go back and see the request, payloads, headers and other important properties that you need when you are building a web app. 
+
+
+A core part of transforming Logic App to a web app is the use of a template language such as **Liquid**. It made presenting dynamic content flexible, robust and had great performance. <a href="https://developer.mozilla.org/en-US/docs/Web/XSLT" target="_blank" rel="noopener noreferrer">XSLT</a> would probably be a good substitute, however I did not try this in my project.  
+
+
+When it comes to performance there I think there is a lot more that can be done. I mostly ran this project locally on my computer, so its hard to make any real-world statements about response times and etc. However, what I can say is that you need to balance the amount of actions and optimize where where you can, otherwise you will end up with a slow web app. For example, when I introduced BootStrap with CDN loading for styling, the page loaded noticeably slower. This is somewhat expected since all the styling components are loaded **after** the page is sent the client. But even with this less optimized implementation my experience was overall good, perhaps not the greatest but defiantly good. 
+
+
+Once of the biggest hassles with running Logic Apps as a web apps is the routing. By default all workflows have a `sig` value in the end url, which makes a bit things tricky. The `sig` url parameter is an authentication mechanism to provide security and to only allowing specific clients to make requests to the workflow. As good as this feature is, we can't predict the value and we will need to make a post deployment in order to populate the "paths" to the different workflows. 
+
+There is also some general limitations to take into consideration Microsoft recommends to have no more than 10-15 workflows per logic app resource <a href="https://learn.microsoft.com/en-US/azure/logic-apps/create-single-tenant-workflows-azure-portal#best-practices-and-recommendations" target="_blank" rel="noopener noreferrer">📖</a>. This is just a recommendation but an indicator that large scale web apps with hundreds of different pages is perhaps not what the Logic App is cut out for! 
+
+I do see a space for running Logic Apps as a web app, one of the biggest arguments for me as an Integrations Developer is that I can work with the tools I know and like. Another value of using Logic Apps is all the built in connectors that comes out of the box. Creating simple request forms and connecting to a database, triggering Logic Apps workflows or admin interface is just some of use case where Logic Apps can be useful 💡.
+
 
