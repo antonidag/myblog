@@ -66,7 +66,7 @@ disqusShortname = 'Disqus'
   # Setting it to 'auto' applies the color scheme based on the visitor's device color preference.If you don't specify anything, ignore this parameter, or leave it blank,
   # the default value is set to 'auto'.
   # You can take a look at layouts/index.html for more information.
-  description = "Anton Björkman personal site & blog"
+  description = "Discover Integrations with Anton Björkman! Dive into the world of cloud services, find inspiration and new topics in the ever-evolving digital landscape. Whether you're a seasoned IT professional or a curious beginner, this blog is for you interested in integrations."
   mainSections = ['posts']
   toc = true # set to false to disable table of contents 'globally'
   tocOpen = false # set to true to open table of contents by default
