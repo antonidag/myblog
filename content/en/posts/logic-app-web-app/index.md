@@ -1,6 +1,6 @@
 ---
 title: "Revolutionize Your Logic Apps: Building Dynamic Web Apps with SSR Magic! 🌐✨"
-date: 2023-11-17T12:45:23+01:00
+date: 2025-01-05T10:00:00+01:00
 draft: false
 description: Logic App, a service designed for integrations and business processes. But in this post we will be transforming Logic Apps into a web experience by using server-side rendering (SSR).
 image: "myblog/posts/logic-app-web-app/clientwebserver.gif"
@@ -33,14 +33,14 @@ As mentioned earlier, Logic Apps does not provide these features out of the box,
 
 **How do we achieve this?**
 1) Logic Apps provide built-in HTTP actions to both react on incoming request and return a response back to the client. This means that we somewhat have the basics of a web server. 
-2) We also want to present dynamic content on our webpage. For this, we can use <a href="https://shopify.github.io/liquid" target="_blank" rel="noopener noreferrer">Liquid</a>, with <a href="https://github.com/dotliquid/dotliquid" target="_blank" rel="noopener noreferrer">DotLiquid</a> being a .NET port of the popular open source project Liquid, and it comes as built-in action in Logic Apps. 
+2) We also want to present dynamic content on our webpage. For this, we can use Liquid, with <a href="https://github.com/dotliquid/dotliquid" target="_blank" rel="noopener noreferrer">DotLiquid</a> being a .NET port of the popular open source project Liquid, and it comes as built-in action in Logic Apps. 
 3) Logic Apps are perhaps not known for their fast operations, but in this case I believe Stateless workflows could be a good fit. <a href="https://learn.microsoft.com/en-us/azure/logic-apps/single-tenant-overview-compare" target="_blank" rel="noopener noreferrer">Stateless workflows</a> is a type of Logic Apps workflow with less overhead and some other features, resulting in faster performance and quicker response times.
 
 So we have a way to communicate with clients, present dynamic content and give fast response times, I believe we have the necessary tools to start building our web app!
 
 **Creating a Logic App web app**
 
-For the sake of simplicity, we will build a simple web app to search and display movies using the <a href="https://www.omdbapi.com/" target="_blank" rel="noopener noreferrer">Open Movie Database API</a>. There will be two pages, Home and About section.  
+For the sake of simplicity, we will build a simple web app to search and display movies using the Open Movie Database API. There will be two pages, Home and About section.  
 
 Each page will live inside of a workflow. The workflow will start with the Response trigger "When a request is received" and end with an Response action back to the client. The last Response action need to return html code and have the http header ```Content-Type``` set to ```text/html```, otherwise the browser will not understand it correctly. In between the request and response action is where API calls and etc can be placed. 
 
@@ -94,11 +94,11 @@ Let's create a liquid template for the movie search results:
 We can now create our two workflows, one for our landing page and another when a user searches on a movie. For debugging purpose it is easier to start with the Stateful and once your done debugging, switch over to Stateless for that optimized low latency performance. 
 
 The home/landing workflow will have the following actions: 
-![Workflow](workflow_home.gif)
+![Workflow_home](workflow_home.gif)
 In this example I have not included fetching movie news and etc, this is just the most striped down version of the workflow. 
 
 The search workflow will look something similar to this: 
-![Workflow](workflow_search.gif)
+![Workflow_search](workflow_search.gif)
 Once the workflow is created, save the url and make sure to update your liquid templates to use the new url in the `content.postUrl`. 
 
 
@@ -116,7 +116,7 @@ Running Logic Apps as a web app had its challenges. Logic Apps are built for orc
 As for the developer experience, I think if you know your way around HTML and CSS, you can produce results quite rapidly. I began working with the Stateless mode, but it made development painful, so I switched to Stateful mode. The productivity went up, and it felt more like a natural way of working, mostly due to debugging. Developing the actual web app was a great experience once the trial and error period was over. Why? Because of the Logic Apps Run History; you can easily go back and see the request, payloads, headers, and other important properties that you need when you are building a web app.
 
 
-A core part of transforming Logic App into a web app is the use of a template language such as **Liquid**. It made presenting dynamic content flexible, robust, and had great performance.. <a href="https://developer.mozilla.org/en-US/docs/Web/XSLT" target="_blank" rel="noopener noreferrer">XSLT</a> would probably be a good substitute; however, I did not try this in my project.
+A core part of transforming Logic App into a web app is the use of a template language such as **Liquid**. It made presenting dynamic content flexible, robust, and had great performance. <a href="https://developer.mozilla.org/en-US/docs/Web/XSLT" target="_blank" rel="noopener noreferrer">XSLT</a> would probably be a good substitute; however, I did not try this in my project.
 
 When it comes to performance, I think there is a lot more that can be done. I mostly ran this project locally on my computer, so it's hard to make any real-world statements about response times and so on. However, what I can say is that you need to balance the number of actions and optimize where you can; otherwise, you will end up with a slow web app. For example, when I introduced Bootstrap with CDN loading for styling, the page loaded noticeably slower. This is somewhat expected since all the styling components are loaded **after** the page is sent to the client. But even with this less optimized implementation, my experience was overall good, perhaps not the greatest but definitely good.
 
