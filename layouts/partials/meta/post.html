@@ -34,7 +34,7 @@
         "headline": {{ .Title }},
         "author": {
         "@type": "Person",
-        "name": "{{ .Site.Params.github }}"
+        "name": "{{ .Site.Title }}"
         },
         "datePublished": "{{ dateFormat "2006-01-02" .Date }}",
         "description": {{ .Description }},
@@ -43,7 +43,7 @@
         "dateModified": "{{ dateFormat "2006-01-02" .Lastmod }}",
         "image": {
         "@type": "imageObject",
-        "url": "{{ with .Params.image }}{{ .Permalink }}{{ end }}"
+        "url": "{{ with .Params.image }}{{ end }}"
         },
         "publisher": {
         "@type": "Organization",
