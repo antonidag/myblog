@@ -18,11 +18,9 @@
     <meta property="og:article:published_time" content={{ $ISO_date | safeHTML }} />
     <meta property="article:published_time" content={{ $ISO_date | safeHTML }} />
 
-    {{ with.Params.author }}
-    <meta property="og:article:author" content="{{humanize . }}" />
-    <meta property="article:author" content="{{humanize . }}" />
-    <meta name="author" content="{{humanize . }}" />
-    {{ end }}
+    <meta property="og:article:author" content="Anton Björkman" />
+    <meta property="article:author" content="Anton Björkman" />
+    <meta name="author" content="Anton Björkman" />
 
     {{ with.Params.category }}
     <meta name="news_keywords" content="{{ index . 0 }}" />
