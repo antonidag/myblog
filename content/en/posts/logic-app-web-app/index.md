@@ -33,7 +33,7 @@ As mentioned earlier, Logic Apps does not provide these features out of the box,
 
 **How do we achieve this?**
 1) Logic Apps provide built-in HTTP actions to both react on incoming request and return a response back to the client. This means that we somewhat have the basics of a web server. 
-2) We also want to present dynamic content on our webpage. For this, we can use <a href="https://shopify.github.io/liquid" target="_blank" rel="noopener noreferrer">Liquid</a>, with <a href="https://github.com/dotliquid/dotliquid" target="_blank" rel="noopener noreferrer">DotLiquid</a> being a .NET port of the popular open source project Liquid, and it comes as built-in action in Logic Apps. 
+2) We also want to present dynamic content on our webpage. For this, we can use Liquid, with <a href="https://github.com/dotliquid/dotliquid" target="_blank" rel="noopener noreferrer">DotLiquid</a> being a .NET port of the popular open source project Liquid, and it comes as built-in action in Logic Apps. 
 3) Logic Apps are perhaps not known for their fast operations, but in this case I believe Stateless workflows could be a good fit. <a href="https://learn.microsoft.com/en-us/azure/logic-apps/single-tenant-overview-compare" target="_blank" rel="noopener noreferrer">Stateless workflows</a> is a type of Logic Apps workflow with less overhead and some other features, resulting in faster performance and quicker response times.
 
 So we have a way to communicate with clients, present dynamic content and give fast response times, I believe we have the necessary tools to start building our web app!
@@ -94,11 +94,11 @@ Let's create a liquid template for the movie search results:
 We can now create our two workflows, one for our landing page and another when a user searches on a movie. For debugging purpose it is easier to start with the Stateful and once your done debugging, switch over to Stateless for that optimized low latency performance. 
 
 The home/landing workflow will have the following actions: 
-![Workflow](workflow_home.gif)
+![Workflow_home](workflow_home.gif)
 In this example I have not included fetching movie news and etc, this is just the most striped down version of the workflow. 
 
 The search workflow will look something similar to this: 
-![Workflow](workflow_search.gif)
+![Workflow_search](workflow_search.gif)
 Once the workflow is created, save the url and make sure to update your liquid templates to use the new url in the `content.postUrl`. 
 
 
