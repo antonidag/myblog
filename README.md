@@ -10,6 +10,8 @@ The aim of this project is to eventually become my personal site and blog. I wan
 - Github Pages for hosting
 - [Hugo](https://gohugo.io/) for static site generation
 - [utterances](https://utteranc.es/) for blog posts comments
+- GoDaddy for domain
+- Goolge Analytics for statistics 
 
 ## Getting Started
 
