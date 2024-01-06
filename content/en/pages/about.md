@@ -10,7 +10,7 @@ hideComments: true
 
 Hi, I'm Anton, and a warm welcome to my page about integrations! 🚀
 
-I've had the luxury of working closely with business processes, and therefore, I have naturally been supporting and developing integrations! Currently, I work as an Integration Developer at [Epical](https://www.epicalgroup.com/en) with a focus on Microsoft Integration Services. 💼
+I've had the luxury of working closely with business processes, and therefore, I have naturally been supporting and developing integrations! Currently, I work as an Integration Developer at [Epical](https://www.epicalgroup.com) with a focus on Microsoft Integration Services. 💼
 
 The goal of this blog is to inspire and help other developers working with integrations. The content on this blog will be focused on Microsoft Integration Services; however, CI/CD, infrastructure as code, and DevOps are the same, whatever platform you are working with! 🔗💻
 

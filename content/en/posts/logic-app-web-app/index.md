@@ -40,7 +40,7 @@ So we have a way to communicate with clients, present dynamic content and give f
 
 **Creating a Logic App web app**
 
-For the sake of simplicity, we will build a simple web app to search and display movies using the Open Movie Database API. There will be two pages, Home and About section.  
+For the sake of simplicity, we will build a simple web app to search and display movies using the Open Movie Database API. There will be two pages, Home and Search.  
 
 Each page will live inside of a workflow. The workflow will start with the Response trigger "When a request is received" and end with an Response action back to the client. The last Response action need to return html code and have the http header ```Content-Type``` set to ```text/html```, otherwise the browser will not understand it correctly. In between the request and response action is where API calls and etc can be placed. 
 
