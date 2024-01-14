@@ -92,6 +92,10 @@ Files was generated with the <a href="https://json-generator.com/" target="_blan
 ```
 For simplicity the files will be hosted and served on Github pages, since the focus on the benchmark will be the performance of the Logic Apps actions the data source itself it will not be a factor in our case. 
 
+### Workflow implementation
+#### Condition 
+#### Switch
+
 Feel free to adjust the language or add more details based on your specific requirements and preferences.
 
 Benchmark on conditions and switch.
