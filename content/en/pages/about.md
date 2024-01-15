@@ -16,6 +16,3 @@ The goal of this blog is to inspire and help other developers working with integ
 
 
 Make sure to connect with me on [LinkedIn](https://se.linkedin.com/in/anton-bj%C3%B6rkman-447a1a1b1) to stay updated on the latest posts!
-
-<div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="sv_SE" data-type="horizontal" data-theme="dark" data-vanity="anton-björkman-447a1a1b1"></div>
-<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
