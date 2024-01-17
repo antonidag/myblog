@@ -53,7 +53,7 @@ jobs:
           hugo -d public    
       - name: Edit Sitemap
         run: |
-          sed -i 's|https://antonidag.github.io|https://antonbjorkman.com|g' ./public/sitemap.xml
+          sed -i 's|https://antonidag.github.io|https://www.antonbjorkman.com|g' ./public/sitemap.xml
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
