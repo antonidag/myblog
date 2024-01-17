@@ -56,7 +56,7 @@ jobs:
           sed -i 's|https://antonidag.github.io|https://www.antonbjorkman.com|g' ./public/sitemap.xml
       - name: Edit index.xml
         run: |
-          sed -i 's|https://antonidag.github.io|https://www.antonbjorkman.com|g' ./index.xml
+          sed -i 's|https://antonidag.github.io|https://www.antonbjorkman.com|g' ./public/index.xml
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
