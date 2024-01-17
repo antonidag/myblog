@@ -51,9 +51,12 @@ jobs:
       - name: Build with Hugo
         run: |
           hugo -d public    
-      - name: Edit Sitemap
+      - name: Edit sitemap.xml
         run: |
           sed -i 's|https://antonidag.github.io|https://www.antonbjorkman.com|g' ./public/sitemap.xml
+      - name: Edit index.xml
+        run: |
+          sed -i 's|https://antonidag.github.io|https://www.antonbjorkman.com|g' ./index.xml
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
