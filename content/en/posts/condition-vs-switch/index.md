@@ -14,7 +14,7 @@ In this post we will look at the Logic Apps Control actions; Condition and Switc
 But let's first go thru the difference between <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-conditional-statement?tabs=consumption" target="_blank" rel="noopener noreferrer">Condition</a> and a <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-switch-statement"  target="_blank" rel="noopener noreferrer">Switch</a> action!
 
 ## Condition and Switch actions
-In a programming language like C#, you will run into if and switch statements, they are controlling mechanizes to determine how to act on a value or a group of values. In Logic Apps these are implemented as Condition and Switch. The Condition action is similar to a if-else and the Switch action is like a Switch-case statement in C#. There is few limitations in the Logic Apps implementation of these actions.
+In a programming language like C#, you will run into if and switch statements, they are controlling mechanizes to determine how to act on a value or a group of values. In Logic Apps these are implemented as Condition and Switch actions. The Condition action is similar to a if-else and the Switch action is like a Switch-case statement in C#. There is few limitations in the Logic Apps implementation of these actions.
 
 For instance the Condition action does not support a multiple chain of if-else statements, instead you need to create multiple Condition actions to build up the chain of if-else statements.
 
@@ -41,7 +41,8 @@ if (a != 10 && a != 20 && a != 30 ){
 } else {
 
 }
-```
+``` 
+?Logic Apps has a magic card up on it sleeves, parallel actions. So the smart thing is that you can run Condition actions in parallel with each other and optimize the performance!?
 
 And pseudo-code for the Switch action is implemented:
 
@@ -67,20 +68,16 @@ The pseudo-code makes it a bit more clear on how these action different from eac
 ## The Benchmark
 ### Use Case: File Processing and Conditional Record Handling
 
-It is common real-world scenario where data needs to be filtered and then processed based on various conditions. Therefor the benchmark will center around a straight forward use case on data processing from an HTTP end-point. To get a better sample of the performance we will increase the amount of records by 500, up to 10_000 records.
+It is common in the real-world that data needs to be filtered and then processed based on various conditions. This benchmark will center around a straight forward use case on data processing. To get a better data sample of the performance, we will increase the amount of records by 500, up to 10_000 records. 
 
 #### Scenario Description:
-1. **Fetch array from HTTP end-point:**
-
-   - This array serves as the primary data source for our benchmark.
-
-2. **Loop Over array:**
+1. **Loop Over array:**
 
    - Once the array is retrieved, the iterate over individual records within the array.
 
-3. **Conditional Handling:**
+2. **Conditional Handling:**
    - The first set of conditions involves checking if a string within the record is equal to specific values, namely 10, 20, or 30.
-   - If the condition is met, corresponding values are written to a new array.
+   - If the condition is met, process data.
 
 ### Data source
 Files was generated with the <a href="https://json-generator.com/" target="_blank" rel="noopener noreferrer">Json Generator</a> tool, the following template generates an array with the numbers of 0, 10, 20, 30, 40, 50 and 60:
@@ -90,45 +87,18 @@ Files was generated with the <a href="https://json-generator.com/" target="_blan
     '{{random(0,10,20,30,40,50,60)}}'
 ]
 ```
-For simplicity the files will be hosted and served on Github pages, since the focus on the benchmark will be the performance of the Logic Apps actions the data source itself it will not be a factor in our case. 
 
 ### Workflow implementation
+In this case we will expose an http end-point 
 #### Condition 
 #### Switch
 
-Feel free to adjust the language or add more details based on your specific requirements and preferences.
-
-Benchmark on conditions and switch.
-
-Explain the difference between the to actions
-
-Method
-How the benchmark is made. Services and etc
-Explain the common senario
-
-Link to github, with workflows and iac
-
 ### Environment settings
+All the benchmarks was be using a WS1 App Service Plan, the scale out settings was limited to 1. 
+The workflows concurrency For Each settings will be default, meaning that Logic App will process several records at the same time. 
 
-App service plans settings
-Other Services connected to the logic & benchmark
+## Result
 
-## Workflow settings
+## Conclusion
 
-Some diagram
-basic flow - condition
-Read file
-for each line
-if eq yes then write line to new file
-nq then skip line
-
-basic flow - switch
-Read file
-for each line
-swtich on line
-if yes then write line to new file
-default then skip line
-
-Data
-
-Summary
+## Summary
