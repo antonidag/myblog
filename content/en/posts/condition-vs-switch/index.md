@@ -9,14 +9,13 @@ image: "myblog/posts/logic-app-web-app/clientwebserver.gif"
 ## Background   
 Everyone loves when an system can handle/react fast and make it feel like seamless operation. This is true whether it is in a large scale enterprise or a in smaller organization. How fast systems can handle requests can be a complicated chain of services communicating with each other, therefor optimizations and performance improvements are an important task we developers need to deal with.
 
-In this post we will look at four differnce ways to implement if statements in Logic Apps. To see if there is any performance difference. We will conduct a benchmark on a real world senario and by compare the results.
+In this post we will look at three differnce ways to implement if statements in Logic Apps, to see if there is any performance difference. We will conduct a benchmark on a real world senario and by compare the results.
 
-But let's first go thru all there is to know about the <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-conditional-statement?tabs=consumption" target="_blank" rel="noopener noreferrer">Condition</a> actions!
+But let's first go thru the ways uu could implement if statements in Logic Apps!
 
-## Condition and Switch actions
-In a programming language like C#, you will run into if and switch statements, they are controlling mechanizes to determine how to act on a value or a group of values. In Logic Apps these are implemented as Condition and Switch actions. The Condition action is similar to a if-else and the Switch action is like a Switch-case statement in C#. There is few limitations in the Logic Apps implementation of these actions.
-
-For instance the Condition action does not support a multiple chain of if-else statements, instead you need to create multiple Condition actions to build up the chain of if-else statements.
+## Understanding if:s in Logic Apps
+You will run into if statements quite quickly, they are controlling mechanizes to determine how to act on a value or a group of values. In Logic Apps if statments are implemented as Condition, however there is also alternitives methods that you could use. For instance the Javascript action and the if expression. These three methods they all come with their own limitations and perks! 
+The Condition action is similar to a if-else statement. Based on a condtion the action will either be true or false, and depending on the output excute other operations. One of the limitations is that the Condition action does not support a multiple chain of if-else statements, instead you need to create multiple Condition actions to build up the chain of if-else statements.
 
 Below can we see how it looks with pseudo-code to better understand how the Condition action is implemented:
 
@@ -43,27 +42,6 @@ if (a != 10 && a != 20 && a != 30 ){
 }
 ``` 
 ?Logic Apps has a magic card up on it sleeves, parallel actions. So the smart thing is that you can run Condition actions in parallel with each other and optimize the performance!?
-
-Add a bit of text, regarding the switch actions and pseudo-code for the Switch action is implemented:
-
-```
-switch (a)
-{
-    case 10:
-      doThis();
-      break;
-    case 20:
-      doSomething();
-      break;
-    case 30:
-      doSomethingElse();
-      break;
-   default:
-     doThat();
-}
-```
-
-The pseudo-code makes it a bit more clear on how these action different from each other a specially when you are in need of determine multiples paths to execute.
 
 ## The Benchmark
 ### Use Case: File Processing and Conditional Record Handling
