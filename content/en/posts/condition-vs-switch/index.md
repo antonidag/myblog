@@ -44,7 +44,7 @@ if (a != 10 && a != 20 && a != 30 ){
 ``` 
 ?Logic Apps has a magic card up on it sleeves, parallel actions. So the smart thing is that you can run Condition actions in parallel with each other and optimize the performance!?
 
-And pseudo-code for the Switch action is implemented:
+Add a bit of text, regarding the switch actions and pseudo-code for the Switch action is implemented:
 
 ```
 switch (a)
@@ -89,10 +89,11 @@ Files was generated with the <a href="https://json-generator.com/" target="_blan
 ```
 
 ### Workflow implementation
-In this case we will expose an http end-point 
-#### Condition 
+To mimic the senareio and keep the implementation as simple as possible, we will expose an end-point where we can post an array of numbers. The workflows will start will an Request trigger and then followed by the For Each action. The difference in the workflows only be Switch and Condition actions implementation.
+#### Condition
+![Workflow-switch](workflow-condition.svg)
 #### Switch
-
+![Workflow-switch](workflow-switch.svg)
 ### Environment settings
 All the benchmarks was be using a WS1 App Service Plan, the scale out settings was limited to 1. 
 The workflows concurrency For Each settings will be default, meaning that Logic App will process several records at the same time. 
