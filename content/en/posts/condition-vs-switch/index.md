@@ -9,9 +9,9 @@ image: "myblog/posts/logic-app-web-app/clientwebserver.gif"
 ## Background   
 Everyone loves when an system can handle/react fast and make it feel like seamless operation. This is true whether it is in a large scale enterprise or a in smaller organization. How fast systems can handle requests can be a complicated chain of services communicating with each other, therefor optimizations and performance improvements are an important task we developers need to deal with.
 
-In this post we will look at the Logic Apps Control actions; Condition and Switch, to see if there is any performance difference. We will make a benchmark by comparing two workflows implementations. One workflow implementing the Control action Condition and the other the Switch action.
+In this post we will look at four differnce ways to implement if statements in Logic Apps. To see if there is any performance difference. We will conduct a benchmark on a real world senario and by compare the results.
 
-But let's first go thru the difference between <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-conditional-statement?tabs=consumption" target="_blank" rel="noopener noreferrer">Condition</a> and a <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-switch-statement"  target="_blank" rel="noopener noreferrer">Switch</a> action!
+But let's first go thru all there is to know about the <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-conditional-statement?tabs=consumption" target="_blank" rel="noopener noreferrer">Condition</a> actions!
 
 ## Condition and Switch actions
 In a programming language like C#, you will run into if and switch statements, they are controlling mechanizes to determine how to act on a value or a group of values. In Logic Apps these are implemented as Condition and Switch actions. The Condition action is similar to a if-else and the Switch action is like a Switch-case statement in C#. There is few limitations in the Logic Apps implementation of these actions.
