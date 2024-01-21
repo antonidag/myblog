@@ -47,7 +47,9 @@ if (a == 30){
 
 }
 ```
+2. The Javascript action can also be used for implemention if-else, this a pretty straight forward you can run javascript and does give us the option to make a something
 
+3. Using expression if, the expession in Logic Apps can be used in numerus places to help and eaze the implementation and simplify experssions that you would like to do. The if expression works very similar to tanary operator.
 ## The Benchmark
 ### Use Case: Array Processing and Conditional Record Handling
 
