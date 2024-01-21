@@ -1,5 +1,5 @@
 ---
-title: "Conditions and Switch, which is faster in Logic Apps?" 
+title: "Condition, which is faster in Logic Apps?" 
 date: 2024-01-04T20:46:09+01:00
 draft: false
 description: 
@@ -20,11 +20,11 @@ You will run into if statements quite quickly, they are controlling mechanizes t
 ```
 // Example of chaining if-else statments, in programing language as C#
 if (a == 10){
-    doThis();
+    return a;
 } else if (a == 20){
-    doSomething();
+    return a;
 } else if (a == 30){
-    doSomethingElse();
+    return a;
 } else {
 
 }
@@ -32,17 +32,17 @@ if (a == 10){
 
 // Example how the Logic Apps Condition action implements if-else
 if (a == 10){
-    doThis();
+    return a;
 } else {
 
 }
 if (a == 20){
-    doSomething();
+    return a;
 } else {
 
 }
 if (a == 30){
-    doSomethingElse();
+    return a;
 } else {
 
 }
