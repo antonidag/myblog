@@ -15,11 +15,22 @@ But let's first go thru the ways uu could implement if statements in Logic Apps!
 
 ## Understanding if:s in Logic Apps
 You will run into if statements quite quickly, they are controlling mechanizes to determine how to act on a value or a group of values. In Logic Apps if statments are implemented as Condition, however there is also alternitives methods that you could use. For instance the Javascript action and the if expression. These three methods they all come with their own limitations and perks! 
-The Condition action is similar to a if-else statement. Based on a condtion the action will either be true or false, and depending on the output excute other operations. One of the limitations is that the Condition action does not support a multiple chain of if-else statements, instead you need to create multiple Condition actions to build up the chain of if-else statements.
-
-Below can we see how it looks with pseudo-code to better understand how the Condition action is implemented:
+1. The Condition action is similar to a if-else statement, based on a condtion the action will either be true or false, and depending on the output execute either one or other path. When your are working in a programing language, such as C# is it pretty common that create a chain of if-else statements, but this feature is not avalible in the Logic App Condition action, instead you need to create multiple Condition actions to build up the chain of if-else statements. Let take a view at the pseudo-code below to get better understanding:
 
 ```
+// Example of chaining if-else statments, in programing language as C#
+if (a == 10){
+    doThis();
+} else if (a == 20){
+    doSomething();
+} else if (a == 30){
+    doSomethingElse();
+} else {
+
+}
+
+
+// Example how the Logic Apps Condition action implements if-else
 if (a == 10){
     doThis();
 } else {
@@ -30,23 +41,17 @@ if (a == 20){
 } else {
 
 }
-if (a == 20){
+if (a == 30){
     doSomethingElse();
 } else {
 
 }
-if (a != 10 && a != 20 && a != 30 ){
-    doThat();
-} else {
-
-}
-``` 
-?Logic Apps has a magic card up on it sleeves, parallel actions. So the smart thing is that you can run Condition actions in parallel with each other and optimize the performance!?
+```
 
 ## The Benchmark
-### Use Case: File Processing and Conditional Record Handling
+### Use Case: Array Processing and Conditional Record Handling
 
-It is common in the real-world that data needs to be filtered and then processed based on various conditions. This benchmark will center around a straight forward use case on data processing. To get a better data sample of the performance, we will increase the amount of records by 500, up to 10_000 records. 
+It is common in the real-world that data needs to be filtered and then processed based on various conditions. This benchmark will center around a straight forward use case on data processing. To get a better data sample of the performance, we will increase the amount of records by 500, up to 10000 records. 
 
 #### Scenario Description:
 1. **Loop Over array:**
@@ -54,21 +59,16 @@ It is common in the real-world that data needs to be filtered and then processed
    - Once the array is retrieved, the iterate over individual records within the array.
 
 2. **Conditional Handling:**
-   - The first set of conditions involves checking if a string within the record is equal to specific values, namely 10, 20, or 30.
-   - If the condition is met, process data.
+   - The first set of conditions involves checking if the number is equal to specific values, namely 10, 20, or 30.
+   - If the condition is met, then process the data.
 
 ### Data source
-Files was generated with the <a href="https://json-generator.com/" target="_blank" rel="noopener noreferrer">Json Generator</a> tool, the following template generates an array with the numbers of 0, 10, 20, 30, 40, 50 and 60:
-```
-[
-    '{{repeat(10000)}}',
-    '{{random(0,10,20,30,40,50,60)}}'
-]
-```
+Files was generated with the <a href="https://json-generator.com/" target="_blank" rel="noopener noreferrer">Json Generator</a> tool, the following template generates an array with the numbers of 0, 10
 
 ### Workflow implementation
 To mimic the senareio and keep the implementation as simple as possible, we will expose an end-point where we can post an array of numbers. The workflows will start will an Request trigger and then followed by the For Each action. The difference in the workflows only be Switch and Condition actions implementation.
 #### Condition
+to optimize for perfemance we will utalize the run in paralell action.
 ![Workflow-switch](workflow-condition.svg)
 #### Switch
 ![Workflow-switch](workflow-switch.svg)
