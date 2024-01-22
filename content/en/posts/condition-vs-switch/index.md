@@ -9,16 +9,16 @@ image: "myblog/posts/logic-app-web-app/clientwebserver.gif"
 ## Background   
 Everyone loves when an system can handle/react fast and make it feel like seamless operation. This is true whether it is in a large scale enterprise or a in smaller organization. How fast systems can handle requests can be a complicated chain of services communicating with each other, therefor optimizations and performance improvements are an important task we developers need to deal with.
 
-In this post we will look at three differnce ways to implement if statements in Logic Apps, to see if there is any performance difference. We will conduct a benchmark on a real world senario and by compare the results.
+In this post we will look at three difference ways to implement if statements in Logic Apps, to see if there is any performance difference. We will conduct a benchmark on a real world senario and by compare the results.
 
 But let's first go thru the ways uu could implement if statements in Logic Apps!
 
 ## Understanding if:s in Logic Apps
-You will run into if statements quite quickly, they are controlling mechanizes to determine how to act on a value or a group of values. In Logic Apps if statments are implemented as Condition, however there is also alternitives methods that you could use. For instance the Javascript action and the if expression. These three methods they all come with their own limitations and perks! 
-1. The Condition action is similar to a if-else statement, based on a condtion the action will either be true or false, and depending on the output execute either one or other path. When your are working in a programing language, such as C# is it pretty common that create a chain of if-else statements, but this feature is not avalible in the Logic App Condition action, instead you need to create multiple Condition actions to build up the chain of if-else statements. Let take a view at the pseudo-code below to get better understanding:
+You will run into if statements quite quickly, they are controlling mechanizes to determine how to act on a value or a group of values. In Logic Apps if statements are implemented as Condition, however there is also alternatives methods that you could use. For instance the Javascript action and the if expression. These three methods they all come with their own limitations and perks! 
+1. The Condition action is similar to a if-else statement, based on a condition the action will either be true or false, and depending on the output execute either one or other path. When your are working in a programming language, such as C# is it pretty common that create a chain of if-else statements, but this feature is not available in the Logic App Condition action, instead you need to create multiple Condition actions to build up the chain of if-else statements. Let take a view at the pseudo-code below to get better understanding:
 
 ```
-// Example of chaining if-else statments, in programing language as C#
+// Example of chaining if-else statements, in programming language as C#
 if (a == 10){
     return a;
 } else if (a == 20){
@@ -47,9 +47,9 @@ if (a == 30){
 
 }
 ```
-2. The Javascript action can also be used for implemention if-else, this a pretty straight forward you can run javascript and does give us the option to make a something
+2. The Javascript action can also be used for implementation if-else, this a pretty straight forward you can run javascript and does give us the option to make a something
 
-3. Using expression if, the expession in Logic Apps can be used in numerus places to help and eaze the implementation and simplify experssions that you would like to do. The if expression works very similar to tanary operator.
+3. Using expression if, the expression in Logic Apps can be used in numerous places to help and ease the implementation and simplify expressions that you would like to do. The if expression works very similar to tanary operator.
 ## The Benchmark
 ### Use Case: Array Processing and Conditional Record Handling
 
@@ -70,7 +70,7 @@ Files was generated with the <a href="https://json-generator.com/" target="_blan
 ### Workflow implementation
 To mimic the senareio and keep the implementation as simple as possible, we will expose an end-point where we can post an array of numbers. The workflows will start will an Request trigger and then followed by the For Each action. The difference in the workflows only be Switch and Condition actions implementation.
 #### Condition
-to optimize for perfemance we will utalize the run in paralell action.
+to optimize for performance we will utilize the run in parallel action.
 ![Workflow-switch](workflow-condition.svg)
 #### Switch
 ![Workflow-switch](workflow-switch.svg)
