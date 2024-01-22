@@ -14,8 +14,8 @@ In this post we will look at three difference ways to implement if statements in
 But let's first go thru the ways uu could implement if statements in Logic Apps!
 
 ## Understanding if:s in Logic Apps
-You will run into if statements quite quickly, they are controlling mechanizes to determine how to act on a value or a group of values. In Logic Apps if statements are implemented as Condition, however there is also alternatives methods that you could use. For instance the Javascript action and the if expression. These three methods they all come with their own limitations and perks! 
-1. The Condition action is similar to a if-else statement, based on a condition the action will either be true or false, and depending on the output execute either one or other path. When your are working in a programming language, such as C# is it pretty common that create a chain of if-else statements, but this feature is not available in the Logic App Condition action, instead you need to create multiple Condition actions to build up the chain of if-else statements. Let take a view at the pseudo-code below to get better understanding:
+As you delve into Logic Apps, you'll encounter if statements quite swiftly; they serve as control mechanisms to decide actions based on values. In Logic Apps, if statements are implemented as Condition action, but there are alternative methods, such as the JavaScript action and the if expression. Each of these methods comes with its unique limitations, perks, and useage!
+1. The Condition action functions simliar to an if-else statement. Depending on the condition, the action will return either a true or false outcome, triggering the execution of either path. While in programming languages like C#, it is common to create a chain of if-else statements, this feature is not exactly supported in the Logic App Condition action. Instead, you have to create multiple Condition actions to build up the same chain of if-else statements. Let's look at the pseudo-code below for a better understanding:
 
 ```
 // Example of chaining if-else statements, in programming language as C#
