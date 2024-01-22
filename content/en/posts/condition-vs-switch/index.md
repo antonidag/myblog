@@ -15,7 +15,7 @@ But let's first go thru the ways uu could implement if statements in Logic Apps!
 
 ## Understanding if:s in Logic Apps
 As you delve into Logic Apps, you'll encounter if statements quite swiftly; they serve as control mechanisms to decide actions based on values. In Logic Apps, if statements are implemented as Condition action, but there are alternative methods, such as the JavaScript action and the if expression. Each of these methods comes with its unique limitations, perks, and useage!
-1. The Condition action functions simliar to an if-else statement. Depending on the condition, the action will return either a true or false outcome, triggering the execution of either path. While in programming languages like C#, it is common to create a chain of if-else statements, this feature is not exactly supported in the Logic App Condition action. Instead, you have to create multiple Condition actions to build up the same chain of if-else statements. Let's look at the pseudo-code below for a better understanding:
+1. The Condition action works simliar to an if-else statement. Depending on the condition, the action will return either a true or false outcome, triggering the execution of either path. While in programming languages like C#, it is common to create a chain of if-else statements, this feature is not exactly supported in the Logic App Condition action. Instead, you have to create multiple Condition actions to build up the same chain of if-else statements. Let's look at the pseudo-code below for a better understanding:
 
 ```
 // Example of chaining if-else statements, in programming language as C#
@@ -49,7 +49,7 @@ if (a == 30){
 ```
 2. The Javascript action can also be used for implementation if-else, this a pretty straight forward you can run javascript and does give us the option to make a something
 
-3. Using expression if, the expression in Logic Apps can be used in numerous places to help and ease the implementation and simplify expressions that you would like to do. The if expression works very similar to tanary operator.
+3. Using expression if, the expression in Logic Apps can be used in numerous places to help and ease the implementation and simplify complex task that you would like to do. The if expression works very similar to tanary operator.
 ## The Benchmark
 ### Use Case: Array Processing and Conditional Record Handling
 
