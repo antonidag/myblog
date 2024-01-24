@@ -16,9 +16,9 @@ As you start to develop workflows, you will run into if statements quite fast; t
 
 ### Condition action
 Works similar to an if-else statement. Depending on the condition, the action will return either a true or false, and execute one or the other path. In programming languages like C#, it is common to create a chain of if-else statements, this feature is however not supported in the Logic App Condition action. 
-Instead, you have to create multiple Condition actions to build up the chain of if-else statements, but there is also the possibility to nested your Condition actions.
+Instead, you have to create multiple Condition actions to build up the chain of if-else statements, there is also the possibility to nested your Condition actions.
 ```
-// Pseudo-code Condition actions of chaining if-else
+// Pseudo-code of chaining Condition actions
 if (a == 10){
     return do();
 } else {
@@ -36,7 +36,7 @@ if (a == 30){
 }
 return null;
 
-//Pseudo-code Condition actions of nesting if-else
+//Pseudo-code of nesting Condition actions
 if (a == 10){
     return do();
 } else {
@@ -64,7 +64,7 @@ if(equals(a,10),a,if(equals(a,20),a,if(equals(a,30),a,null)))
 As you can see when writing a nested expressions the readability get quite awful. Therefor it is best practice to not "over do" this feature.
 
 ### Javascript action
-Allows you to run "vanilla" Javascript code within the Logic Apps, and can be used for a vast verity of tasks. The action can use outputs from other actions and also `return` the output of the code, which in turn can be used in other actions in your workflows.
+Allows you to run "vanilla" Javascript code within the Logic Apps, and can be used for a vast verity of tasks. The action can use outputs from other actions and can also `return` the output of the code, which in turn can be used in other actions in your workflows.
 
 
 ## The Benchmark
@@ -79,18 +79,17 @@ It is common in the real-world that data needs to be filtered and then processed
 2. **Conditional Handling:**
    - If the number is equal to 10, 20, or 30. Then return the number.
 
-### Data source
-Files was generated with the <a href="https://json-generator.com/" target="_blank" rel="noopener noreferrer">Json Generator</a> tool, the following template generates an array with the numbers of 0, 10
-
 ### Workflow implementation
-Each workflow will start with an Request trigger followed by a For Each action. The difference in the workflows only be and Condition actions implementation.
-
+This benchmark will be implementing a orchestration workflow that will loop over the items and call the different implementations of conditional handling. 
 #### Condition action
 #### Expression if
 #### Javascript action
 ### Environment settings
 All the benchmarks was be using a WS1 App Service Plan, the scale out settings was limited to 1. 
 The workflows concurrency For Each settings will be default, meaning that Logic App will process several records at the same time. 
+
+### Data source
+Files was generated with the <a href="https://json-generator.com/" target="_blank" rel="noopener noreferrer">Json Generator</a> tool, the following template generates an array with the numbers of 0, 10, 20, 30, 40, 50.
 
 ## Result
 
