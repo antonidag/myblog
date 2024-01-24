@@ -7,11 +7,11 @@ image: "myblog/posts/logic-app-web-app/clientwebserver.gif"
 ---
 
 ## Background   
-Everyone loves when an system can handle/react fast and make it feel like seamless operation. This is true whether it is in a large scale enterprise or a in smaller organization. How fast systems can handle requests can be a complicated chain of services communicating with each other, therefor optimizations and performance improvements are an important task we developers need to deal with.
+Logic Apps is a flexible tool that provides you with the opportunity to implement tasks in various ways. Having more options is often beneficial, but at times, it can be a bit confusing. How do you determine when to use what and under what circumstances? Is there any performance difference?
 
-In this post we will look at three difference ways to implement if statements in Logic Apps, to see if there is any performance difference. We will conduct a benchmark on a real world senario and by compare the results.
+In this post, we will explore three different ways to implement if statements in Logic Apps to assess potential performance differences and examine the various implementations. We will conduct a benchmark and compare the results.
 
-## Understanding if:s in Logic Apps
+##  Exploring Alternatives to If statements
 As you start developing workflows, you will encounter if statements quite quickly; they serve as control mechanisms to decide actions based on values. In Logic Apps, if statements are commonly used with the Condition action, but there are alternative actions and functions that you could use, such as the JavaScript action and if expression. Each of these methods comes with its perks and limitations!
 
 ### Condition action
