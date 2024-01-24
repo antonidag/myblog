@@ -1,5 +1,5 @@
 ---
-title: "Condition, which is faster in Logic Apps?" 
+title: "Fast Lane or Slow Lane? Choosing the Quickest Logic App Condition!🏎️" 
 date: 2024-01-04T20:46:09+01:00
 draft: false
 description: 
@@ -56,7 +56,7 @@ Expressions in Logic Apps are a sequence that can contain one or more functions,
 ```
 if(equals(a,10),a,null)
 ```
-A notable feature of Expressions is the ability to nest them. However, when nesting if functions, readability can become challenging. Therefore, it is a best practice not to overuse this feature. 
+A notable feature of Expressions is the ability to nest them. However, when nesting `if` functions, readability can become challenging. Therefore, it is a best practice not to overuse this feature. 
 ```
 if(equals(a,10),a,if(equals(a,20),a,if(equals(a,30),a,null)))
 ```
@@ -64,11 +64,9 @@ if(equals(a,10),a,if(equals(a,20),a,if(equals(a,30),a,null)))
 ### JavaScript action
 Allows you to run "vanilla" JavaScript code within Logic Apps and can be used for a vast variety of tasks. The action can utilize outputs from other actions and can also `return` the output of the code, which, in turn, can be used in other actions in your workflows.
 
-
 ## The Benchmark
 ### Use Case: Array Processing and Conditional Record Handling
-
-It is common in the real-world that data needs to be filtered and then processed based on various conditions. This benchmark will center around a straight forward use case on data processing. To get a better data sample of the performance, we will increase the amount of records by 500, up to 10000 records. 
+This benchmark will center around a straight forward use case on data processing and conditional handling. To get a better data sample of the performance, we will increase the amount of records by 500, up to 10000 records. 
 
 #### Scenario Description:
 1. **Loop Over array:**
@@ -78,10 +76,13 @@ It is common in the real-world that data needs to be filtered and then processed
    - If the number is equal to 10, 20, or 30. Then return the number.
 
 ### Workflow implementation
-This benchmark will be implementing a orchestration workflow that will loop over the items and call the different implementations of conditional handling. 
+This benchmark will be implementing a orchestration workflow that will loop over the items and call the different implementations. 
 #### Condition action
+![Condition workflow](condition.svg)
 #### Expression if
+![Compose workflow](compose.svg)
 #### Javascript action
+![JavaScript workflow](javascript.svg)
 ### Environment settings
 All the benchmarks was be using a WS1 App Service Plan, the scale out settings was limited to 1. 
 The workflows concurrency For Each settings will be default, meaning that Logic App will process several records at the same time. 
