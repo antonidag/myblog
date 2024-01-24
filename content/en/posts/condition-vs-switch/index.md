@@ -12,11 +12,10 @@ Everyone loves when an system can handle/react fast and make it feel like seamle
 In this post we will look at three difference ways to implement if statements in Logic Apps, to see if there is any performance difference. We will conduct a benchmark on a real world senario and by compare the results.
 
 ## Understanding if:s in Logic Apps
-As you start to develop workflows, you will run into if statements quite fast; they serve as control mechanisms to decide actions based on values. In Logic Apps, if statements are commonly used with the Condition action, but there are alternative actions and functions that you could use, such as the JavaScript action and if expression. Each of these ways comes with its perks and limitations!
+As you start developing workflows, you will encounter if statements quite quickly; they serve as control mechanisms to decide actions based on values. In Logic Apps, if statements are commonly used with the Condition action, but there are alternative actions and functions that you could use, such as the JavaScript action and if expression. Each of these methods comes with its perks and limitations!
 
 ### Condition action
-Works similar to an if-else statement. Depending on the condition, the action will return either a true or false, and execute one or the other path. In programming languages like C#, it is common to create a chain of if-else statements, this feature is however not supported in the Logic App Condition action. 
-Instead, you have to create multiple Condition actions to build up the chain of if-else statements, there is also the possibility to nested your Condition actions.
+Works similarly to an if-else statement. Depending on the condition, the action will return either true or false, executing one of the paths. In programming languages like C#, it is common to create a chain of if-else statements. However, this feature is not supported in the Logic App Condition action. Instead, you have to create multiple Condition actions to build up the chain of if-else statements. It is also possible to nest your Condition actions.
 ```
 // Pseudo-code of chaining Condition actions
 if (a == 10){
@@ -53,18 +52,17 @@ if (a == 10){
 
 ```
 ### If Expression
-For those who are not aware Expressions in Logic Apps are a sequence that can contain one or more functions, operators, variables, explicit values, or constants [ref](https://learn.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference#if). One of these expressions is the function `if` and is often combined with other functions shown below: 
+Expressions in Logic Apps are a sequence that can contain one or more functions, operators, variables, explicit values, or constants. One of these expressions is the function `if`, often combined with other functions, as shown below:
 ```
 if(equals(a,10),a,null)
 ```
-A really cool thing about Expressions is that you can nest them like the code above, and this can be applied for `if` functions as well. This means that you could create a nested if-else statements like the following: 
+A notable feature of Expressions is the ability to nest them. However, when nesting if functions, readability can become challenging. Therefore, it is a best practice not to overuse this feature. 
 ```
 if(equals(a,10),a,if(equals(a,20),a,if(equals(a,30),a,null)))
 ```
-As you can see when writing a nested expressions the readability get quite awful. Therefor it is best practice to not "over do" this feature.
 
-### Javascript action
-Allows you to run "vanilla" Javascript code within the Logic Apps, and can be used for a vast verity of tasks. The action can use outputs from other actions and can also `return` the output of the code, which in turn can be used in other actions in your workflows.
+### JavaScript action
+Allows you to run "vanilla" JavaScript code within Logic Apps and can be used for a vast variety of tasks. The action can utilize outputs from other actions and can also `return` the output of the code, which, in turn, can be used in other actions in your workflows.
 
 
 ## The Benchmark
