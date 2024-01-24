@@ -77,18 +77,21 @@ This benchmark will center around a straight forward use case on data processing
 
 ### Workflow implementation
 This benchmark will be implementing a orchestration workflow that will loop over the items and call the different implementations. 
-#### Condition action
-![Condition workflow](condition.svg)
-#### Expression if
-![Compose workflow](compose.svg)
-#### Javascript action
-![JavaScript workflow](javascript.svg)
+
+The full code of the workflows and generated files can be viewed at my [Github](https://github.com/antonidag/logic-app-condition-vs-switch), but let's point out the important difference between the workflows:
+
+- __The Condition__  uses the Condition action and with the or option.
+
+- __The Expression__ uses the Compose action with the nested if expression.
+
+- __The JavaScript__ uses the JavaScript actions.
+
 ### Environment settings
 All the benchmarks was be using a WS1 App Service Plan, the scale out settings was limited to 1. 
 The workflows concurrency For Each settings will be default, meaning that Logic App will process several records at the same time. 
 
 ### Data source
-Files was generated with the <a href="https://json-generator.com/" target="_blank" rel="noopener noreferrer">Json Generator</a> tool, the following template generates an array with the numbers of 0, 10, 20, 30, 40, 50.
+Files was generated with the <a href="https://json-generator.com/" target="_blank" rel="noopener noreferrer">Json Generator</a> tool, the following template generates an array with the numbers of 0, 10, 20, 30, 40, 50, 60.
 
 ## Result
 
