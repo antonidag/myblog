@@ -86,10 +86,14 @@ This benchmark will be implementing a orchestration workflow that will loop over
 The full code of the workflows and generated files can be viewed at my <a href="https://github.com/antonidag/logic-app-condition-vs-switch" target="_blank" rel="noopener noreferrer">GitHub</a>, but let's point out the important difference between the workflows:
 
 - __The Condition__  uses the Condition action and with the or option.
+![condition](condition.png)
 
 - __The Expression__ uses the Compose action with the nested if expression.
+![compose](compose.png)
 
 - __The JavaScript__ uses the JavaScript actions.
+![compose](javascript.png)
+
 
 ### Environment settings
 All the benchmarks was be using a WS1 App Service Plan, the scale out settings was limited to 1. 
