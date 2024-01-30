@@ -52,7 +52,7 @@ if (a == 20){
 
 ```
 ### If Expression
-<a href="https://learn.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference" target="_blank" rel="noopener noreferrer">Expressions</a> in Logic Apps are a sequence that can contain one or more functions, operators, variables, explicit values, or constants. One of these expressions is the function `if`, often combined with other functions, as shown below:
+<a href="https://learn.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference" target="_blank" rel="noopener noreferrer">Expressions</a> in Logic Apps are a sequence that can contain one or more functions, operators, variables, explicit values, or constants. Expressions can be used for varus purposes and places, for instance there are functions for date time operations, logical operations, collection operations to mention a few. One that we are more intreseed in is the function `if`, and it is often combined with other functions, as shown below:
 ```
 if(equals(a,10),a,null)
 ```
@@ -87,7 +87,7 @@ The full project with workflows and generated files can be viewed at my <a href=
 
 Let's point out some important difference between the workflows:
 
-- __The Condition__ uses the Condition action and with the `or` option, either returning the number or `null` in separated Response actions.
+- __The Condition__ uses the Condition action with the `or` option, either returning the number or `null` in separated Response actions.
 ![Condition workflow](condition.png)
 
 - __The Expression__ uses nested if expressions in the Response action.
