@@ -81,18 +81,20 @@ The arrays was generated with the <a href="https://json-generator.com/" target="
    - If the number is equal to 20, 30, or 40. Then return the number.
 
 ### Workflow implementation
-This benchmark will be implementing a orchestration workflow that will loop over the items and call the different implementations. 
+We will implement a orchestration workflow that will loop over the items and call the other the workflows e.g Condition, Expression and Javascript. 
 
-The full code of the workflows and generated files can be viewed at my <a href="https://github.com/antonidag/logic-app-condition-vs-switch" target="_blank" rel="noopener noreferrer">GitHub</a>, but let's point out the important difference between the workflows:
+The full project with workflows and generated files can be viewed at my <a href="https://github.com/antonidag/logic-app-condition-vs-switch" target="_blank" rel="noopener noreferrer">GitHub</a>.
 
-- __The Condition__  uses the Condition action and with the or option.
-![condition](condition.png)
+Let's point out some important difference between the workflows:
 
-- __The Expression__ uses the Compose action with the nested if expression.
-![compose](compose.png)
+- __The Condition__ uses the Condition action and with the `or` option, either returning the number or `null` in separated Response actions.
+![Condition workflow](condition.png)
 
-- __The JavaScript__ uses the JavaScript actions.
-![compose](javascript.png)
+- __The Expression__ uses nested if expressions in the Response action.
+![Expression workflow](compose.png)
+
+- __The JavaScript__ uses the JavaScript actions and returns the output which is later used in the Response action.
+![JavScript workflow](javascript.png)
 
 
 ### Environment settings
