@@ -15,54 +15,20 @@ In this post, we will explore three different ways to implement if statements in
 As you start developing workflows, you will encounter if statements quite quickly; they serve as control mechanisms to decide actions based on values. In Logic Apps, if statements are commonly used with the Condition action, but there are alternative actions and functions that you could use, such as the JavaScript action and if expression. Each of these methods comes with its perks and limitations!
 
 ### Condition action
-Works similarly to an if-else statement. Depending on the condition, the action will return either true or false, executing one of the paths. In programming languages like C#, it is common to create a chain of if-else statements. However, this feature is not supported in the Logic App <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-conditional-statement?tabs=consumption" target="_blank" rel="noopener noreferrer">Condition action</a>. Instead, you have to create multiple Condition actions to build up the chain of if-else statements. It is also possible to nest your Condition actions.
-```
-// Pseudo-code of chaining Condition actions
-if (a == 20){
-    return do();
-} else {
+Works similarly to an if-else statement. The action will return either true or false, executing one of the paths. The <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-conditional-statement?tabs=consumption" target="_blank" rel="noopener noreferrer">Condition action</a> supports your classic logical operations such as:
+- `or`, only one of the statements has be `true` for the action to return `true`. 
+- `and`, all of your statements has to be `true` in order for action to return `true`. 
+- The option to group statements, however if you have a more complex condition it is probably easier to use another method.
 
-}
-if (a == 30){
-    return doMore();
-} else {
-
-}
-if (a == 40){
-    return doEvenMore();
-} else {
-
-}
-return null;
-
-//Pseudo-code of nesting Condition actions
-if (a == 20){
-    return do();
-} else {
-    if (a == 30){
-        return doMore();
-    } else {
-            if (a == 40){
-                return doEvenMore();
-            } else {
-                return null;
-        }
-    }
-}
-
-```
-### If Expression
-<a href="https://learn.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference" target="_blank" rel="noopener noreferrer">Expressions</a> in Logic Apps are a sequence that can contain one or more functions, operators, variables, explicit values, or constants. Expressions can be used for varus purposes and places, for instance there are functions for date time operations, logical operations, collection operations to mention a few. One that we are more intreseed in is the function `if`, and it is often combined with other functions, as shown below:
+### Expression
+<a href="https://learn.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference" target="_blank" rel="noopener noreferrer">Expressions</a> can be used for varus purposes, for instance there are functions for date time operations, logical operations, collection operations to mention a few. One expression we are a bit more interested in is the `if` function, and it is often combined with other functions, as shown below:
 ```
 if(equals(a,10),a,null)
 ```
-A notable feature of Expressions is the ability to nest them. However, when nesting `if` functions, readability can become challenging. Therefore, it is a best practice not to overuse this feature. 
-```
-if(equals(a,20),a,if(equals(a,30),a,if(equals(a,40),a,null)))
-```
+A memorable feature of Expressions is the ability to nest them. However, when nesting functions, operations together with other outputs form previous actions the readability can become challenging. Therefore, it is a best practice not to overuse this feature. 
 
 ### JavaScript action
-Allows you to run "vanilla" JavaScript code within Logic Apps and can be used for a vast variety of tasks. The <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-add-run-inline-code?tabs=consumption" target="_blank" rel="noopener noreferrer">action</a> can utilize outputs from other actions and can also `return` the output of the code, which, in turn, can be used in other actions in your workflows.
+Allows you to run "vanilla" JavaScript code within Logic Apps and can be used for a vast variety of tasks. The <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-add-run-inline-code?tabs=consumption" target="_blank" rel="noopener noreferrer">JavaScript action</a> can utilize outputs from other actions and can also `return` the output of the code, which, in turn, can be used in other actions in your workflows.
 
 ## The Benchmark ⏱️
 ### Use Case: Array Processing and Conditional Record Handling
@@ -75,10 +41,10 @@ The arrays was generated with the <a href="https://json-generator.com/" target="
 
 ### Scenario Description:
 1. **Loop Over array:**
-   - Once the array is retrieved, the iterate over individual records within the array.
+   - Once the array is retrieved, iterate over individual records within the array.
 
 2. **Conditional Handling:**
-   - If the number is equal to 20, 30, or 40. Then return the number.
+   - If the number is equal to 20, 30, or 40. Then return the number, else return `null`
 
 ### Workflow implementation
 We will implement a orchestration workflow that will loop over the items and call the other the workflows e.g Condition, Expression and Javascript. 
@@ -98,8 +64,8 @@ Let's point out some important difference between the workflows:
 
 
 ### Environment settings
-All the benchmarks was be using a WS1 App Service Plan, the scale out settings was limited to 1. 
-The workflows concurrency For Each settings will be default, meaning that Logic App will process several records at the same time. 
+All the benchmarks will be using a WS2 App Service Plan, the scale out settings was limited to 1. 
+The workflows mode was set to the `Stateful` mode and the concurrency settings had the default, meaning that Logic App will process several records at the same time. 
 
 ## Result 📊
 
