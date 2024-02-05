@@ -7,25 +7,26 @@ image: "myblog/posts/logic-app-web-app/clientwebserver.gif"
 ---
 
 ## Background   
-Logic Apps is a flexible service that gives you the tools to implement tasks in different ways. Having more options is often beneficial, but sometimes it can be a bit confusing. How do you determine when to use what and under what circumstances? Is there any option that is faster or slower?
+Logic Apps is a flexible service that provides you with the tools to implement tasks in various ways. Having more options is often beneficial, but sometimes it can be a bit confusing. How do you determine when to use which method and under what circumstances? Is there a method that is faster or slower?
 
 In this post, we will explore three different methods to implement if statements in Logic Apps. We will conduct benchmarks and compare the results.
 
 ##  Exploring Alternatives to If statements 🏴󠁲󠁯󠁩󠁦󠁿
-As you start developing, you will encounter if statements quite quickly; they serve as control mechanisms to decide actions based on values. In Logic Apps, the Condition actions is the if statements counter part, but there are alternative actions and functions that you could use, such as the Inline Code action and if expression. Each of these methods comes with its perks and limitations!
+As you start developing, you will encounter if statements quite quickly; they serve as control mechanisms to decide actions based on values. In Logic Apps, the Condition action is the counterpart of if statements, but there are alternative actions and functions that you could use, such as the Inline Code action and `if` Expression. Each of these methods comes with its perks and limitations!
 
 ### Condition action
 Works similarly to an if-else statement. The action will return either true or false, executing one of the paths. The <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-conditional-statement?tabs=consumption" target="_blank" rel="noopener noreferrer">Condition action</a> supports your classic logical operations such as:
-- `or`, only one of the statements has be `true` for the action to return `true`. 
-- `and`, all of your statements has to be `true` in order for action to return `true`. 
-- The option to group statements, however if you have a more complex condition it is probably easier to use another method.
+
+- `or`, only one of the statements has to be `true` for the action to return true.
+- `and`, all of your statements have to be `true` in order for the action to return true.
+- The option to group statements, to create more complex statements.
 
 ### Expression
-<a href="https://learn.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference" target="_blank" rel="noopener noreferrer">Expressions</a> can be used for varus purposes, for instance there are functions for date time operations, logical operations, collection operations to mention a few. One expression we are a bit more interested in is the `if` function, and it is often combined with other functions, as shown below:
+<a href="https://learn.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference" target="_blank" rel="noopener noreferrer">Expressions</a> can be used for various purposes. For instance, there are functions for date-time operations, logical operations, and collection operations, to mention a few. One expression we are a bit more interested in is the `if` function, and it is often combined with other functions, as shown below:
 ```
 if(equals(a,10),a,null)
 ```
-One feature of Expressions is the ability to nest them, by nesting expressions you can create complex statements and outputs. However, when nesting functions, operations together with other outputs form previous actions the readability can become challenging. Therefore, it is a best practice not to overuse this feature. 
+One feature of Expressions is the ability to nest them. By nesting expressions, you can create complex statements and outputs. However, when nesting functions and operations together with other outputs from previous actions, readability can become challenging. Therefore, it is best practice not to overuse this feature.
 
 ### Inline Code action
 Allows you to run "vanilla" JavaScript code within Logic Apps and can be used for a vast variety of tasks. The <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-add-run-inline-code?tabs=consumption" target="_blank" rel="noopener noreferrer">Inline code action</a> can utilize outputs from other actions and can also `return` the output of the code, which, in turn, can be used in other actions in your workflows.
