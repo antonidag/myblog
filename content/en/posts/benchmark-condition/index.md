@@ -35,7 +35,7 @@ Allows you to run "vanilla" JavaScript code within Logic Apps and can be used fo
 ### Use Case: Array Processing and Conditional Record Handling
 This benchmark will center around a straight forward use case on data processing and conditional handling. To get a better data sample of the performance, we will increase the amount of records by 500, up to 10000 records. 
 
-The arrays was generated with the <a href="https://json-generator.com/" target="_blank" rel="noopener noreferrer">Json Generator</a>, and had the following template:
+The input arrays was generated with the <a href="https://json-generator.com/" target="_blank" rel="noopener noreferrer">Json Generator</a>, and had the following template:
 ```
 
 ```
@@ -81,7 +81,9 @@ The workflows mode was set to the `Stateful` mode and the concurrency settings h
 - Inline code: __0.461__
 ## Reflections
 
-By looking at the diagrams the Expression implementation resulted in lower time per element in seconds. When comparing this to the Condition workflow, it will give us a 12.25% performance gain on average. This can be calculated by using this formula: 
+The results from these benchmarks are not to be seen as right and wrong, meaning that one or the other method is better or worse. With that said there is a lot more parameters to look at before have a proper result. In these benchmark the metric we look at was duration of the workflows, so have that in mind when reading the results.  
+
+Anyway, by looking at the diagrams it shows that the Expression implementation resulted in lower time per element in seconds and when comparing this to the Condition workflow, it will give us a 12.25% performance gain on average. This can be calculated by using the following formula: 
 
 Percentage difference = (Condition - Expression / Condition) * 100%
 
@@ -89,13 +91,10 @@ Percentage difference = (<math><mrow><mn>0.032</mn><mo> seconds/item</mo></mrow>
 
 Percentage difference ≈ <math><mrow><mn>12.25</mn><mo>%</mo></mrow></math>
 
-There is also a pattern that correlates with the amount of elements. It seems that the more elements as input the time per element eventually goes down. This trend seems to be true for all the implementations and is not isolated to one workflow. It would be really interesting to see for how long this trend would continue on if we would keep on incrementing with 500 elements. Will it just continue to on and give better and better time per element. 
+There seams to be a pattern that correlates with the amount of elements, the time per element eventually goes down. This seems to be true for all the implementations and is not isolated to one workflow. I think this is related to the Logic Apps overhead. At a sertant amount of elements we start to "win back" due to scaling mechanism and  therefor we seeing this trend.
 
-Before you start and implementing any optimization I think you need to consider if it is worth or not? What will it cost you? The Readability, maintenance are important factors in the application life cycle. Therefor you might want to wait until there is evidence of a bottleneck before you start optimizing. 
+One of the surprises with the benchmarks was the Inline Code implementation, it was on avg 30 % slower per element! I do not know how the Inline code action works in the background, but probably there is some overhead with Node process that is running our code and somehow causing this performance decrease.  
 
-Anyway, if we play around with a case where per element it takes 1 seconds and we have 86 400 items, it will take 24 hours to process all the elements. This optimization could then potentially save us around 3.4 hours, which would be good! But if the goal is bring down the process time to a few hours, then this optimization would only be apart of the solution.
+I think interesting next steps would be to create a more complex nested statement, to see if there we will get the same results or will it be any difference between the implementation. Perhaps in such a case the Inline Code action will preform better? Another step would be to increase the amount of elements in the input arrays up to 100 000 elements to explore Logic App will behave if the trend shown will be flatten or keep improving, where is the break point? 
 
 
-
-The results from these benchmarks are not to be seen as right and wrong, meaning that one or the other method is better or worse. These results only indicates that in a partially situation you might get a similar output. Bare in mind that the data collection has 
-## Summary
