@@ -81,19 +81,12 @@ The workflows mode was set to the `Stateful` mode and the concurrency settings h
 - Inline code: __0.461__
 ## Reflections
 
-The results from these benchmarks are not to be seen as right and wrong, meaning that one or the other method is better or worse. With that said there is a lot more parameters to look at before have a proper result. In these benchmark the metric we look at was duration of the workflows, so have that in mind when reading the results.  
+The results from these benchmarks are not to be seen as right and wrong, meaning that one or the other method is better or worse. There is a lot more parameters to take in and look at before having a proper result. In these benchmark we only look at the duration of the workflows.
 
-Anyway, by looking at the diagrams it shows that the Expression implementation resulted in lower time per element in seconds and when comparing this to the Condition workflow, it will give us a 12.25% performance gain on average. This can be calculated by using the following formula: 
+Anyway, with this in mind the diagrams shows that the Expression implementation resulted in lower time per element in seconds. When comparing this to the Condition workflow, it will give us around 14% performance gain on average. One big surprise with was that the Inline Code implementation, was on avg rounded 43% slower per element! I do not know how the Inline code action works under the hood, but probably there is some overhead with Node process that is running the code and somehow causing this big performance decrease.  
 
-Percentage difference = (Condition - Expression / Condition) * 100%
+If we glance at the diagrams there seams to be a pattern that correlates with the amount of elements, the time per element eventually goes down. This seems to be true for all the implementations and is not isolated to one workflow. I think this is related to the Logic Apps scale out mechanism at a sertant amount of elements we start to "win back" the overhead and therefor we seeing this trend.
 
-Percentage difference = (<math><mrow><mn>0.032</mn><mo> seconds/item</mo></mrow></math> / <math><mrow><mn>0.266</mn><mo> seconds/item</mo></mrow></math>) * 100%
-
-Percentage difference ≈ <math><mrow><mn>12.25</mn><mo>%</mo></mrow></math>
-
-There seams to be a pattern that correlates with the amount of elements, the time per element eventually goes down. This seems to be true for all the implementations and is not isolated to one workflow. I think this is related to the Logic Apps overhead. At a sertant amount of elements we start to "win back" due to scaling mechanism and  therefor we seeing this trend.
-
-One of the surprises with the benchmarks was the Inline Code implementation, it was on avg 30 % slower per element! I do not know how the Inline code action works in the background, but probably there is some overhead with Node process that is running our code and somehow causing this performance decrease.  
 
 I think interesting next steps would be to create a more complex nested statement, to see if there we will get the same results or will it be any difference between the implementation. Perhaps in such a case the Inline Code action will preform better? Another step would be to increase the amount of elements in the input arrays up to 100 000 elements to explore Logic App will behave if the trend shown will be flatten or keep improving, where is the break point? 
 
