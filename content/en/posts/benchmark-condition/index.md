@@ -33,7 +33,7 @@ Allows you to run "vanilla" JavaScript code within Logic Apps and can be used fo
 
 ## The Benchmark ⏱️
 ### Use Case: Array Processing and Conditional Record Handling
-This benchmark will center around a straight forward use case on data processing and conditional handling. To get a better data sample of the performance, we will increase the amount of records by 500, up to 10000 records. 
+This benchmark will center around a straight forward use case on data processing and conditional handling. To get a better data sample of the performance, we will increase the amount of elements by 500, up to 10,000 elements. 
 
 The input arrays was generated with the <a href="https://json-generator.com/" target="_blank" rel="noopener noreferrer">Json Generator</a>, and had the following template:
 ```
@@ -58,9 +58,11 @@ The full project with workflows and generated files can be viewed at my <a href=
 Let's point out some important difference between the workflows:
 
 - __The Condition__ uses the Condition action with the `or` option, either returning the number or `null` in separated Response actions.
+
 ![Condition workflow](condition.png)
 
 - __The Expression__ uses nested if expressions in the Response action.
+
 ![Expression workflow](compose.png)
 
 - __The Inline Code__ uses JavaScript code to return the output which is later used in the Response action.
@@ -87,10 +89,10 @@ All the benchmarks will be using a WS2 App Service Plan. The scale-out settings 
 
 The results from these benchmarks are not to be seen as absolute, meaning that one method is better or worse to another. There are many more parameters to consider and analyze before reaching a conclusion. In these benchmarks, we only focus on the duration of the workflows.
 
-Keeping this in mind, the diagrams show that the Expression implementation resulted in a lower time per element in seconds. When compared to the Condition workflow, it indicates approximately a 14% performance gain on average. One significant surprise was that the Inline Code implementation was, on average, around 43% slower per element! I am unsure of the how the Inline Code action works under the hood, but presumably, there is some overhead with the Node process that executes the code, thereby causing this performance decrease.
+Keeping this in mind, the diagrams show that the Expression implementation resulted in a lower time per element in seconds. When compared to the Condition workflow, it indicates approximately a __12.5%__ performance gain on average. One significant surprise was that the Inline Code implementation was, on average, around __74.5%__ slower per element! I am unsure of the how the Inline Code action works under the hood, but presumably, there is some kind of bottleneck or overhead with the Node process that executes the code, thereby causing this huge performance decrease.
 
-Upon glancing at the diagrams, there appears to be a pattern that correlates with the number of elements: the time per element gradually decreases. This trend seems consistent across all implementations and is not isolated to a single workflow. I believe this is related to the Logic Apps scale-out mechanism, and at a certain number of elements, we begin to "win back", hence why we are seeing this trend.
+A pattern that seams to correlates with the number of elements is: the time per element gradually decreases. This trend is seen across all implementations especially around 9000 to 10,000 elements point and is not isolated to a single workflow. I think this is related to the Logic Apps scale-out mechanism, and at a certain number of elements, we begin to "win back" and really take advantage of feature, hence why we are seeing this trend.
 
-I believe the next interesting steps would involve creating a more complex nested statement to determine if we get similar results. Perhaps in such cases, the Inline Code action would perform better. Another step would be to increase the number of elements in the input arrays up to 100,000 elements to explore how Logic App behaves; whether the trend shown will flatten or continue improving?
+I think a interesting next steps would be to create a complex nested if statements, and see if we get similar results. Perhaps in such cases, the Inline Code action would perform better. Another step would be to increase the number of elements in the input arrays up to 100,000 elements to explore how Logic App behaves; whether the trend shown will flatten or continue improving?
 
 What are your thoughts on the different methods of implementing if statements? Have you had similar experiences with performance differences? 🤖Share your insights and experiences in the comments below!
