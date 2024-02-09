@@ -53,7 +53,7 @@ The input arrays was generated with the <a href="https://json-generator.com/" ta
 ### Workflow implementation
 We will implement a orchestration workflow that will loop over the items and call the other the workflows e.g Condition, Expression and Javascript. 
 
-The full project with workflows and generated files can be viewed at my <a href="https://github.com/antonidag/logic-app-condition-vs-switch" target="_blank" rel="noopener noreferrer">GitHub</a>.
+The full project with workflows and generated files can be viewed at my <a href="https://github.com/antonidag/logic-app-benchmark-condition" target="_blank" rel="noopener noreferrer">GitHub</a>.
 
 Let's point out some important difference between the workflows:
 
