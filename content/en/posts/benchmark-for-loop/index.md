@@ -1,12 +1,12 @@
 ---
-title: For and Until Loops, which is faster in Logic Apps? 
+title: "Fast Lane or Slow Lane? Choosing the Quickest Logic App For Loop!🏎️"
 date: 2023-11-20T10:18:00+00:00
 draft: true
 description: 
 ---
 
 Background
-Benchmark on For and Until Loops.
+Benchmark on For and Javascript.
 
 Explain the difference between the to actions
 
