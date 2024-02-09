@@ -12,7 +12,7 @@ Logic Apps is a flexible service that provides you with the tools to implement t
 In this post, we will explore three different methods to implement if statements in Logic Apps. We will conduct benchmarks and compare the results.
 
 ##  Exploring Alternatives to If statements 🏴󠁲󠁯󠁩󠁦󠁿
-As you start developing, you will encounter if statements quite quickly; they serve as control mechanisms to decide actions based on values. In Logic Apps, the <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-conditional-statement?tabs=consumption" target="_blank" rel="noopener noreferrer">Condition action</a> is the counterpart of if statements, but there are alternative actions and functions that you could use, such as the <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-add-run-inline-code?tabs=consumption" target="_blank" rel="noopener noreferrer">Inline code action</a>  and `if` Expression. Each of these methods comes with its perks and limitations!
+As you start developing, you will encounter if statements quite quickly; they serve as control mechanisms to decide actions based on values. In Logic Apps, the <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-conditional-statement?tabs=consumption" target="_blank" rel="noopener noreferrer">Condition action</a> is the counterpart of if statements, but there are alternative actions and functions that you could use, such as the <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-add-run-inline-code?tabs=consumption" target="_blank" rel="noopener noreferrer">Inline code action</a> and <a href="https://learn.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference" target="_blank" rel="noopener noreferrer">Expression</a>. Each of these methods comes with its perks and limitations!
 
 ### Condition action
 Works similarly to an if-else statement. The action will return either true or false, executing one of the paths. The action supports your classic logical operations such as:
@@ -68,7 +68,7 @@ Let's point out some important difference between the workflows:
 
 
 ### Environment settings
-All the benchmarks will be using a WS2 App Service Plan. The scale-out settings were limited to 1. The workflows mode was set to the 'Stateful' mode, and the concurrency settings remained at default, meaning that Logic App will process several records simultaneously.
+All the benchmarks will be using a WS2 App Service Plan. The scale-out settings were limited to 1. The workflows mode was set to the `Stateful` mode, and the concurrency settings remained at default, meaning that Logic App will process several records simultaneously.
 
 ## Result 📊
 
@@ -81,6 +81,7 @@ All the benchmarks will be using a WS2 App Service Plan. The scale-out settings 
 - Expression: __0.231__
 - Condition: __0.264__
 - Inline code: __0.461__
+
 ## Reflections
 
 The results from these benchmarks are not to be seen as absolute, meaning that one method is better or worse to another. There are many more parameters to consider and analyze before reaching a conclusion. In these benchmarks, we only focus on the duration of the workflows.
@@ -89,6 +90,6 @@ Keeping this in mind, the diagrams show that the Expression implementation resul
 
 Upon glancing at the diagrams, there appears to be a pattern that correlates with the number of elements: the time per element gradually decreases. This trend seems consistent across all implementations and is not isolated to a single workflow. I believe this is related to the Logic Apps scale-out mechanism, and at a certain number of elements, we begin to "win back", hence observing this trend.
 
-I believe the next interesting steps would involve creating a more complex nested statement to determine if we obtain similar results or if there will be differences between implementations. Perhaps in such cases, the Inline Code action would perform better. Another step would be to increase the number of elements in the input arrays up to 100,000 elements to explore how Logic App behaves; whether the trend shown will flatten or continue improving?
+I believe the next interesting steps would involve creating a more complex nested statement to determine if we get similar results. Perhaps in such cases, the Inline Code action would perform better. Another step would be to increase the number of elements in the input arrays up to 100,000 elements to explore how Logic App behaves; whether the trend shown will flatten or continue improving?
 
 What are your thoughts on the different methods of implementing if statements? Have you had similar experiences with performance differences? 🤖Share your insights and experiences in the comments below!
