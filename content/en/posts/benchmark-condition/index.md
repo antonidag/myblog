@@ -9,7 +9,7 @@ image: "myblog/posts/benchmark-condition/preview.gif"
 ## Background   
 Logic Apps is a flexible service that provides you with the tools to implement tasks in various ways. Having more options is often beneficial, but sometimes it can be a bit confusing. How do you determine when to use which method and under what circumstances? Is there a method that is faster or slower?
 
-In this post, we will explore three different methods to implement if statements in Logic Apps. We will conduct benchmarks and compare the results.
+In this post, we will explore three different methods to implement if statements in Logic Apps Standard. We will conduct benchmarks and compare the results.
 
 ##  Exploring Alternatives to If statements 🏴󠁲󠁯󠁩󠁦󠁿
 As you start developing, you will encounter if statements quite quickly; they serve as control mechanisms to decide actions based on values. In Logic Apps, the <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-conditional-statement?tabs=consumption" target="_blank" rel="noopener noreferrer">Condition action</a> is the counterpart of if statements, but there are alternative actions and functions that you could use, such as the <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-add-run-inline-code?tabs=consumption" target="_blank" rel="noopener noreferrer">Inline code action</a> and <a href="https://learn.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference" target="_blank" rel="noopener noreferrer">Expression</a>. Each of these methods comes with its perks and limitations!
@@ -71,7 +71,9 @@ Let's point out some important difference between the workflows:
 
 
 ### Environment settings
-All the benchmarks will be using a WS2 App Service Plan. The scale-out settings were limited to 1. The workflows mode was set to the `Stateful` mode, and the concurrency settings remained at default, meaning that Logic App will process several elements simultaneously.
+All the benchmarks will use the same resources: 
+- WS2 App Service Plan. The scale-out settings were limited to 1. 
+- Logic Apps Standard. Workflows mode was set to the `Stateful` mode, and the concurrency settings remained at default, meaning that Logic App will process several elements simultaneously.
 
 ## Result 📊
 
