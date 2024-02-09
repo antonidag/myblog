@@ -12,24 +12,24 @@ Logic Apps is a flexible service that provides you with the tools to implement t
 In this post, we will explore three different methods to implement if statements in Logic Apps. We will conduct benchmarks and compare the results.
 
 ##  Exploring Alternatives to If statements 🏴󠁲󠁯󠁩󠁦󠁿
-As you start developing, you will encounter if statements quite quickly; they serve as control mechanisms to decide actions based on values. In Logic Apps, the Condition action is the counterpart of if statements, but there are alternative actions and functions that you could use, such as the Inline Code action and `if` Expression. Each of these methods comes with its perks and limitations!
+As you start developing, you will encounter if statements quite quickly; they serve as control mechanisms to decide actions based on values. In Logic Apps, the <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-conditional-statement?tabs=consumption" target="_blank" rel="noopener noreferrer">Condition action</a> is the counterpart of if statements, but there are alternative actions and functions that you could use, such as the <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-add-run-inline-code?tabs=consumption" target="_blank" rel="noopener noreferrer">Inline code action</a>  and `if` Expression. Each of these methods comes with its perks and limitations!
 
 ### Condition action
-Works similarly to an if-else statement. The action will return either true or false, executing one of the paths. The <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-conditional-statement?tabs=consumption" target="_blank" rel="noopener noreferrer">Condition action</a> supports your classic logical operations such as:
+Works similarly to an if-else statement. The action will return either true or false, executing one of the paths. The action supports your classic logical operations such as:
 
 - `or`, only one of the statements has to be `true` for the action to return true.
 - `and`, all of your statements have to be `true` in order for the action to return true.
 - The option to group statements, to create more complex statements.
 
 ### Expression
-<a href="https://learn.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference" target="_blank" rel="noopener noreferrer">Expressions</a> can be used for various purposes. For instance, there are functions for date-time operations, logical operations, and collection operations, to mention a few. One expression we are a bit more interested in is the `if` function, and it is often combined with other functions, as shown below:
+Expressions can be used for various purposes. For instance, there are functions for date-time operations, logical operations, and collection operations, to mention a few. One expression we are a bit more interested in is the `if` function, and it is often combined with other functions, as shown below:
 ```
 if(equals(a,10),a,null)
 ```
 One feature of Expressions is the ability to nest them. By nesting expressions, you can create complex statements and outputs. However, when nesting functions and operations together with other outputs from previous actions, readability can become challenging. Therefore, it is best practice not to overuse this feature.
 
 ### Inline Code action
-Allows you to run "vanilla" JavaScript code within Logic Apps and can be used for a vast variety of tasks. The <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-add-run-inline-code?tabs=consumption" target="_blank" rel="noopener noreferrer">Inline code action</a> can utilize outputs from other actions and can also `return` the output of the code, which, in turn, can be used in other actions in your workflows.
+Allows you to run "vanilla" JavaScript code within Logic Apps and can be used for a vast variety of tasks. The action can utilize outputs from other actions and can also `return` the output of the code, which, in turn, can be used in other actions in your workflows.
 
 ## The Benchmark ⏱️
 ### Use Case: Array Processing and Conditional Record Handling
@@ -65,8 +65,7 @@ Let's point out some important difference between the workflows:
 
 
 ### Environment settings
-All the benchmarks will be using a WS2 App Service Plan, the scale out settings was limited to 1. 
-The workflows mode was set to the `Stateful` mode and the concurrency settings had the default, meaning that Logic App will process several records at the same time. 
+All the benchmarks will be using a WS2 App Service Plan. The scale-out settings were limited to 1. The workflows mode was set to the 'Stateful' mode, and the concurrency settings remained at default, meaning that Logic App will process several records simultaneously.
 
 ## Result 📊
 
@@ -81,13 +80,12 @@ The workflows mode was set to the `Stateful` mode and the concurrency settings h
 - Inline code: __0.461__
 ## Reflections
 
-The results from these benchmarks are not to be seen as right and wrong, meaning that one or the other method is better or worse. There is a lot more parameters to take in and look at before having a proper result. In these benchmark we only look at the duration of the workflows.
+The results from these benchmarks are not to be seen as absolute, meaning that one method is better or worse to another. There are many more parameters to consider and analyze before reaching a conclusion. In these benchmarks, we only focus on the duration of the workflows.
 
-Anyway, with this in mind the diagrams shows that the Expression implementation resulted in lower time per element in seconds. When comparing this to the Condition workflow, it will give us around 14% performance gain on average. One big surprise with was that the Inline Code implementation, was on avg rounded 43% slower per element! I do not know how the Inline code action works under the hood, but probably there is some overhead with Node process that is running the code and somehow causing this big performance decrease.  
+Keeping this in mind, the diagrams show that the Expression implementation resulted in a lower time per element in seconds. When compared to the Condition workflow, it indicates approximately a 14% performance gain on average. One significant surprise was that the Inline Code implementation was, on average, around 43% slower per element! I am unsure of the how the Inline Code action works under the hood , but presumably, there is some overhead with the Node process that executes the code, thereby causing this substantial performance decrease.
 
-If we glance at the diagrams there seams to be a pattern that correlates with the amount of elements, the time per element eventually goes down. This seems to be true for all the implementations and is not isolated to one workflow. I think this is related to the Logic Apps scale out mechanism at a sertant amount of elements we start to "win back" the overhead and therefor we seeing this trend.
+Upon glancing at the diagrams, there appears to be a pattern that correlates with the number of elements: the time per element gradually decreases. This trend seems consistent across all implementations and is not isolated to a single workflow. I believe this is related to the Logic Apps scale-out mechanism, and at a certain number of elements, we begin to "win back", hence observing this trend.
 
-
-I think interesting next steps would be to create a more complex nested statement, to see if there we will get the same results or will it be any difference between the implementation. Perhaps in such a case the Inline Code action will preform better? Another step would be to increase the amount of elements in the input arrays up to 100 000 elements to explore Logic App will behave if the trend shown will be flatten or keep improving, where is the break point? 
+I believe the next interesting steps would involve creating a more complex nested statement to determine if we obtain similar results or if there will be differences between implementations. Perhaps in such cases, the Inline Code action would perform better. Another step would be to increase the number of elements in the input arrays up to 100,000 elements to explore how Logic App behaves; whether the trend shown will flatten or continue improving?
 
 
