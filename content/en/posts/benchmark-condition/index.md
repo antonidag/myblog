@@ -88,4 +88,4 @@ Upon glancing at the diagrams, there appears to be a pattern that correlates wit
 
 I believe the next interesting steps would involve creating a more complex nested statement to determine if we obtain similar results or if there will be differences between implementations. Perhaps in such cases, the Inline Code action would perform better. Another step would be to increase the number of elements in the input arrays up to 100,000 elements to explore how Logic App behaves; whether the trend shown will flatten or continue improving?
 
-
+What are your thoughts on the different methods of implementing if statements? Have you had similar experiences with performance differences? 🤖Share your insights and experiences in the comments below!
