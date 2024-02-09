@@ -2,7 +2,7 @@
 title: "Fast Lane or Slow Lane? Choosing the Quickest Logic App Condition!🏎️" 
 date: 2024-01-04T20:46:09+01:00
 draft: false
-description: 
+description: "Discover the fastest condition in Logic Apps with a benchmark breakdown! Compare the efficiency of Condition action, Expression, and Inline Code methods for implementing if statements."
 image: "myblog/posts/logic-app-web-app/clientwebserver.gif"
 ---
 
