@@ -37,7 +37,10 @@ This benchmark will center around a straight forward use case on data processing
 
 The input arrays was generated with the <a href="https://json-generator.com/" target="_blank" rel="noopener noreferrer">Json Generator</a>, and had the following template:
 ```
-
+[
+    '{{repeat(10000)}}',
+    '{{random(0,10,20,30,40,50,60)}}'
+]
 ```
 
 ### Scenario Description:
