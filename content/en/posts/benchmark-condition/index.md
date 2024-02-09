@@ -45,7 +45,7 @@ The input arrays was generated with the <a href="https://json-generator.com/" ta
 
 ### Scenario Description:
 1. **Loop Over array:**
-   - Once the array is retrieved, iterate over individual records within the array.
+   - Once the array is retrieved, iterate over individual elements within the array.
 
 2. **Conditional Handling:**
    - If the number is equal to 20, 30, or 40. Then return the number, else return `null`
@@ -71,7 +71,7 @@ Let's point out some important difference between the workflows:
 
 
 ### Environment settings
-All the benchmarks will be using a WS2 App Service Plan. The scale-out settings were limited to 1. The workflows mode was set to the `Stateful` mode, and the concurrency settings remained at default, meaning that Logic App will process several records simultaneously.
+All the benchmarks will be using a WS2 App Service Plan. The scale-out settings were limited to 1. The workflows mode was set to the `Stateful` mode, and the concurrency settings remained at default, meaning that Logic App will process several elements simultaneously.
 
 ## Result 📊
 
