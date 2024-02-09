@@ -64,6 +64,7 @@ Let's point out some important difference between the workflows:
 ![Expression workflow](compose.png)
 
 - __The Inline Code__ uses JavaScript code to return the output which is later used in the Response action.
+
 ![Inline Code workflow](javascript.png)
 
 
