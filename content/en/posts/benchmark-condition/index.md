@@ -7,7 +7,7 @@ image: "myblog/posts/benchmark-condition/preview.gif"
 ---
 
 ## Background   
-Logic Apps is a flexible service that provides you with the tools to implement tasks in various ways. Having more options is often beneficial, but sometimes it can be a bit confusing. How do you determine when to use which method and under what circumstances? Is there a method that is faster or slower?
+Logic Apps is a flexible service that provides you with the tools to implement tasks in various ways. Having more options is often beneficial, but sometimes it can be a bit overwhelming. How do you determine when to use which method and under what circumstances? Is there a faster or slower method?
 
 In this post, we will explore three different methods to implement if statements in Logic Apps Standard. We will conduct benchmarks and compare the results.
 
@@ -32,7 +32,6 @@ One feature of Expressions is the ability to nest them. By nesting expressions, 
 Allows you to run "vanilla" JavaScript code within Logic Apps and can be used for a vast variety of tasks. The action can utilize outputs from other actions and can also `return` the output of the code, which, in turn, can be used in other actions in your workflows.
 
 ## The Benchmark ⏱️
-### Use Case: Array Processing and Conditional Record Handling
 This benchmark will center around a straight forward use case on data processing and conditional handling. To get a better data sample of the performance, we will increase the amount of elements by 500, up to 10,000 elements. 
 
 The input arrays was generated with the <a href="https://json-generator.com/" target="_blank" rel="noopener noreferrer">Json Generator</a>, and had the following template:
@@ -93,8 +92,8 @@ The results from these benchmarks are not to be seen as absolute, meaning that o
 
 Keeping this in mind, the diagrams show that the Expression implementation resulted in a lower time per element in seconds. When compared to the Condition workflow, it indicates approximately a __12.5%__ performance gain on average. One significant surprise was that the Inline Code implementation was, on average, around __74.5%__ slower per element! I am unsure of the how the Inline Code action works under the hood, but presumably, there is some kind of bottleneck or overhead with the Node process that executes the code, thereby causing this huge performance decrease.
 
-A pattern that seams to correlates with the number of elements is: the time per element gradually decreases. This trend is seen across all implementations especially around 9000 to 10,000 elements point and is not isolated to a single workflow. I think this is related to the Logic Apps scale-out mechanism, and at a certain number of elements, we begin to "win back" and really take advantage of feature, hence why we are seeing this trend.
+A pattern that seams to correlates with the number of elements is: the time per element gradually decreases. This trend is seen across all implementations especially around 8000 to 10,000 elements point and is not isolated to a single workflow. I think this is related to the Logic Apps scale-out mechanism, and at a certain number of elements, we begin to "win back" and really take advantage of feature, hence why we are seeing this trend.
 
-I think a interesting next steps would be to create a complex nested if statements, and see if we get similar results. Perhaps in such cases, the Inline Code action would perform better. Another step would be to increase the number of elements in the input arrays up to 100,000 elements to explore how Logic App behaves; whether the trend shown will flatten or continue improving?
+I think a interesting next steps would be to create a complex nested if statement, and see if we get similar results. Perhaps in such cases, the Inline Code action would perform better? Another step would be to increase the number of elements in the input arrays up to 100,000 elements to explore how Logic App behaves; whether the trend shown will flatten or continue improving?
 
 What are your thoughts on the different methods of implementing if statements? Have you had similar experiences with performance differences? 🤖Share your insights and experiences in the comments below!
