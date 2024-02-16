@@ -21,11 +21,12 @@ When working with biceps you will run into a the following:
   - is a reuseable competent that can be used along with parameters to deploy one or many resources. 
 - main bicep file
   - often referred to the file that orchestrates all of your deployments
-- parameters files
-    - these are files that we use as an input for our main bicep file. 
+- parameters
+     - json files
+     - bicepparm file 
 
 You can read more about these topics on the Microsoft bicep documentation.
 
-## Creating an what if deployment pipeline
+## Github actions what if deployment pipeline
 
 
