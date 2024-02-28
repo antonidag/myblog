@@ -1,5 +1,5 @@
 ---
-title: Bicep What if deployment IaC
+title: "Azure Deployment Anxiety?😬 Try Bicep What-If for Instant Relief!🍾"
 date: 2024-02-20T15:53:00+00:00
 draft: false
 description: 
@@ -11,13 +11,31 @@ There is a lot of difference ways to make sure the right resources are deployed 
 In this blog we look into bicep what if deployments, and how they can help you making sure you are deploying the right thing! We will do this by creating a github action workflow by using the Azure cli to build, validate and make a what if deployment.  
 
 ## What is Bicep? 💪
-To the world a bicep is a muscle, but in the world of Azure its a way to deploy resources to your subscription. Both bicep and ARM IaC and bicep templates are just and simpler "extension" to ARM. 
+Bicep is a domain-specific language (DSL) that uses declarative syntax to deploy Azure resources. In a Bicep file, you define the infrastructure you want to deploy to Azure, and then use that file throughout the development lifecycle to repeatedly deploy your infrastructure. 
 
-You can read more about these topics on the Microsoft bicep documentation.
+Read more about bicep in the official [documentation]() 
 
-## What is Az CLI? 
+## What is Az CLI?
+The Azure Command-Line Interface (CLI) is a cross-platform command-line tool to connect to Azure and execute administrative commands on Azure resources. It allows the execution of commands through a terminal using interactive command-line prompts or a script. 
 
-## Create bicep template & parameter file
+Read more about the az cli [here](somelink)
+
+## Creating a safe, secure and predictable deployments
+
+__What we are trying to achieve?__
+We want create a safe, secure and pain-free deployment. In addition improve quality and make deployments more transparent. There is no silver bullet, therefor this is just some of steps you could take to improve your deployments to Azure: 
+- __Build the bicep template__
+
+   *Why do we want to build our bicep template?* The reason for this prevent any syntax errors, circular dependencies and etc. In addition this will also help us identify other warnings such unused variables & hardcoded values.
+- __Validate the deployment__
+
+  *Why should we validate the deployment?* template we want to make sure it can be deployed with out any issues,
+- __Make an What-if deployment__
+
+  *Why use a what-if deployment?* Our last step before releasing this our Azure environment, we would like to get an report of the resources deployed, a `what if` deployment can help us with this
+  
+
+## Bicep template & parameter files
 Visual Code, with the Bicep extension will help with syntax and autocompletion and is loaded with many other features as well!
 Github action extension.
 
@@ -57,38 +75,39 @@ param accessTier = 'Hot'
 
 Great, now we have bicep template and parameters fill it with! 
 
-## Something here
 
-Before we create our Github Action workflow, we need to think about what we are trying to achieve?
-We want create a safe, secure and pain-free deployment. Improve the quality and make it more transparent on what we deploying into the environment. In order to get there, we can do do the following: 
-- __Build bicep template__
-
-   *Why do we want to build our bicep template?* The reason for this prevent any syntax errors, circular dependencies and etc. In addition this will also help us identify other warnings such unused variables & hardcoded values.
-- __Validate deployment__
-
-  *Why should we validate the deployment?* template we want to make sure it can be deployed with out any issues,
-- __What-if deployment__
-
-  *Why use a what-if deployment?* Our last step before releasing this our Azure environment, we would like to get an report of the resources deployed, a `what if` deployment can help us with this
-  
 ## Run az cli command locally
 Let's star by reproducing the steps locally on our machine. If you have not already have install Azure CLI go ahead and download it, once install you will also need to install bicep extension. This can be install by simply running the following command: 
 
 ```
 az bicep install
 ```
- You can run the following command in your terminal:
+__Step 1:__ Login in to Azure
+
+```
+az login
+```
+This will prompt you new window in your browser and let you log in your account.
+
+__Step 2:__ Set the subscription
+```
+az account set --subscription {SUBSCRIPTION_ID} 
+```
+It makes thinks easier to set which subscription we are working with, so we do not accidental deploy to the wrong one.
+
+__Step 3:__ Build bicep template 
 ```
 az bicep build --file main.bicep
 ```
-After you have run command, if everything went fine a new file call `main.json` will be created. This is ARM template and you can read more about the relation between Bicep and ARM here.  
+After you have run command, if everything went fine a new file call `main.json` will be created. 
 
-and this will be done by using the command `validate`:
+
+__Step 4:__ Validate the deployment
 ```
 az deployment group validate --resource-group ${{secrets.RG_NAME}} --name MyWhatIfDeployment --template-file main.bicep --parameters main.bicepparam
 ```
 
-:
+__Step 5:__ Make an What-if deployment
 ```
 az deployment group what-if --resource-group {resourceGroupName} --name MyStorageDeployment --template-file main.bicep --parameters main.bicepparam
 ```
@@ -96,3 +115,39 @@ az deployment group what-if --resource-group {resourceGroupName} --name MyStorag
 By make use of all of these commands we can catch any potential errors before it is time for release.
 
 ## Create Github Action pipeline
+
+```
+name: Bicep What if deployment
+on:
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: DEV
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Set up Azure CLI
+        uses: Azure/cli@v1.0.9
+        with:
+          inlineScript: true
+          
+      - name: Install Azure CLI Bicep extension
+        run: az bicep install
+      
+      - name: Build Bicep file
+        run: az bicep build --file main.bicep
+
+      - name: Login to Azure
+        run: az login --username ${{ secrets.AZURE_USERNAME }} --password '${{ secrets.AZURE_USER_PASSWORD }}' --tenant ${{ secrets.AZURE_TENANT_ID }}
+
+      - name: Set Azure Subscription
+        run: az account set --subscription ${{secrets.SUBSCRIPTION_ID}}
+      
+      - name: Validate Bicep Template
+        run: az deployment group validate --resource-group ${{secrets.RG_NAME}} --name ValidateDeployment --template-file main.bicep --parameters main.bicepparam
+
+      - name: What if deployment
+        run: az deployment group what-if --resource-group ${{secrets.RG_NAME}} --name WhatIfDeployment --template-file main.bicep --parameters main.bicepparam
+```
