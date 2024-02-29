@@ -1,5 +1,6 @@
 ---
-title: "Azure Deployment Anxiety?😬 Try Bicep What-If for Instant Relief!🍾"
+title: "Optimize Azure Deployments: Bicep What-If for Seamless Operations 
+Azure Deployment Anxiety?😬 Try Bicep What-If for Instant Relief!🍾"
 date: 2024-02-20T15:53:00+00:00
 draft: false
 description: 
@@ -10,17 +11,17 @@ There is a lot of difference ways to make sure the right resources are deployed 
 
 In this blog we look into bicep what if deployments, and how they can help you making sure you are deploying the right thing! We will do this by creating a github action workflow by using the Azure cli to build, validate and make a what if deployment.  
 
-## What is Bicep? 💪
+## Introducing Bicep 💪
 Bicep is a domain-specific language (DSL) that uses declarative syntax to deploy Azure resources. In a Bicep file, you define the infrastructure you want to deploy to Azure, and then use that file throughout the development lifecycle to repeatedly deploy your infrastructure. 
 
 Read more about bicep in the official [documentation]() 
 
-## What is Az CLI?
+## What is Az CLI? ⌨️
 The Azure Command-Line Interface (CLI) is a cross-platform command-line tool to connect to Azure and execute administrative commands on Azure resources. It allows the execution of commands through a terminal using interactive command-line prompts or a script. 
 
 Read more about the az cli [here](somelink)
 
-## Creating a safe, secure and predictable deployments
+## Creating a safe, secure and predictable deployments ☔
 
 __What we are trying to achieve?__
 We want create a safe, secure and pain-free deployment. In addition improve quality and make deployments more transparent. There is no silver bullet, therefor this is just some of steps you could take to improve your deployments to Azure: 
@@ -35,7 +36,7 @@ We want create a safe, secure and pain-free deployment. In addition improve qual
   *Why use a what-if deployment?* Our last step before releasing this our Azure environment, we would like to get an report of the resources deployed, a `what if` deployment can help us with this
   
 
-## Bicep template & parameter files
+## Building Bicep Templates 🏗️
 Visual Code, with the Bicep extension will help with syntax and autocompletion and is loaded with many other features as well!
 Github action extension.
 
@@ -76,7 +77,7 @@ param accessTier = 'Hot'
 Great, now we have bicep template and parameters fill it with! 
 
 
-## Run az cli command locally
+## Executing az cli command locally 🏃‍♂️
 Let's star by reproducing the steps locally on our machine. If you have not already have install Azure CLI go ahead and download it, once install you will also need to install bicep extension. This can be install by simply running the following command: 
 
 ```
@@ -114,7 +115,7 @@ az deployment group what-if --resource-group {resourceGroupName} --name MyStorag
 
 By make use of all of these commands we can catch any potential errors before it is time for release.
 
-## Create Github Action pipeline
+## Setting up Github Action pipeline ⚙️
 
 ```
 name: Bicep What if deployment
