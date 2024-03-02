@@ -1,15 +1,14 @@
 ---
-title: "Optimize Azure Deployments: Bicep What-If for Seamless Operations 
-Azure Deployment Anxiety?😬 Try Bicep What-If for Instant Relief!🍾"
+title: "Optimize Azure Deployments: Bicep What-If for Seamless Operations"
 date: 2024-02-20T15:53:00+00:00
 draft: false
 description: 
 ---
 
 ## Background 
-There is a lot of difference ways to make sure the right resources are deployed and changed. Most likely this is managed by peer reviews, however looking at code and determine the changes is not always that simple. How do you know whats being changed or created when you deploy infrastructure? 
+There are many different ways to ensure that the right resources are deployed and changed. Most likely, this is managed by peer reviews. However, looking at code and determining the changes is not always a simple task. How do you know what's being changed or created when you deploy infrastructure?
 
-In this blog we look into bicep what if deployments, and how they can help you making sure you are deploying the right thing! We will do this by creating a github action workflow by using the Azure cli to build, validate and make a what if deployment.  
+In this blog, we'll delve into Bicep what-if deployments and how they can help you ensure that you are deploying the right thing! We will do this by creating a GitHub Action pipeline using the Azure CLI to build, validate, and perform a what-if deployment.
 
 ## Introducing Bicep 💪
 Bicep is a domain-specific language (DSL) that uses declarative syntax to deploy Azure resources. In a Bicep file, you define the infrastructure you want to deploy to Azure, and then use that file throughout the development lifecycle to repeatedly deploy your infrastructure. 
@@ -24,23 +23,22 @@ Read more about the az cli [here](somelink)
 ## Creating a safe, secure and predictable deployments ☔
 
 __What we are trying to achieve?__
-We want create a safe, secure and pain-free deployment. In addition improve quality and make deployments more transparent. There is no silver bullet, therefor this is just some of steps you could take to improve your deployments to Azure: 
+We aim to create safe, secure, and pain-free deployments while improving quality and transparency. There's no silver bullet, so these are just some steps you could take to enhance your deployments to Azure:
 - __Build the bicep template__
 
-   *Why do we want to build our bicep template?* The reason for this prevent any syntax errors, circular dependencies and etc. In addition this will also help us identify other warnings such unused variables & hardcoded values.
+  *Why do we want to build our bicep template?* Ensuring there are no syntax errors, circular dependencies, etc. Additionally, this step will help identify other warnings, unused variables, and hardcoded values.
 - __Validate the deployment__
 
-  *Why should we validate the deployment?* template we want to make sure it can be deployed with out any issues,
+  *Why should we validate the deployment?* This ensures that the template is valid for the resource group. 
 - __Make an What-if deployment__
 
-  *Why use a what-if deployment?* Our last step before releasing this our Azure environment, we would like to get an report of the resources deployed, a `what if` deployment can help us with this
+  *Why use a What-If deployment?* Before deploying the Bicep template, we can preview the changes. This additional extra step ensures the right resources are deployed and provides a safety net for potential issues.
+ 
   
 
 ## Building Bicep Templates 🏗️
-Visual Code, with the Bicep extension will help with syntax and autocompletion and is loaded with many other features as well!
-Github action extension.
 
-The resource we will use as an example is an Storage Account.
+Create a new file `main.bicep` and past in the code below:
 ```
 param location string
 param storageName string
@@ -62,8 +60,9 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   }
 }
 ```
+This template will deploy a `Storage Account` of some kind, depending on the parameters used as input. 
 
-The bicepparm file can help you separate parameters from your deployment file like this:
+Create a other file and name it `main.bicepparm`. A bicepparm file are used for parameterize your `main.bicep` template:
 ```
 using './main.bicep'
 
@@ -75,7 +74,6 @@ param accessTier = 'Hot'
 ```
 
 Great, now we have bicep template and parameters fill it with! 
-
 
 ## Executing az cli command locally 🏃‍♂️
 Let's star by reproducing the steps locally on our machine. If you have not already have install Azure CLI go ahead and download it, once install you will also need to install bicep extension. This can be install by simply running the following command: 
@@ -100,12 +98,12 @@ __Step 3:__ Build bicep template
 ```
 az bicep build --file main.bicep
 ```
-After you have run command, if everything went fine a new file call `main.json` will be created. 
+After you have run command, if everything went fine a new file `main.json` will be created. 
 
 
 __Step 4:__ Validate the deployment
 ```
-az deployment group validate --resource-group ${{secrets.RG_NAME}} --name MyWhatIfDeployment --template-file main.bicep --parameters main.bicepparam
+az deployment group validate --resource-group {resourceGroupName} --name MyWhatIfDeployment --template-file main.bicep --parameters main.bicepparam
 ```
 
 __Step 5:__ Make an What-if deployment
