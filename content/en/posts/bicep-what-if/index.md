@@ -126,20 +126,20 @@ The deployment will update the following scope:
 
 Scope: /subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP}
 
-  + Microsoft.Storage/storageAccounts/mystrtestmoqwejqe [2023-01-01]
+  + Microsoft.Storage/storageAccounts/mystr123 [2023-01-01]
 
       apiVersion:                          "2023-01-01"
-      id:                                  "/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP}/providers/Microsoft.Storage/storageAccounts/mystrtestmoqwejqe"
+      id:                                  "/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP}/providers/Microsoft.Storage/storageAccounts/mystr123"
       kind:                                "StorageV2"
       location:                            "northeurope"
-      name:                                "mystrtestmoqwejqe"
+      name:                                "mystr123"
       properties.accessTier:               "Hot"
       properties.minimumTlsVersion:        "TLS1_2"
       properties.supportsHttpsTrafficOnly: true
       sku.name:                            "Standard_LRS"
       type:                                "Microsoft.Storage/storageAccounts"
 ```
-This information makes it really easy to understand what's being deployed, changed, or ignored in the Azure environment. Sending this to your colleague for review would be much appreciated!  
+This information makes it really easy to understand what's being deployed, changed, or ignored. Sending this to your colleague for review would be much appreciated!  
 
 By combining the steps, we can build a stable and rigorous deployment process and catch errors before it is too late.
 
