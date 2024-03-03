@@ -23,19 +23,17 @@ Read more about the az cli [here](somelink)
 ## Creating a safe, secure and predictable deployments ☔
 
 __What we are trying to achieve?__
-We aim to create safe, secure, and pain-free deployments while improving quality and transparency. There's no silver bullet, so these are just some steps you could take to enhance your deployments to Azure:
+Our goal is to create safe, secure, and pain-free deployments while improving the overall quality and clarity. There are various methods that can help improve deployments to Azure, but we are going to focus on the Bicep tools. Here are some steps you could take to enhance your pipeline deployments to Azure right now:
 - __Build the bicep template__
 
-  *Why do we want to build our bicep template?* Ensuring there are no syntax errors, circular dependencies, etc. Additionally, this step will help identify other warnings, unused variables, and hardcoded values.
+  *Why do we want to build our bicep template?* Ensuring there are no syntax errors. Additionally, this step will also help identify warnings with your template.
 - __Validate the deployment__
 
-  *Why should we validate the deployment?* This ensures that the template is valid for the resource group. 
-- __Make an What-if deployment__
+  *Why should we validate the deployment?* This ensures that the template is valid for a deployment to the resource group. 
+- __Preform a What-if deployment__
 
-  *Why use a What-If deployment?* Before deploying the Bicep template, we can preview the changes. This additional extra step ensures the right resources are deployed and provides a safety net for potential issues.
+  *Why preform a What-If deployment?* Before deploying a Bicep template, we can preview the changes. This additional step ensures the right resources are deployed and provides a extra safety net.
  
-  
-
 ## Building Bicep Templates 🏗️
 
 Create a new file `main.bicep` and paste in the code below:
@@ -60,9 +58,9 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   }
 }
 ```
-This bicep template will deploy a `Storage Account` of some kind, depending on the parameters used as input. 
+This Bicep template will deploy a `Storage Account` of some type, depending on the parameters used as input. 
 
-Create a other file and name it `main.bicepparm`. A bicepparm file are used for parameterize your `main.bicep` template:
+Create a other file `main.bicepparm`. `.bicepparm` files are used to parameterize your `main.bicep` template:
 ```
 using './main.bicep'
 
@@ -73,9 +71,7 @@ param skuName = 'Standard_LRS'
 param accessTier = 'Hot'
 ```
 
-Great, now we have bicep template and parameters fill it with! 
-
-## Executing az cli command locally 🏃‍♂️
+## Running az cli commands locally 🏃‍♂️
 Let's start by reproducing the steps locally on our machine. If you have not already installed Azure CLI, go ahead and download it. Once installed, you will also need to install the Bicep extension. This can be done by simply running the following command:
 
 ```
@@ -98,7 +94,7 @@ __Step 3:__ Build Bicep template
 ```
 az bicep build --file main.bicep
 ```
-After you have run this command, if everything went fine, a new file named `main.json` will be created.
+After you have run this command, if everything went fine, a new file `main.json` will be created.
 
 
 __Step 4:__ Validate the deployment
@@ -109,7 +105,7 @@ az deployment group validate
 --template-file main.bicep 
 --parameters main.bicepparam
 ```
-As mentioned earlier, this step will validate the template in the resource group. Perhaps the template had no syntax errors, but there was some kind of misspelling or another type of mistake. This step will hopefully catch that.
+As mentioned earlier, this step will validate the template in the resource group. In our case, the template used is simple but in real life these templates could become quite complex. Making it hard to see mistakes like misspelling or dependency order. Hopefully this step will catch these type of errors.
 
 
 __Step 5:__ Perform a What-if deployment
@@ -120,7 +116,7 @@ az deployment group what-if
 --template-file main.bicep 
 --parameters main.bicepparam
 ```
-If successful, an output shown below will be printed:
+If successful, an output shown below will be printed in the terminal:
 ```
 Resource and property changes are indicated with these symbols:
   + Create
@@ -143,9 +139,9 @@ Scope: /subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP}
       sku.name:                            "Standard_LRS"
       type:                                "Microsoft.Storage/storageAccounts"
 ```
-This information makes it really easy to understand what's being deployed, changed, or ignored in the Azure environment. Sending this to your colleague for review would be much appreciated!
+This information makes it really easy to understand what's being deployed, changed, or ignored in the Azure environment. Sending this to your colleague for review would be much appreciated!  
 
-By combining these steps, we can build a stable and rigorous deployment process and hopefully catch errors before it is too late or when it's time for release.
+By combining the steps, we can build a stable and rigorous deployment process and catch errors before it is too late.
 
 ## Setting up Github Action pipeline ⚙️
 Start by setting up an GitHub Environment. After this we need to create a Service Principal in Azure. This resource will then be used to make our deployments.
