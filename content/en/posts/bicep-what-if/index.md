@@ -8,17 +8,8 @@ description:
 ## Background 
 There are many different ways to ensure that the right resources are deployed and changed. Most likely, this is managed by peer reviews. However, looking at code and determining the changes is not always a simple task. How do you know what's being changed or created when you deploy infrastructure?
 
-In this blog, we'll delve into Bicep what-if deployments and how they can help you ensure that you are deploying the right thing! We will do this by creating a GitHub Action pipeline using the Azure CLI to build, validate, and perform a what-if deployment.
+In this blog, we will dive into Bicep what-if deployments and how they can help you ensure that you are deploying the right thing! We will do this by creating a GitHub Action pipeline using the Azure CLI to build, validate, and perform a what-if deployment.
 
-## Introducing Bicep 💪 might toss
-Bicep is a domain-specific language (DSL) that uses declarative syntax to deploy Azure resources. In a Bicep file, you define the infrastructure you want to deploy to Azure, and then use that file throughout the development lifecycle to repeatedly deploy your infrastructure. 
-
-Read more about bicep in the official [documentation]() 
-
-## What is Az CLI? ⌨️ might toss
-The Azure Command-Line Interface (CLI) is a cross-platform command-line tool to connect to Azure and execute administrative commands on Azure resources. It allows the execution of commands through a terminal using interactive command-line prompts or a script. 
-
-Read more about the az cli [here](somelink)
 
 ## Creating a safe, secure and predictable deployments ☔
 
@@ -60,7 +51,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
 ```
 This Bicep template will deploy a `Storage Account` of some type, depending on the parameters used as input. 
 
-Create a other file `main.bicepparm`. `.bicepparm` files are used to parameterize your `main.bicep` template:
+Create a other file `main.bicepparm`, adjust the parameters to your liking:
 ```
 using './main.bicep'
 
@@ -70,9 +61,10 @@ param kind = 'StorageV2'
 param skuName = 'Standard_LRS'
 param accessTier = 'Hot'
 ```
+A `.bicepparm` file are used to parameterize your `main.bicep` template file.
 
 ## Running az cli commands locally 🏃‍♂️
-Let's start by reproducing the steps locally on our machine. If you have not already installed Azure CLI, go ahead and download it. Once installed, you will also need to install the Bicep extension. This can be done by simply running the following command:
+I always find it a good start by reproducing the steps locally on our machine. If you have not already installed Azure CLI, go ahead and download it. Once installed, you will also need to install the Bicep extension. This can be done by simply running the following command:
 
 ```
 az bicep install
@@ -105,7 +97,7 @@ az deployment group validate
 --template-file main.bicep 
 --parameters main.bicepparam
 ```
-As mentioned earlier, this step will validate the template in the resource group. In our case, the template used is simple but in real life these templates could become quite complex. Making it hard to see mistakes like misspelling or dependency order. Hopefully this step will catch these type of errors.
+As mentioned earlier, this step will validate the template in the resource group. In our case, the template used is simple but in real scenario these templates could become quite complex. Making it hard to see mistakes like misspelling or dependency order. Hopefully this step will catch these type of errors.
 
 
 __Step 5:__ Perform a What-if deployment
@@ -120,8 +112,7 @@ If successful, an output shown below will be printed in the terminal:
 ```
 Resource and property changes are indicated with these symbols:
   + Create
-  * Ignore
-
+  
 The deployment will update the following scope:
 
 Scope: /subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP}
@@ -138,10 +129,12 @@ Scope: /subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP}
       properties.supportsHttpsTrafficOnly: true
       sku.name:                            "Standard_LRS"
       type:                                "Microsoft.Storage/storageAccounts"
-```
-This information makes it really easy to understand what's being deployed, changed, or ignored. Sending this to your colleague for review would be much appreciated!  
 
-By combining the steps, we can build a stable and rigorous deployment process and catch errors before it is too late.
+Resource changes: 1 to create.
+```
+Here we can clearly see the resources being deployed, their name, sku and all the necessary information. We also get a summery as you can se on the last row of resources changed, created and ignored. Sending this to your colleague for review would be much appreciated and easy to understand. Compare this to code-review for an example, the reviewer needs to have knowledge around the language Bicep its syntax, logic and structure. If you are like me, and does not always make the perfect pull request, the reviewer might end up reviewing a lot of code, which can make it hard to get a proper overview of the impacted resources. 
+
+If we combine these steps, we can build a stable, rigorous and predictable deployment process and catch errors before it is too late.
 
 ## Setting up Github Action pipeline ⚙️
 Start by setting up an GitHub Environment. After this we need to create a Service Principal in Azure. This resource will then be used to make our deployments.
