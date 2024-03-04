@@ -8,7 +8,7 @@ description:
 ## Background 
 There are many different ways to ensure that the right resources are deployed and changed. Most likely, this is managed by peer reviews. However, looking at code and determining the changes is not always a simple task. How do you know what's being changed or created when you deploy infrastructure?
 
-In this blog, we will dive into Bicep what-if deployments and how they can help you ensure that you are deploying the right thing! We will do this by creating a GitHub Action pipeline using the Azure CLI to build, validate, and perform a what-if deployment.
+In this blog, we will dive into <a href="https://github.com/antonidag/github-action-bicep-what-if-https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/" target="_blank" rel="noopener noreferrer">Bicep</a> what-if deployments and how they can help you ensure that you are deploying the right thing! We will do this by creating a GitHub Action pipeline using the <a href="https://learn.microsoft.com/en-us/cli/azure/?view=azure-cli-latest" target="_blank" rel="noopener noreferrer">Azure CLI</a> to build, validate, and perform a what-if deployment.
 
 
 ## Creating a safe, secure and predictable deployments ☔
@@ -93,7 +93,7 @@ __Step 4:__ Validate the deployment
 ```
 az deployment group validate 
 --resource-group {RESOURCE_GROUP} 
---name MyWhatIfDeployment 
+--name ValidateDeployment  
 --template-file main.bicep 
 --parameters main.bicepparam
 ```
@@ -104,7 +104,7 @@ __Step 5:__ Perform a What-if deployment
 ```
 az deployment group what-if 
 --resource-group {RESOURCE_GROUP} 
---name MyStorageDeployment 
+--name WhatIfDeployment 
 --template-file main.bicep 
 --parameters main.bicepparam
 ```
@@ -134,12 +134,16 @@ Resource changes: 1 to create.
 ```
 Here we can clearly see the resources being deployed, their name, sku and all the necessary information. We also get a summery as you can se on the last row of resources changed, created and ignored. Sending this to your colleague for review would be much appreciated and easy to understand. Compare this to code-review for an example, the reviewer needs to have knowledge around the language Bicep its syntax, logic and structure. If you are like me, and does not always make the perfect pull request, the reviewer might end up reviewing a lot of code, which can make it hard to get a proper overview of the impacted resources. 
 
-If we combine these steps, we can build a stable, rigorous and predictable deployment process and catch errors before it is too late.
+If we combine these steps, we can build a stable, robust and predictable deployment process and catch errors before it is too late.
 
 ## Setting up Github Action pipeline ⚙️
-Start by setting up an GitHub Environment. After this we need to create a Service Principal in Azure. This resource will then be used to make our deployments.
 
+Before diving into the setup process, there are a few prerequisites to address:
+- __Create a Service Principal in Azure:__ This provides the necessary permissions for the GitHub Action to interact with your Azure resources securely.
+- __Set up a GitHub Project:__ Create a project in GitHub and set up an Environment within your project.
+- __Add GitHub Secrets:__ Store credentials securely as GitHub secrets to ensure they are not exposed in your repository.
 
+Create a new folder `.github/workflows` and a file `what-if.yml` and paste in the code:
 ```
 name: Bicep What if deployment
 on:
@@ -147,7 +151,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: {GITHUB_ENVIRONMENT}
+    environment: GITHUB_ENVIRONMENT
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -164,7 +168,7 @@ jobs:
         run: az bicep build --file main.bicep
 
       - name: Login to Azure
-        run: az login --username ${{ secrets.AZURE_USERNAME }} --password '${{ secrets.AZURE_USER_PASSWORD }}' --tenant ${{ secrets.AZURE_TENANT_ID }}
+        run: az login --service-principal -u ${{ secrets.AZURE_USERNAME }} -p ${{ secrets AZURE_USER_PASSWORD }} --tenant ${{ secrets.AZURE_TENANT_ID }}
 
       - name: Set Azure Subscription
         run: az account set --subscription ${{secrets.SUBSCRIPTION_ID}}
@@ -175,3 +179,6 @@ jobs:
       - name: What if deployment
         run: az deployment group what-if --resource-group ${{secrets.RESOURCE_GROUP}} --name WhatIfDeployment --template-file main.bicep --parameters main.bicepparam
 ```
+This pipeline can be customized to fit your organizations needs, but can server as a start for automating what-if deployments in your Azure environment. For detailed instructions and the full project code, refer to my GitHub repository <a href="https://github.com/antonidag/github-action-bicep-what-if-deployment" target="_blank" rel="noopener noreferrer">here</a>.  
+
+## Reflections
