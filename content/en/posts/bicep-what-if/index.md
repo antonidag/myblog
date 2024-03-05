@@ -179,6 +179,11 @@ jobs:
       - name: What if deployment
         run: az deployment group what-if --resource-group ${{secrets.RESOURCE_GROUP}} --name WhatIfDeployment --template-file main.bicep --parameters main.bicepparam
 ```
-This pipeline can be customized to fit your organizations needs, but can server as a start for automating what-if deployments in your Azure environment. For detailed instructions and the full project code, refer to my GitHub repository <a href="https://github.com/antonidag/github-action-bicep-what-if-deployment" target="_blank" rel="noopener noreferrer">here</a>.  
+This pipeline can serve as a starting for automating what-if deployments in your Azure environment, but will probably need to be customized to fit your organizations. For more details the full project code and be viewed at my GitHub repository <a href="https://github.com/antonidag/github-action-bicep-what-if-deployment" target="_blank" rel="noopener noreferrer">here</a>.  
 
 ## Reflections
+Some key take away are that using Azure CLI together with Bicep to build, validate and preform a what-if deployment is an excellent way to setting yourself up for success. It might feel like much work and many steps, but how many times have you not tried and deployed something and it failed. If we can mitigate this, there is probably a lot of time saved and irritation. 
+
+The real challenge is probably to incorporate this process with existing processes and ways of working within the organization. I know for a fact that in some larger organization going from development to production ready can involve many other steps and human interaction, and perhaps this might be the tool to improve the efficiency.
+
+Have you integrated what-if deployments in your pipeline? What is your experience with CI/CD in your organizations? Share your insights and experiences in the comments below!
