@@ -6,18 +6,18 @@ description:
 ---
 
 ## Background 
-There are many different ways to ensure that the right resources are deployed and changed. Most likely, this is managed by peer reviews. However, looking at code and determining the changes is not always a simple task. How do you know what's being changed or created when you deploy infrastructure?
+There are many different ways to ensure that the right resources are deployed. Most likely, this is managed by peer reviews or some other process. However, looking at code and determining the changes is not always a simple task. How do you know what is being changed or created when you deploy infrastructure?
 
-In this blog, we will dive into <a href="https://github.com/antonidag/github-action-bicep-what-if-https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/" target="_blank" rel="noopener noreferrer">Bicep</a> what-if deployments and how they can help you ensure that you are deploying the right thing! We will do this by creating a GitHub Action pipeline using the <a href="https://learn.microsoft.com/en-us/cli/azure/?view=azure-cli-latest" target="_blank" rel="noopener noreferrer">Azure CLI</a> to build, validate, and perform a what-if deployment.
+In this blog, we will dive into <a href="https://github.com/antonidag/github-action-bicep-what-if-https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/" target="_blank" rel="noopener noreferrer">Bicep</a> what-if deployments and how they can help deploy the right thing! We will do this by creating a GitHub Action pipeline using the <a href="https://learn.microsoft.com/en-us/cli/azure/?view=azure-cli-latest" target="_blank" rel="noopener noreferrer">Azure CLI</a> to build, validate, and perform a what-if deployment.
 
 
 ## Creating a safe, secure and predictable deployments ☔
 
 __What we are trying to achieve?__
 Our goal is to create safe, secure, and pain-free deployments while improving the overall quality and clarity. There are various methods that can help improve deployments to Azure, but we are going to focus on the Bicep tools. Here are some steps you could take to enhance your pipeline deployments to Azure right now:
-- __Build the bicep template__
+- __Build the Bicep template__
 
-  *Why do we want to build our bicep template?* Ensuring there are no syntax errors. Additionally, this step will also help identify warnings with your template.
+  *Why do we want to build our Bicep template?* Ensures that there is no syntax errors. Additionally, this step will also help identify warnings with your template.
 - __Validate the deployment__
 
   *Why should we validate the deployment?* This ensures that the template is valid for a deployment to the resource group. 
@@ -61,10 +61,10 @@ param kind = 'StorageV2'
 param skuName = 'Standard_LRS'
 param accessTier = 'Hot'
 ```
-A `.bicepparm` file are used to parameterize your `main.bicep` template file.
+A `.bicepparm` files are used to parameterize your `main.bicep` template file.
 
 ## Running az cli commands locally 🏃‍♂️
-I always find it a good start by reproducing the steps locally on our machine. If you have not already installed Azure CLI, go ahead and download it. Once installed, you will also need to install the Bicep extension. This can be done by simply running the following command:
+It is a good start to reproduce the steps locally on our machine. If you have not already installed Azure CLI, go ahead and download it. Once installed, you will also need to install the Bicep extension. This can be done by simply running the following command:
 
 ```
 az bicep install
@@ -74,7 +74,7 @@ __Step 1:__ Login to Azure
 ```
 az login
 ```
-This will prompt a new window in your browser and allow you to log in to your account.
+This will prompt a new window in your browser and allow you to login to your account.
 
 __Step 2:__ Set the subscription
 ```
@@ -132,14 +132,14 @@ Scope: /subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP}
 
 Resource changes: 1 to create.
 ```
-Here we can clearly see the resources being deployed, their name, sku and all the necessary information. We also get a summery as you can se on the last row of resources changed, created and ignored. Sending this to your colleague for review would be much appreciated and easy to understand. Compare this to code-review for an example, the reviewer needs to have knowledge around the language Bicep its syntax, logic and structure. If you are like me, and does not always make the perfect pull request, the reviewer might end up reviewing a lot of code, which can make it hard to get a proper overview of the impacted resources. 
+Here we can clearly see the resources being deployed, their name, sku and all the necessary information. We also get a summery as you can se on the last row of resources changed, created and ignored. Sending this to your colleague for review would be much appreciated and easy to understand. Compare this to code-review for an example, the reviewer needs to have knowledge around the language Bicep its syntax, logic and structure. If you are like me, and does not always make the perfect pull requests, the reviewer might end up reviewing a lot of code, which can make it hard to get a proper overview of the impacted resources. 
 
 If we combine these steps, we can build a stable, robust and predictable deployment process and catch errors before it is too late.
 
 ## Setting up Github Action pipeline ⚙️
 
 Before diving into the setup process, there are a few prerequisites to address:
-- __Create a Service Principal in Azure:__ This provides the necessary permissions for the GitHub Action to interact with your Azure resources securely.
+- __Create a Service Principal in Azure:__ This provides the necessary permissions for the GitHub Action to interact with your Azure resources.
 - __Set up a GitHub Project:__ Create a project in GitHub and set up an Environment within your project.
 - __Add GitHub Secrets:__ Store credentials securely as GitHub secrets to ensure they are not exposed in your repository.
 
@@ -179,9 +179,11 @@ jobs:
       - name: What if deployment
         run: az deployment group what-if --resource-group ${{secrets.RESOURCE_GROUP}} --name WhatIfDeployment --template-file main.bicep --parameters main.bicepparam
 ```
-This pipeline can serve as a starting for automating what-if deployments in your Azure environment, but will probably need to be customized to fit your organizations. For more details the full project code and be viewed at my GitHub repository <a href="https://github.com/antonidag/github-action-bicep-what-if-deployment" target="_blank" rel="noopener noreferrer">here</a>.  
+This pipeline can serve as a starting for automating what-if deployments in your Azure environment, but will probably need to be customized to fit your organization. For more details the full project code and be viewed at my GitHub repository <a href="https://github.com/antonidag/github-action-bicep-what-if-deployment" target="_blank" rel="noopener noreferrer">here</a>.  
+
+That's it! We have managed to create a what-if pipeline!
 
 ## Reflections
-Some key take away are that using Azure CLI together with Bicep to build, validate and preform a what-if deployment is an excellent way to setting yourself up for success. It might feel like much work and many steps, but if we can mitigate failures we will probably save a lot of time and hassle! With a creative mind, the information given from what-if deployments could easily turn into documentation, change logs and release notes. 
+Some key take away are that using Azure CLI together with Bicep to build, validate and preform a what-if deployment is an excellent way to setting yourself up for success. It might feel like much work and many steps, but if we can mitigate failures we will probably save a lot of time and hassle! With a creative mind, the information given from what-if deployments could easily turn into documentation, change logs or release notes. 
 
 Have you integrated what-if deployments in your pipeline? What is your experience with CI/CD in your organizations? Share your insights and experiences in the comments below!
