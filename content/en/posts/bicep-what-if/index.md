@@ -6,7 +6,7 @@ description:
 ---
 
 ## Background 
-There are many different ways to ensure that the right resources are deployed. Most likely, this is managed by peer reviews or some other process. However, looking at code and determining the changes is not always a simple task. How do you know what is being changed or created when you deploy infrastructure?
+There are many ways to guarantee that the right resources are deployed. Most likely, this is managed by peer reviews or some other process. However, looking at code and determining the changes is not always a simple task. How do you know what is being changed or created when you deploy infrastructure?
 
 In this blog, we will dive into <a href="https://github.com/antonidag/github-action-bicep-what-if-https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/" target="_blank" rel="noopener noreferrer">Bicep</a> what-if deployments and how they can help deploy the right thing! We will do this by creating a GitHub Action pipeline using the <a href="https://learn.microsoft.com/en-us/cli/azure/?view=azure-cli-latest" target="_blank" rel="noopener noreferrer">Azure CLI</a> to build, validate, and perform a what-if deployment.
 
@@ -179,7 +179,11 @@ jobs:
       - name: What if deployment
         run: az deployment group what-if --resource-group ${{secrets.RESOURCE_GROUP}} --name WhatIfDeployment --template-file main.bicep --parameters main.bicepparam
 ```
-This pipeline can serve as a starting for automating what-if deployments in your Azure environment, but will probably need to be customized to fit your organization. For more details the full project code and be viewed at my GitHub repository <a href="https://github.com/antonidag/github-action-bicep-what-if-deployment" target="_blank" rel="noopener noreferrer">here</a>.  
+This pipeline can serve as a starting for automating what-if deployments in your Azure environment, but will probably need to be customized to fit your organization. For more details the full project code and be viewed at my GitHub repository <a href="https://github.com/antonidag/github-action-bicep-what-if-deployment" target="_blank" rel="noopener noreferrer">here</a>.
+
+After the setup you can trigger the pipeline and it will start deploying to Azure:   
+
+![Github_Action](github_action.png)
 
 That's it! We have managed to create a what-if pipeline!
 
