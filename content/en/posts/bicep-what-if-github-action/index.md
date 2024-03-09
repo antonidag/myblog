@@ -1,9 +1,9 @@
 ---
-title: "Deploy Smarter, Not Harder: Bicep What-If for Azure Deployment"
+title: "Deploy Smarter, Not Harder: Github & Bicep What-If for Azure Deployment 💪"
 date: 2024-02-20T15:53:00+00:00
 draft: false
 description: "Discover the efficiency of Bicep what-if deployments in our latest post. Learn to preview changes with Azure CLI, ensuring safe deployments. Setup GitHub Action pipelines for automation. Whether you're new or experienced, optimize your Azure deployment process with Bicep."
-image: "myblog/posts/bicep-what-if/bicep-whatif.gif"
+image: "myblog/posts/bicep-what-if-github-action/bicep-whatif.gif"
 ---
 
 ## Background
