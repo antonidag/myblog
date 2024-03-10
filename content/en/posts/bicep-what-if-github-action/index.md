@@ -98,7 +98,7 @@ az deployment group validate
 --template-file main.bicep 
 --parameters main.bicepparam
 ```
-As mentioned earlier, this step will validate the template in the resource group. In our case, the template used is simple but in real scenario these templates could become quite complex. Making it hard to see mistakes like misspelling or dependency order. Hopefully this step will catch these type of errors.
+As mentioned earlier, this step will validate the template in the resource group. In our case, the template used is simple but in real scenario these templates could become quite complex, making it harder to spot errors. Hopefully this step will catch these type of errors.
 
 
 __Step 5:__ Perform a What-if deployment
