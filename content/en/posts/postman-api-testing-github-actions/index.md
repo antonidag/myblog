@@ -13,6 +13,9 @@ In this blog post we will automate testing with Postman with Github Actions.
 
 ## What is Postman?
 Postman is a popular tool to call API:s, it has a easy to use UI and have become more and more soficticated. Now days Postman comes with a lot of features.
+
+## Building a simple Logic App
+
 ## Creating API tests 
 ```
 pm.test("response is ok", function () {
