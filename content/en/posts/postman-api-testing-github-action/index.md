@@ -1,8 +1,9 @@
 ---
-title: API Testing with Postman and Github Actions 
-date: 2024-04-0T02:53:00+00:00
-draft: true
-description: 
+title: "API Testing with Postman and Github Actions"
+date: 2024-03-10T00:00:00+00:00
+draft: false
+description: ""
+image: ""
 ---
 
 ## Background 
@@ -20,7 +21,7 @@ pm.test("response is ok", function () {
 
 ```
 ## Automate Postman Test with Github Actions
-Before diving into the setup process, there are a few prerequisites to address:
+Before diving into the setup process, there are a few prerequisites to fix:
 - __Set up a GitHub Project:__ Create a project in GitHub and set up an Environment within your project.
 - __Add GitHub Secrets:__ Store credentials securely as GitHub secrets to ensure they are not exposed in your repository.
 
