@@ -9,7 +9,7 @@ image: "myblog/posts/bicep-what-if-github-action/bicep-whatif.gif"
 ## Background
 There are many ways to guarantee that the right resources are deployed. Most likely, this is managed by peer reviews or some other process. However, looking at code and determining the changes is not always a simple task. How do you know what is being changed or created when you deploy infrastructure?
 
-In this blog, we will dive into <a href="https://github.com/antonidag/github-action-bicep-what-if-https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/" target="_blank" rel="noopener noreferrer">Bicep</a> what-if deployments and how they can help deploy the right thing! We will do this by creating a GitHub Action pipeline using the <a href="https://learn.microsoft.com/en-us/cli/azure/?view=azure-cli-latest" target="_blank" rel="noopener noreferrer">Azure CLI</a> to build, validate, and perform a what-if deployment.
+In this blog, we will dive into <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/" target="_blank" rel="noopener noreferrer">Bicep</a> what-if deployments and how they can help deploy the right thing! We will do this by creating a GitHub Action pipeline using the <a href="https://learn.microsoft.com/en-us/cli/azure/?view=azure-cli-latest" target="_blank" rel="noopener noreferrer">Azure CLI</a> to build, validate, and perform a what-if deployment.
 
 
 ## Creating a safe, secure and predictable deployments ☔
