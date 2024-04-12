@@ -65,13 +65,13 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Run seo analysers
+      - uses: actions/checkout@v4
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-          run: | 
-            npm i -g seo-analyzer
-            seo-analyzer -u www.antonbjorkman.com
+      - run: npm i -g seo-analyzer
+      - run: seo-analyzer -u www.antonbjorkman.com
 
   # Deployment job
   deploy:
