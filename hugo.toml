@@ -115,4 +115,4 @@ url = "https://se.linkedin.com/in/anton-bj%C3%B6rkman-447a1a1b1"
 
 [[params.socialIcons]]
 name = "Rss"
-url = "index.xml"
+url = "https://www.antonbjorkman.com/index.xml"
