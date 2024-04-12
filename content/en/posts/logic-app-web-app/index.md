@@ -3,7 +3,7 @@ title: "Revolutionize Your Logic Apps: Building Dynamic Web Apps with SSR Magic!
 date: 2024-01-04T00:00:00+01:00
 draft: false
 description: Logic App, a service designed for integrations and business processes. But in this post we will be transforming Logic Apps into a web experience by using server-side rendering (SSR).
-image: "myblog/posts/logic-app-web-app/clientwebserver.gif"
+image: "posts/logic-app-web-app/clientwebserver.gif"
 ---
 
 
