@@ -7,16 +7,17 @@ image: ""
 ---
 
 ## Background 
-Testing software is important part of its lifecycle and there is whole lot of different method to do testing. Automated testing 
+Testing software is an important part of its lifecycle and a big part of its success. However, usually what happens in a project is that testing is overlooked. This could be due to several reasons but perhaps the biggest factor is not enuf time. Therefor find the right tool, could potential save the project.  
 
-In this blog post we will automate post deployment testing with Postman with Github Actions.
+In this blog post we will use Postman and Github Actions to automate testing, and see how easy and testing could be done.
 
 ## What is Postman?
-Postman is a popular tool to call API:s, it has a easy to use UI and have become more and more soficticated. Now days Postman comes with a lot of features.
+Postman is a popular tool to call and build API:s with. It has an easy to use UI and have become more and more soficticated over the time. Postman comes with a lot of features, workspaces, environments, testing and flows. The flow feature allows you build workflows. For more information read more about Postman [here]()
+## Testing APIs
 
 
 ## Creating API tests in Postman
-We are going to work with a simple Time API. The operation returns the current time in a json payload. You need to authenticate with Basic Auth to call the API. Here is a raw HTTP response to give you an idea of what we are dealing with: 
+We are going to work with a simple Time API that I have created for this blog. The operation returns the current time in a json payload. You need to authenticate with Basic Auth to authenticate forwards the API. Here is a raw HTTP response to give you an idea of what we are dealing with: 
 ```
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
@@ -40,9 +41,11 @@ We will test & validate that the:
 - Validate json payload
 
 
-Before we can jump into writing test, we first we need to create a new "Collection" and then import or manually create the HTTP requests. Once we have created the requests and configured the authentication we are ready to build are test cases!
+Before we can jump into writing test, we first need work inside of Postman. 
+Start by creating a new Collection and name it appropriate to the API you are testing, in my case "Time API". Collections is a how API:s can be organized in Postman.  
+There is several ways to import collections and API:s, in my case I think it easiest to create the HTTP request manually. Depending on your API there could other types on parameters, headers and authentication required, Postman allows an simple interface to configure this. 
 
-To create test we need to navigate to the "Test" menu. Test are written in JavaScript, the Postman JavaScript API documentation can be found [here](https://learning.postman.com/docs/writing-scripts/script-references/script-reference-overview/)  
+To create test for an API we need to navigate to the "Test" menu. Test are written in JavaScript, the Postman JavaScript API documentation can be found [here](https://learning.postman.com/docs/writing-scripts/script-references/script-reference-overview/).
 
 Let's start by make sure everything is working as it should, by creating this simple test:
 ```
