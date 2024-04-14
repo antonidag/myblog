@@ -54,9 +54,7 @@ pm.test("response is ok", function () {
 })
 
 ```
-To run the test, we need to right click the collection and enter the "Run collection" menu. Then we can click on run to see the results. After the test has finished is should look like this: 
-[img]
-
+To run the test, we need to right click the collection and enter the "Run collection" menu. Then we can click on run to see the results. 
 
 Once you understand the syntax and its framework writing test in Postman is really easy.
 
@@ -119,4 +117,9 @@ jobs:
         run: |
           postman collection run "27855227-be5be94b-8361-4efc-afd2-49762436fcef"
 ```
+
+When the workflow is triggered it will generate an run like this:
+![postman1.png](postman1.png)
+Here you can see the summery of the all the tests and valvule information such as execution time, how many assertions and etc.
+
 ## Reflection
