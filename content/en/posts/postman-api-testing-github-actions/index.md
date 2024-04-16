@@ -20,7 +20,7 @@ When it comes to testing software there are many different approaches unit, func
 - Database Integration
 - or File system Integration
 
-
+[book](https://www.techtarget.com/searchsoftwarequality/definition/integration-testing)
 
 ## Creating API tests in Postman
 We are going to work with a simple Time API that I have created for this blog. The operation returns the current time in a json payload. You need to authenticate with Basic Auth to authenticate forwards the API. Here is a raw HTTP response to give you an idea of what we are dealing with: 
