@@ -14,7 +14,12 @@ Integrating testing in the CI pipeline can improve the overall quality and produ
 ## What is Postman?
 As mention before Postman is a popular platform to build and using API:. Postman is packed with a lot of features such as workspaces where you share and build API artifacts. It also comes with the availability to perform load testing and test individual API:s. For more information more about Postman and its feature read more at their [website](https://www.postman.com/product/what-is-postman/)
 
-## Testing APIs
+## Integration Testing
+When it comes to testing software there are many different approaches unit, functional, integration and end-to-end testing to mention a few. Some are more fitted for some type of testing and other for another method. Integration testing verifies that the components or modules interacts as intended. Typically integration tests could be verifying an: 
+- External API 
+- Database Integration
+- or File system Integration
+
 
 
 ## Creating API tests in Postman
