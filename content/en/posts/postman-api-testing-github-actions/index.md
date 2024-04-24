@@ -100,10 +100,10 @@ Before diving into the setup process, there are a few prerequisites to fix:
 - __Set up a GitHub Project:__ Create a project in GitHub and set up an Environment within your project.
 - __Add GitHub Secrets:__ Store credentials securely as GitHub secrets to ensure they are not exposed in your repository.
 
-Worth mention is that their is a lot more configure and to think about if you where to use Postman in a real wold CI pipeline. FOr instance different environment and variables and etc. 
+Worth mention is that their could be more to configure and to think about if you where to use Postman in a real wold CI pipeline. For instance different environment and variables and etc. 
 
 
-However, Postman has made running a Collection in Github Actions super simple! 
+However, once you have all your variables and secrets done Postman has made running a tests in Github Actions super simple! 
 ```
 name: Automated API tests using Postman CLI
 
@@ -124,7 +124,7 @@ jobs:
           postman collection run "27855227-be5be94b-8361-4efc-afd2-49762436fcef"
 ```
 
-When the workflow is triggered it will generate an run like this:
+When the workflow is done it will generate and output similar to the following:
 ```
 Run postman collection run "27855227-be5be94b-8361-4efc-afd2-49762436fcef"
   
