@@ -7,9 +7,9 @@ image: ""
 ---
 
 ## Background 
-Testing software is an important part of its lifecycle and a big part of its success. There is lot different frameworks and method out there. Finding the right tool for the project could sometime be challenging! [Postman](https://www.postman.com/) is popular API platform for building and using APIs, and widely used among developers, architects and technical functions! 
+Testing software is an important part of its lifecycle and a big part of its success. There is lot different frameworks and method out there and finding the right tools for could sometime be challenging! [Postman](https://www.postman.com/) is popular API platform for building and using APIs, and widely used among developers and is one of the tools that makes testing simpler! 
 
-Integrating testing in the CI pipeline can improve the overall quality and productivity. Therefor, in this blog post we will explore how Postman can be used to automate API testing using Github Actions. 
+Integrating testing in the your CI pipeline can improve the overall quality and productivity. Therefor, in this blog post we will explore how Postman can be used to automate API testing using Github Actions. 
 
 ## What is Postman?
 As mention before Postman is a popular platform to build and using API:. Postman is packed with a lot of features such as workspaces where you share and build API artifacts. It also comes with the availability to perform load testing and test individual API:s. For more information more about Postman and its feature read more at their [website](https://www.postman.com/product/what-is-postman/)
