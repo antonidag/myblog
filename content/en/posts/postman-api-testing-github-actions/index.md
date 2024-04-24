@@ -12,7 +12,7 @@ Testing software is an important part of its lifecycle and a big factor of its s
 Integrating testing into your CI pipeline can help improve overall quality and productivity. Therefore, in this blog post, we will explore how Postman can be used to automate API testing using GitHub Actions!
 
 ## What is Postman?
-As mention before Postman is a popular platform to build and using API:. Postman is packed with a lot of features such as workspaces where you share and build API artifacts. It also comes with the availability to perform load testing and test individual API:s. For more information more about Postman and its feature read more at their [website](https://www.postman.com/product/what-is-postman/)
+As mentioned before, Postman is a popular platform for building and using API:s. Postman is packed with many features, such as workspaces where you can share and build API artifacts. It also offers the ability to perform load testing and test individual APIs. For more information about Postman and its features, visit their [website](https://www.postman.com/product/what-is-postman/)
 
 ## Integration Testing
 When it comes to testing software there are many different approaches unit, functional, integration and end-to-end testing to mention a few. Some are more fitted for some type of testing and other for another method. Integration testing verifies that the components or modules interacts as intended. Typically integration tests could be verifying an: 
