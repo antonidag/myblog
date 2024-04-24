@@ -23,76 +23,72 @@ When it comes to testing software there are many different approaches unit, func
 [book](https://www.techtarget.com/searchsoftwarequality/definition/integration-testing)
 
 ## Creating API tests in Postman
-We are going to work with a simple Time API that I have created for this blog. The operation returns the current time in a json payload. You need to authenticate with Basic Auth to authenticate forwards the API. Here is a raw HTTP response to give you an idea of what we are dealing with: 
+We are going to test an weather API from [weatherapi.com](https://www.weatherapi.com/). They provide a rich amount of API:s, see their API documentation for more [info](https://www.weatherapi.com/docs). 
+
+We want test & validate that the:
+- Authentication is working
+- Validate expected HTTP headers
+- Validate JSON payload
+
+
+Before we can jump into writing test, we first need work inside of Postman. Start by creating a new Collection and name it appropriate to the API you are testing, in my case "Weather API".
+There is several ways to import collections and API:s into Postman, I will create the HTTP request manually. Depending on your API there could different types on parameters, headers and authentication required, this configuration is supported by Postman. 
+
+To create test for an API we need to navigate to the "Test" menu inside of the created request. Tests in Postman are written in JavaScript. There is [documentation](https://learning.postman.com/docs/writing-scripts/script-references/script-reference-overview/), test examples and how-tos that can be helpful to familiarize with before starting writing your test cases. Once you have some basic knowledge around it will come quite easy to start! 
+
+However, let's by creating this simple test:
 ```
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-Content-Length: 42
-Connection: keep-alive
-Date: Mon, 18 Mar 2024 16:07:12 GMT
-x-powered-by: Express
-access-control-allow-methods: GET
-x-content-type-options: nosniff
-cache-control: no-cache
-etag: W/"2a-123abc"
+pm.test("Successful authentication", function () {
+    pm.expect(pm.response).to.have.status(200); // 200 indicates successful authentication
+});
 
-{
-  "currentTime" : "2024-03-18T16:07:12.026Z"
-}
-```
-
-We will test & validate that the:
-- Basic Authentication is working
-- Validate the expected HTTP Headers
-- Validate json payload
-
-
-Before we can jump into writing test, we first need work inside of Postman. 
-Start by creating a new Collection and name it appropriate to the API you are testing, in my case "Time API". Collections is a how API:s can be organized in Postman.  
-There is several ways to import collections and API:s, in my case I think it easiest to create the HTTP request manually. Depending on your API there could other types on parameters, headers and authentication required, Postman allows an simple interface to configure this. 
-
-To create test for an API we need to navigate to the "Test" menu. Test are written in JavaScript, the Postman JavaScript API documentation can be found [here](https://learning.postman.com/docs/writing-scripts/script-references/script-reference-overview/).
-
-Let's start by make sure everything is working as it should, by creating this simple test:
-```
-pm.test("response is ok", function () {
-    pm.response.to.have.status(200)
-})
 
 ```
 To run the test, we need to right click the collection and enter the "Run collection" menu. Then we can click on run to see the results. 
 
-Once you understand the syntax and its framework writing test in Postman is really easy.
-
-Here is the final JavaScript code: 
+If you have a hard time writing the tests, you can get help from the [Postbot](https://www.postman.com/product/postbot/). The bot can assist you with fixing, adding more tests and writing documentation for the API.
+With a bit of editing and help from the bot the tests for one of API operations finalized to: 
 ```
-//-----Validate Authentication
-pm.test("successful authentication", function () {
-    pm.expect(pm.response).to.have.status(200); // 200 indicates successful authentication
+pm.test("Validate headers", function () {
+    pm.response.to.have.header('Content-Type', 'application/json');
 });
-
-//-----Validate HTTP Headers
-pm.test("validate headers", function () {
-    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8'); // Check Content-Type header value
-    pm.response.to.have.header('Access-Control-Allow-Methods', 'GET'); // Check Access-Control-Allow-Methods header value
-    pm.response.to.have.header('X-Content-Type-Options', 'nosniff'); // Check X-Content-Type-Options header value
-    pm.response.to.have.header('Cache-Control', 'no-cache'); // Check Cache-Control header value
+pm.test("Successful authentication", function () {
+    pm.expect(pm.response).to.have.status(200); 
 });
-
-//-----Validate payload
-pm.test("payload is json", function () {
-    pm.response.to.have.jsonBody(); // Check body to be json
-})
-
-pm.test("validate currentTime field", function () {
-    // Parse the response body as JSON
+pm.test("Payload is json", function () {
+    pm.response.to.have.jsonBody();
+});
+pm.test("Validate payload properties", function () {
     var responseBody = pm.response.json();
-
-    // Check if the currentTime field exists
-    pm.expect(responseBody).to.have.property('currentTime');
-
-    // Check if the currentTime field is a valid ISO 8601 date
-    pm.expect(responseBody.currentTime).to.match(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/);
+    pm.expect(responseBody).to.have.property('location');
+    pm.expect(responseBody).to.have.property('current');
+});
+pm.test("Temperature is within a valid range", function () {
+    const responseData = pm.response.json();
+    pm.expect(responseData.current.temp_c).to.be.a('number');
+    pm.expect(responseData.current.temp_c).to.be.within(-100, 100);
+});
+pm.test("Wind speed should be a non-negative number", function () {
+    const responseData = pm.response.json();
+    pm.expect(responseData.current.wind_kph).to.be.a('number');
+});
+pm.test("Location information is not empty", function () {
+  const responseData = pm.response.json();
+  pm.expect(responseData.location).to.exist.and.to.not.be.empty;
+});
+pm.test("Validate last_updated field format", function () {
+    const responseData = pm.response.json();
+    pm.expect(responseData.current.last_updated).to.match(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/);
+});
+pm.test("Precipitation is a non-negative number", function () {
+    const responseData = pm.response.json();
+    pm.expect(responseData.current.precip_mm).to.be.at.least(0);
+    pm.expect(responseData.current.precip_in).to.be.at.least(0);
+});
+pm.test("UV index is a non-negative number", function () {
+    const responseData = pm.response.json();
+    pm.expect(responseData.current.uv).to.be.a('number');
+    pm.expect(responseData.current.uv).to.be.at.least(0);
 });
 ```
 
@@ -104,6 +100,10 @@ Before diving into the setup process, there are a few prerequisites to fix:
 - __Set up a GitHub Project:__ Create a project in GitHub and set up an Environment within your project.
 - __Add GitHub Secrets:__ Store credentials securely as GitHub secrets to ensure they are not exposed in your repository.
 
+Worth mention is that their is a lot more configure and to think about if you where to use Postman in a real wold CI pipeline. FOr instance different environment and variables and etc. 
+
+
+However, Postman has made running a Collection in Github Actions super simple! 
 ```
 name: Automated API tests using Postman CLI
 
@@ -125,7 +125,75 @@ jobs:
 ```
 
 When the workflow is triggered it will generate an run like this:
-![postman1.png](postman1.png)
+```
+Run postman collection run "27855227-be5be94b-8361-4efc-afd2-49762436fcef"
+  
+postman
+
+Weather API
+
+→ Current
+  GET http://api.weatherapi.com/v1/current.json?key={APIKey}&q=Malmo&aqi=no [200 OK, 1.32kB, 355ms]
+  ✓  Validate headers
+  ✓  Successful authentication
+  ✓  Payload is json
+  ✓  Validate payload properties
+  ✓  Temperature is within a valid range
+  ✓  Wind speed should be a non-negative number
+  ✓  Location information is not empty
+  ✓  Validate last_updated field format
+  ✓  Precipitation is a non-negative number
+  ✓  UV index is a non-negative number
+
+→ Forecast
+  GET http://api.weatherapi.com/v1/forecast.json?key={APIKey}&q=Malmo&days=1&aqi=no&alerts=no [200 OK, 17.97kB, 237ms]
+  ✓  Validate headers
+  ✓  Successful authentication
+  ✓  Payload is json
+  ✓  Temperature is within a valid range
+  ✓  Hour array is present and has expected number of elements
+  ✓  Response has the required fields
+  ✓  Localtime is in a valid date format
+  ✓  Forecastday array is present and contains the expected number of elements
+  ✓  Last updated time is in a valid date format
+  ✓  Condition object within the 'current' object should exist and be an object
+
+→ History
+  GET http://api.weatherapi.com/v1/forecast.json?key={APIKey}&q=Malmo&days=1&aqi=no&alerts=no [200 OK, 17.97kB, 6ms]
+  ✓  Validate headers
+  ✓  Successful authentication
+  ✓  Payload is json
+  ✓  Response time is less than 200ms
+  ✓  Forecast contains at least one forecastday
+  ✓  Temperature is within a reasonable range
+  ✓  Wind direction is in a valid format
+  ✓  Condition text is a non-empty string
+  ✓  UV index is a non-negative integer
+
+┌─────────────────────────┬────────────────────┬───────────────────┐
+│                         │           executed │            failed │
+├─────────────────────────┼────────────────────┼───────────────────┤
+│              iterations │                  1 │                 0 │
+├─────────────────────────┼────────────────────┼───────────────────┤
+│                requests │                  3 │                 0 │
+├─────────────────────────┼────────────────────┼───────────────────┤
+│            test-scripts │                  6 │                 0 │
+├─────────────────────────┼────────────────────┼───────────────────┤
+│      prerequest-scripts │                  3 │                 0 │
+├─────────────────────────┼────────────────────┼───────────────────┤
+│              assertions │                 29 │                 0 │
+├─────────────────────────┴────────────────────┴───────────────────┤
+│ total run duration: 721ms                                        │
+├──────────────────────────────────────────────────────────────────┤
+│ total data received: 35.29kB (approx)                            │
+├──────────────────────────────────────────────────────────────────┤
+│ average response time: 199ms [min: 6ms, max: 355ms, s.d.: 144ms] │
+└──────────────────────────────────────────────────────────────────┘
+
+Postman CLI run data uploaded to Postman Cloud successfully.
+```
 Here you can see the summery of the all the tests and valvule information such as execution time, how many assertions and etc.
 
 ## Reflection
+
+PostBot really nice, well integrated, helps with you workflow.
