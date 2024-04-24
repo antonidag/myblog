@@ -12,15 +12,14 @@ Testing software is an important part of its lifecycle and a big factor of its s
 Integrating testing into your CI pipeline can help improve overall quality and productivity. Therefore, in this blog post, we will explore how Postman can be used to automate API testing using GitHub Actions!
 
 ## What is Postman?
-As mentioned before, Postman is a popular platform for building and using API:s. Postman is packed with many features, such as workspaces where you can share and build API artifacts. It also offers the ability to perform load testing and test individual APIs. For more information about Postman and its features, visit their [website](https://www.postman.com/product/what-is-postman/)
+As mentioned before, Postman is a popular platform for building and using API:s. Postman is packed with features, such as workspaces for collaboration of building API:s. It also offers the ability to perform load testing and test individual APIs. For more information about Postman and its features, visit their [website](https://www.postman.com/product/what-is-postman/)
 
 ## Integration Testing
-When it comes to testing software there are many different approaches unit, functional, integration and end-to-end testing to mention a few. Some are more fitted for some type of testing and other for another method. Integration testing verifies that the components or modules interacts as intended. Typically integration tests could be verifying an: 
-- External API 
+When it comes to testing software, there is various approaches like unit, functional, integration, and end-to-end testing. Each method has its strengths, suited for different aspects of testing, the choice of the method depends on the scope and goal. For instance, integration testing verifies the interactions between various modules or components. This could for example be verifying an:
+- External API
 - Database Integration
 - or File system Integration
 
-[book](https://www.techtarget.com/searchsoftwarequality/definition/integration-testing)
 
 ## Creating API tests in Postman
 We are going to test an weather API from [weatherapi.com](https://www.weatherapi.com/). They provide a rich amount of API:s, see their API documentation for more [info](https://www.weatherapi.com/docs). 
