@@ -30,23 +30,21 @@ We want test & validate that the:
 - Validate JSON payload
 
 
-Before we can jump into writing test, we first need work inside of Postman. Start by creating a new Collection and name it appropriate to the API you are testing, in my case "Weather API".
-There is several ways to import collections and API:s into Postman, I will create the HTTP request manually. Depending on your API there could different types on parameters, headers and authentication required, this configuration is supported by Postman. 
+Before we can jump into writing tests, we first need to work inside of Postman. Start by creating a new Collection and name it appropriately for the API you are testing. In my case, it's named "Weather API". There are several ways to import collections and APIs into Postman. Depending on your API, there might be parameters, headers, and authentication, that you will need to setup.
 
-To create test for an API we need to navigate to the "Test" menu inside of the created request. Tests in Postman are written in JavaScript. There is [documentation](https://learning.postman.com/docs/writing-scripts/script-references/script-reference-overview/), test examples and how-tos that can be helpful to familiarize with before starting writing your test cases. Once you have some basic knowledge around it will come quite easy to start! 
+To create tests for an API, we need to navigate to the "Test" menu inside of the created request. Tests in Postman are written in JavaScript. There is [documentation](https://learning.postman.com/docs/writing-scripts/script-references/script-reference-overview/), test examples, and how-tos that can be helpful to familiarize yourself with before starting to write your test cases. Once you have some basic knowledge, it will become quite easy to start!
 
-However, let's by creating this simple test:
+However, let's start by creating this simple test:
 ```
 pm.test("Successful authentication", function () {
     pm.expect(pm.response).to.have.status(200); // 200 indicates successful authentication
 });
-
-
 ```
-To run the test, we need to right click the collection and enter the "Run collection" menu. Then we can click on run to see the results. 
+To run the test, we need to right-click the collection and enter the "Run collection" menu. Then, we can click on "Run {Collection name}" to see the results.
 
-If you have a hard time writing the tests, you can get help from the [Postbot](https://www.postman.com/product/postbot/). The bot can assist you with fixing, adding more tests and writing documentation for the API.
-With a bit of editing and help from the bot the tests for one of API operations finalized to: 
+If you get stuch or just is having a hard time writing tests, you can get help from the [Postbot](https://www.postman.com/product/postbot/). The bot can assist you with writing new tests, fixing a test, and writing documentation for the API. 
+
+With a bit of editing and help from the bot, the tests for one of the API operations are finalized.
 ```
 pm.test("Validate headers", function () {
     pm.response.to.have.header('Content-Type', 'application/json');
