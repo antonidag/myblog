@@ -24,25 +24,25 @@ When it comes to testing software, there is various approaches like unit, functi
 ## Creating API tests in Postman
 We are going to test an weather API from [weatherapi.com](https://www.weatherapi.com/). They provide a rich amount of API:s, see their API documentation for more [info](https://www.weatherapi.com/docs). 
 
-We want test & validate that the:
+We want test & validate that the API:
 - Authentication is working
 - Validate expected HTTP headers
 - Validate JSON payload
 
 
-Before we can jump into writing tests, we first need to work inside of Postman. Start by creating a new Collection and name it appropriately for the API you are testing. In my case, it's named "Weather API". There are several ways to import collections and APIs into Postman. Depending on your API, there might be parameters, headers, and authentication, that you will need to setup.
+Before we can jump into writing tests, we first need to work inside of Postman. Start by creating a new Collection and name it appropriately for the API you are testing. In my case, it will be named "Weather API". There are several ways to import collections and APIs into Postman, thur an Open API specification, cURL and even from a url. Depending on your API, there might be parameters, headers, and authentication, that you will need to setup before continuing.
 
-To create tests for an API, we need to navigate to the "Test" menu inside of the created request. Tests in Postman are written in JavaScript. There is [documentation](https://learning.postman.com/docs/writing-scripts/script-references/script-reference-overview/), test examples, and how-tos that can be helpful to familiarize yourself with before starting to write your test cases. Once you have some basic knowledge, it will become quite easy to start!
+To create tests for an API, we need to navigate to the "Test" menu inside of an request. Tests in Postman are written in JavaScript and here is a lot [documentation](https://learning.postman.com/docs/writing-scripts/script-references/script-reference-overview/), test examples, and how-tos to help you get started. Once you have some basic knowledge, it will become quite easy to start!
 
-However, let's start by creating this simple test:
+Let's start by creating this simple test:
 ```
 pm.test("Successful authentication", function () {
-    pm.expect(pm.response).to.have.status(200); // 200 indicates successful authentication
+    pm.expect(pm.response).to.have.status(200);
 });
 ```
-To run the test, we need to right-click the collection and enter the "Run collection" menu. Then, we can click on "Run {Collection name}" to see the results.
+To run the test, we need to right-click the collection and enter the "Run collection" menu. Then, we can click on "Run {Collection name}", wait a few seconds and view the results.
 
-If you get stuch or just is having a hard time writing tests, you can get help from the [Postbot](https://www.postman.com/product/postbot/). The bot can assist you with writing new tests, fixing a test, and writing documentation for the API. 
+If you get stuck or just is having difficulties writing tests, you can get help from the [Postbot](https://www.postman.com/product/postbot/). The bot can assist you with writing new tests, fixing a test, and even writing documentation for the API, its has an similar interface as [ChatGBT]() where you can write prompts.
 
 With a bit of editing and help from the bot, the tests for one of the API operations are finalized.
 ```
@@ -89,18 +89,15 @@ pm.test("UV index is a non-negative number", function () {
 });
 ```
 
-There is a great guide on this topic at Postman documentation, if you want to know more about see [here]().
-
 ## Automate Postman Test with Github Actions
 Before diving into the setup process, there are a few prerequisites to fix:
 - __Generate Postman API Key__
 - __Set up a GitHub Project:__ Create a project in GitHub and set up an Environment within your project.
 - __Add GitHub Secrets:__ Store credentials securely as GitHub secrets to ensure they are not exposed in your repository.
 
-Worth mention is that their could be more to configure and to think about if you where to use Postman in a real wold CI pipeline. For instance different environment and variables and etc. 
+Worth mention is that their could be more to configure and think about if you where to use Postman in a production environment. 
 
-
-However, once you have all your variables and secrets done Postman has made running a tests in Github Actions super simple! 
+Once you have all your variables and secrets in both Postman and Github, setting up the Github actions is simple part. Go to the "Run Collection" menu and under the "Run on CI/CD" you can here you can configure the CI/CD settings such as environments, if you are using Github or Azure, linux or windows machine and etc. When ready you simple copy the CLI commands. In my case it will look as the following:   
 ```
 name: Automated API tests using Postman CLI
 
@@ -121,14 +118,11 @@ jobs:
           postman collection run "27855227-be5be94b-8361-4efc-afd2-49762436fcef"
 ```
 
-When the workflow is done it will generate and output similar to the following:
+This pipeline are triggered every time there is "push" to the repository and it will start running your tests:
 ```
-Run postman collection run "27855227-be5be94b-8361-4efc-afd2-49762436fcef"
-  
+Run postman collection run "27855227-be5be94b-8361-4efc-afd2-49762436fcef" 
 postman
-
 Weather API
-
 → Current
   GET http://api.weatherapi.com/v1/current.json?key={APIKey}&q=Malmo&aqi=no [200 OK, 1.32kB, 355ms]
   ✓  Validate headers
@@ -141,7 +135,6 @@ Weather API
   ✓  Validate last_updated field format
   ✓  Precipitation is a non-negative number
   ✓  UV index is a non-negative number
-
 → Forecast
   GET http://api.weatherapi.com/v1/forecast.json?key={APIKey}&q=Malmo&days=1&aqi=no&alerts=no [200 OK, 17.97kB, 237ms]
   ✓  Validate headers
@@ -154,7 +147,6 @@ Weather API
   ✓  Forecastday array is present and contains the expected number of elements
   ✓  Last updated time is in a valid date format
   ✓  Condition object within the 'current' object should exist and be an object
-
 → History
   GET http://api.weatherapi.com/v1/forecast.json?key={APIKey}&q=Malmo&days=1&aqi=no&alerts=no [200 OK, 17.97kB, 6ms]
   ✓  Validate headers
@@ -166,7 +158,6 @@ Weather API
   ✓  Wind direction is in a valid format
   ✓  Condition text is a non-empty string
   ✓  UV index is a non-negative integer
-
 ┌─────────────────────────┬────────────────────┬───────────────────┐
 │                         │           executed │            failed │
 ├─────────────────────────┼────────────────────┼───────────────────┤
@@ -186,10 +177,9 @@ Weather API
 ├──────────────────────────────────────────────────────────────────┤
 │ average response time: 199ms [min: 6ms, max: 355ms, s.d.: 144ms] │
 └──────────────────────────────────────────────────────────────────┘
-
 Postman CLI run data uploaded to Postman Cloud successfully.
 ```
-Here you can see the summery of the all the tests and valvule information such as execution time, how many assertions and etc.
+Here you can see the summery of the all the tests and valuable information such as execution time, how many assertions and etc.
 
 ## Reflection
 
