@@ -9,17 +9,10 @@ image: ""
 ## Background 
 Testing software is an important part of its lifecycle and a big factor of its success. There are many different frameworks and methods out there, and finding the right tools could sometimes be challenging! [Postman](https://www.postman.com) is a popular API platform for building and using APIs, widely used among developers, and is one of the tools that makes testing simpler.
 
-Integrating testing into your CI pipeline can help improve overall quality and productivity. Therefore, in this blog post, we will explore how Postman can be used to automate API testing using GitHub Actions!
+Integrating testing into your CI pipeline can help improve the overall quality and productivity. Therefore, in this blog post, we will explore how Postman can be used to automate API testing using GitHub Actions!
 
 ## What is Postman?
 As mentioned before, Postman is a popular platform for building and using API:s. Postman is packed with features, such as workspaces for collaboration of building API:s. It also offers the ability to perform load testing and test individual APIs. For more information about Postman and its features, visit their [website](https://www.postman.com/product/what-is-postman/)
-
-## Integration Testing
-When it comes to testing software, there is various approaches like unit, functional, integration, and end-to-end testing. Each method has its strengths, suited for different aspects of testing, the choice of the method depends on the scope and goal. For instance, integration testing verifies the interactions between various modules or components. This could for example be verifying an:
-- External API
-- Database Integration
-- or File system Integration
-
 
 ## Creating API tests in Postman
 We are going to test an weather API from [weatherapi.com](https://www.weatherapi.com/). They provide a rich amount of API:s, see their API documentation for more [info](https://www.weatherapi.com/docs). 
@@ -29,12 +22,11 @@ We want test & validate that the API:
 - Validate expected HTTP headers
 - Validate JSON payload
 
+Before we can jump into writing tests, we first need to work inside of Postman. Start by creating a new Collection and name it appropriately for the API you are testing. There are several ways to import collections and APIs into Postman, thur an Open API specification, cURL and even from a url. Depending on your API, there might be parameters, headers, and authentication, that you will need to setup before continuing.
 
-Before we can jump into writing tests, we first need to work inside of Postman. Start by creating a new Collection and name it appropriately for the API you are testing. In my case, it will be named "Weather API". There are several ways to import collections and APIs into Postman, thur an Open API specification, cURL and even from a url. Depending on your API, there might be parameters, headers, and authentication, that you will need to setup before continuing.
+To create tests for an API, we need to navigate to the "Test" menu inside of an request. Tests in Postman are written in JavaScript and here is a lot [documentation](https://learning.postman.com/docs/writing-scripts/script-references/script-reference-overview/), test examples, and how-tos to help you get started. Once you have some basic knowledge, it will become quite easy!
 
-To create tests for an API, we need to navigate to the "Test" menu inside of an request. Tests in Postman are written in JavaScript and here is a lot [documentation](https://learning.postman.com/docs/writing-scripts/script-references/script-reference-overview/), test examples, and how-tos to help you get started. Once you have some basic knowledge, it will become quite easy to start!
-
-Let's start by creating this simple test:
+Let's start by creating this test:
 ```
 pm.test("Successful authentication", function () {
     pm.expect(pm.response).to.have.status(200);
@@ -42,9 +34,9 @@ pm.test("Successful authentication", function () {
 ```
 To run the test, we need to right-click the collection and enter the "Run collection" menu. Then, we can click on "Run {Collection name}", wait a few seconds and view the results.
 
-If you get stuck or just is having difficulties writing tests, you can get help from the [Postbot](https://www.postman.com/product/postbot/). The bot can assist you with writing new tests, fixing a test, and even writing documentation for the API, its has an similar interface as [ChatGBT]() where you can write prompts.
+If you get stuck or just is having difficulties writing tests cases, you can get help from the [Postbot](https://www.postman.com/product/postbot/). The bot can assist you with writing tests, fixing a test, and even writing documentation for the API, its has an similar interface as [ChatGBT]() where you write prompts and the changes will be applied .
 
-With a bit of editing and help from the bot, the tests for one of the API operations are finalized.
+After some editing and help from the bot, the tests for all off the operation could easily written and here is the final result for Current API.
 ```
 pm.test("Validate headers", function () {
     pm.response.to.have.header('Content-Type', 'application/json');
@@ -66,24 +58,25 @@ pm.test("Temperature is within a valid range", function () {
     pm.expect(responseData.current.temp_c).to.be.within(-100, 100);
 });
 pm.test("Wind speed should be a non-negative number", function () {
-    const responseData = pm.response.json();
+    const responseData = pm.response.json(); 
     pm.expect(responseData.current.wind_kph).to.be.a('number');
+    pm.expect(responseData.current.wind_kph).to.be.at.least(0);
 });
 pm.test("Location information is not empty", function () {
   const responseData = pm.response.json();
   pm.expect(responseData.location).to.exist.and.to.not.be.empty;
 });
 pm.test("Validate last_updated field format", function () {
-    const responseData = pm.response.json();
+    const responseData = pm.response.json(); 
     pm.expect(responseData.current.last_updated).to.match(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/);
 });
 pm.test("Precipitation is a non-negative number", function () {
-    const responseData = pm.response.json();
+    const responseData = pm.response.json(); 
     pm.expect(responseData.current.precip_mm).to.be.at.least(0);
     pm.expect(responseData.current.precip_in).to.be.at.least(0);
 });
 pm.test("UV index is a non-negative number", function () {
-    const responseData = pm.response.json();
+    const responseData = pm.response.json();  
     pm.expect(responseData.current.uv).to.be.a('number');
     pm.expect(responseData.current.uv).to.be.at.least(0);
 });
@@ -100,9 +93,7 @@ Worth mention is that their could be more to configure and think about if you wh
 Once you have all your variables and secrets in both Postman and Github, setting up the Github actions is simple part. Go to the "Run Collection" menu and under the "Run on CI/CD" you can here you can configure the CI/CD settings such as environments, if you are using Github or Azure, linux or windows machine and etc. When ready you simple copy the CLI commands. In my case it will look as the following:   
 ```
 name: Automated API tests using Postman CLI
-
 on: push
-
 jobs:
   automated-api-tests:
     runs-on: ubuntu-latest
@@ -118,7 +109,7 @@ jobs:
           postman collection run "27855227-be5be94b-8361-4efc-afd2-49762436fcef"
 ```
 
-This pipeline are triggered every time there is "push" to the repository and it will start running your tests:
+This pipeline are triggered every time there is "push" to the repository and it will start running the API tests:
 ```
 Run postman collection run "27855227-be5be94b-8361-4efc-afd2-49762436fcef" 
 postman
