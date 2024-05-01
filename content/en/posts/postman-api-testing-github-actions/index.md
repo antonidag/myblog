@@ -12,68 +12,58 @@ Testing software is an important part of its lifecycle and a big factor of its s
 Integrating testing into your CI pipeline can help improve the overall quality and productivity. Therefore, in this blog post, we will explore how Postman can be used to automate API testing using GitHub Actions!
 
 ## What is Postman?
-As mentioned before, Postman is a popular platform for building and using API:s. Postman is packed with features, such as workspaces for collaboration of building API:s. It also offers the ability to perform load testing and test individual APIs. For more information about Postman and its features, visit their [website](https://www.postman.com/product/what-is-postman/)
+As mentioned before, Postman is a popular platform for building and using API:s. Except for building API:s Postman also come with features, such as workspaces for collaboration of building API:s, testing and even an visual tool for building workflows. For more information about Postman and its features, visit their [website](https://www.postman.com/product/what-is-postman/)
 
 ## Creating API tests in Postman
-We are going to test an weather API from [weatherapi.com](https://www.weatherapi.com/). They provide a rich amount of API:s, see their API documentation for more [info](https://www.weatherapi.com/docs). 
+We are going to test an weather API from [weatherapi.com](https://www.weatherapi.com/). They offer an free tier and etc so you can follow along with.
 
 We want test & validate that the API:
 - Authentication is working
 - Validate expected HTTP headers
 - Validate JSON payload
+- Validste that fields are in the corret format & within the correct vaules
 
 Before we can jump into writing tests, we first need to work inside of Postman. Start by creating a new Collection and name it appropriately for the API you are testing. There are several ways to import collections and APIs into Postman, thur an Open API specification, cURL and even from a url. Depending on your API, there might be parameters, headers, and authentication, that you will need to setup before continuing.
 
-To create tests for an API, we need to navigate to the "Test" menu inside of an request. Tests in Postman are written in JavaScript and here is a lot [documentation](https://learning.postman.com/docs/writing-scripts/script-references/script-reference-overview/), test examples, and how-tos to help you get started. Once you have some basic knowledge, it will become quite easy!
+To create tests for an API operation, we need to navigate to the "Test" menu inside of an request. Tests in Postman are written in JavaScript and here is a lot [documentation](https://learning.postman.com/docs/writing-scripts/script-references/script-reference-overview/), test examples, and how-tos to help you get started. Once you have some basic knowledge, it will become quite easy!
 
 Let's start by creating this test:
 ```
-pm.test("Successful authentication", function () {
-    pm.expect(pm.response).to.have.status(200);
+pm.test("Successful authentication", function () { pm.expect(pm.response).to.have.status(200);
 });
 ```
 To run the test, we need to right-click the collection and enter the "Run collection" menu. Then, we can click on "Run {Collection name}", wait a few seconds and view the results.
 
-If you get stuck or just is having difficulties writing tests cases, you can get help from the [Postbot](https://www.postman.com/product/postbot/). The bot can assist you with writing tests, fixing a test, and even writing documentation for the API, its has an similar interface as [ChatGBT]() where you write prompts and the changes will be applied .
+If you get stuck or just having difficulties writing tests cases, you can get help from the [Postbot](https://www.postman.com/product/postbot/). The bot can assist you with writing tests, fixing a test, and even writing documentation for the API, its has an similar interface as [ChatGBT]() where you write prompts and the changes will be added.
 
-After some editing and help from the bot, the tests for all off the operation could easily written and here is the final result for Current API.
+After some editing and help from the bot, the tests for all off the operation could easily written within hour and here is the final result for Current API:
 ```
-pm.test("Validate headers", function () {
-    pm.response.to.have.header('Content-Type', 'application/json');
+pm.test("Validate headers", function () { pm.response.to.have.header('Content-Type', 'application/json');
 });
-pm.test("Successful authentication", function () {
-    pm.expect(pm.response).to.have.status(200); 
+pm.test("Successful authentication", function () {  pm.expect(pm.response).to.have.status(200); 
 });
 pm.test("Payload is json", function () {
     pm.response.to.have.jsonBody();
 });
 pm.test("Validate payload properties", function () {
-    var responseBody = pm.response.json();
-    pm.expect(responseBody).to.have.property('location');
-    pm.expect(responseBody).to.have.property('current');
+    var responseBody = pm.response.json(); pm.expect(responseBody).to.have.property('location');
+pm.expect(responseBody).to.have.property('current');
 });
 pm.test("Temperature is within a valid range", function () {
-    const responseData = pm.response.json();
-    pm.expect(responseData.current.temp_c).to.be.a('number');
-    pm.expect(responseData.current.temp_c).to.be.within(-100, 100);
+    const responseData = pm.response.json(); pm.expect(responseData.current.temp_c).to.be.a('number'); pm.expect(responseData.current.temp_c).to.be.within(-100, 100);
 });
 pm.test("Wind speed should be a non-negative number", function () {
-    const responseData = pm.response.json(); 
-    pm.expect(responseData.current.wind_kph).to.be.a('number');
-    pm.expect(responseData.current.wind_kph).to.be.at.least(0);
+    const responseData = pm.response.json();   pm.expect(responseData.current.wind_kph).to.be.a('number'); pm.expect(responseData.current.wind_kph).to.be.at.least(0);
 });
 pm.test("Location information is not empty", function () {
   const responseData = pm.response.json();
-  pm.expect(responseData.location).to.exist.and.to.not.be.empty;
+pm.expect(responseData.location).to.exist.and.to.not.be.empty;
 });
 pm.test("Validate last_updated field format", function () {
-    const responseData = pm.response.json(); 
-    pm.expect(responseData.current.last_updated).to.match(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/);
+    const responseData = pm.response.json();   pm.expect(responseData.current.last_updated).to.match(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/);
 });
 pm.test("Precipitation is a non-negative number", function () {
-    const responseData = pm.response.json(); 
-    pm.expect(responseData.current.precip_mm).to.be.at.least(0);
-    pm.expect(responseData.current.precip_in).to.be.at.least(0);
+    const responseData = pm.response.json();  pm.expect(responseData.current.precip_mm).to.be.at.least(0);  pm.expect(responseData.current.precip_in).to.be.at.least(0);
 });
 pm.test("UV index is a non-negative number", function () {
     const responseData = pm.response.json();  
