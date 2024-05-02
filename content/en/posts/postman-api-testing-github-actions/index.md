@@ -172,7 +172,7 @@ Weather API
 └──────────────────────────────────────────────────────────────────┘
 Postman CLI run data uploaded to Postman Cloud successfully.
 ```
-Here you can see the summery of the all the tests and valuable information such as execution time, how many assertions and etc.
+Here you can see the result of each individual API tests, response time and payload size. You will also get an summery including data such as the amount of executed requests, assertions, average response times and total duration of the test. This is pretty much standard and what you normally would expect from these types of testing tools.  
 
 ## Reflection
 
