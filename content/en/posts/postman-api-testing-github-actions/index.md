@@ -82,7 +82,7 @@ pm.test("UV index is a non-negative number", function () {
   pm.expect(responseData.current.uv).to.be.at.least(0);
 });
 ```
-Once we have all our test cases and the code is ready, we can begin to have automated testing in our pipelines!
+Once we have all our test cases and the code is ready, we can begin to have automated testing in our pipelines!🎬
 
 ## Automate Postman Test with Github Actions ⚙️
 Before diving into the setup process, there are a few prerequisites to fix:
