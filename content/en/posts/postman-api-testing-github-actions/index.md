@@ -3,7 +3,7 @@ title: "Automating API Testing with Postman and GitHub Actions 👩‍🔬"
 date: 2024-03-10T00:00:00+00:00
 draft: false
 description: "Learn how to improve your software development process by automating API testing with Postman and GitHub Actions. Gain practical insights and step-by-step instructions to streamline your CI/CD pipeline, boost productivity, and ensure software reliability. Join us as we harness the power of automation to optimize development workflows."
-image: ""
+image: "myblog/posts/postman-api-testing-github-actions/postman-api-testing.gif"
 ---
 
 ## Background 
