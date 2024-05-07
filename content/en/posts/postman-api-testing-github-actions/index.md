@@ -7,15 +7,15 @@ image: ""
 ---
 
 ## Background 
-Testing software is an important part of its lifecycle and a big factor of its success. There are many different frameworks and methods out there, and finding the right tools could sometimes be challenging! [Postman](https://www.postman.com) is a popular API platform for building and using APIs, widely used among developers, and is one of the tools that makes testing simpler.
+Testing software is an important part of its lifecycle and a big factor of its success. There are many different frameworks and methods available, and finding the right tools can sometimes be challenging! [Postman](https://www.postman.com) is a popular API platform for building and using APIs, widely used among developers, and is one of the tools that makes testing simpler.
 
 Integrating testing into your CI pipeline can help improve the overall quality and productivity. Therefore, in this blog post, we will explore how Postman can be used to automate API testing using GitHub Actions!
 
 ## What is Postman?
-As mentioned before, Postman is a popular platform for building and using APIs. Except for building APIs Postman can also be used for testing, documentation and there is even the possibility to build workflows using a visual designer. If you want to know more check out this [blog](https://blog.postman.com/10-postman-features-everyone-should-know/) post for more information regarding Postman's features.
+As mentioned before, Postman is a popular platform for building and using APIs. In addition to building APIs, Postman can also be used for testing, documentation, and even the creation of workflows using a visual designer. If you want to know more check out this [blog](https://blog.postman.com/10-postman-features-everyone-should-know/) post for more information regarding Postman's features.
 
 ## Creating API tests in Postman
-We are going to test an weather API from [weatherapi.com](https://www.weatherapi.com/). However you can use your own built or another third party service. WaeatherApi.com offer an free tier and once you have your account, you can generate an API Key and follow along.
+We are going to test an weather API from [weatherapi.com](https://www.weatherapi.com/). However you can use your own built or another third party service. WaeatherApi.com offers an free tier and once you have your account, you can generate an API Key and follow along.
 
 In our case we want test & validate that the some of the provided APIs, and make sure the following is working as intended:
 - Authentication
@@ -35,7 +35,7 @@ pm.test("Successful authentication", function () {
 ```
 This code above will evaluate that we got an response code of `200`, basically checking that the authentication method is working as it should. To run the test, we need to right-click the collection and enter the "Run collection" menu. Then, we can click on "Run {Collection name}", wait a few seconds and view the results.
 
-If you get stuck or just having difficulties writing tests cases, you can get help from the [Postbot](https://www.postman.com/product/postbot/). The bot can assist you with writing tests, fixing a test, and even writing documentation for the API. It has an similar interface as [ChatGBT]() where you write prompts on what you need help and then the changes will be added your API operation.
+If you get stuck or are having difficulties writing test cases, you can get help from the [Postbot](https://www.postman.com/product/postbot/). The bot can assist you with writing tests, fixing tests, and even writing documentation for the API. It has an similar interface as [ChatGBT]() where you write prompts on what you need help and then the changes will be added your API operation.
 
 After some editing and help from the bot, the tests for all off the API operations could easily be written within an hour and here is an example of what that can look like:
 ```
@@ -85,7 +85,7 @@ pm.test("UV index is a non-negative number", function () {
 Once we have all our test cases and the code is ready, we can begin to have automated testing in our pipelines!
 
 ## Automate Postman Test with Github Actions
-Before dive into the setup process, there are a few prerequisites to fix:
+Before diving into the setup process, there are a few prerequisites to fix:
 - __Generate Postman API Key__
 - __Set up a GitHub Project:__ Create a project in GitHub and set up an Environment within your project.
 - __Add GitHub Secrets:__ Store credentials securely as GitHub secrets to ensure they are not exposed in your repository.
