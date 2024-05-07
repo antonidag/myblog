@@ -3,7 +3,7 @@ title: "Automating API Testing with Postman and GitHub Actions 👩‍🔬"
 date: 2024-03-10T00:00:00+00:00
 draft: false
 description: "Learn how to improve your software development process by automating API testing with Postman and GitHub Actions. Gain practical insights and step-by-step instructions to streamline your CI/CD pipeline, boost productivity, and ensure software reliability. Join us as we harness the power of automation to optimize development workflows."
-image: "myblog/posts/postman-api-testing-github-actions/postman-api-testing.gif"
+image: "posts/postman-api-testing-github-actions/postman-api-testing.gif"
 ---
 
 ## Background 
@@ -35,7 +35,7 @@ pm.test("Successful authentication", function () {
 ```
 This code above will evaluate that we got an response code of `200`, basically checking that the authentication method is working as it should. To run the test, we need to right-click the collection and enter the "Run collection" menu. Then, we can click on "Run {Collection name}", wait a few seconds and view the results.
 
-If you get stuck or are having difficulties writing test cases, you can get help from the <a href="https://www.postman.com/product/postbot/" target="_blank" rel="noopener noreferrer">Postbot</a>. The bot can assist you with writing tests, fixing tests, and even writing documentation for the API. It has an similar interface as <a href="https://openai.com/index/chatgpt" target="_blank" rel="noopener noreferrer">ChatGPT</a> where you write prompts on what you need help with and then the changes will be added to your code.
+If you get stuck or are having difficulties writing test cases, you can get help from the <a href="https://www.postman.com/product/postbot/" target="_blank" rel="noopener noreferrer">Postbot</a>. The bot can assist you with writing tests, fixing tests, and even writing documentation for the API. It has an similar interface as <a href="https://openai.com/" target="_blank" rel="noopener noreferrer">ChatGPT</a> where you write prompts on what you need help with and then the changes will be added to your code.
 
 After some editing and help from the bot, the tests for all off the API operations could easily be written within an hour and here is an example of what that can look like:
 ```
