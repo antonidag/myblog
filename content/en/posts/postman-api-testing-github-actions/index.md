@@ -1,20 +1,20 @@
 ---
-title: "Automated API Testing with Postman and Github Actions"
+title: "From Code to Testing: Automating API Testing with Postman and GitHub Actions"
 date: 2024-03-10T00:00:00+00:00
 draft: false
-description: ""
+description: "Learn how to improve your software development process by automating API testing with Postman and GitHub Actions. Gain practical insights and step-by-step instructions to streamline your CI/CD pipeline, boost productivity, and ensure software reliability. Join us as we harness the power of automation to optimize development workflows."
 image: ""
 ---
 
 ## Background 
 Testing software is an important part of its lifecycle and a big factor of its success. There are many different frameworks and methods available, and finding the right tools can sometimes be challenging! [Postman](https://www.postman.com) is a popular API platform for building and using APIs, widely used among developers, and is one of the tools that makes testing simpler.
 
-Integrating testing into your CI pipeline can help improve the overall quality and productivity. Therefore, in this blog post, we will explore how Postman can be used to automate API testing using GitHub Actions!
+Integrating testing into your CI pipeline can help improve the overall quality and productivity. Therefore, in this blog post, we will explore how Postman can be used to automate API testing using [GitHub Actions](https://docs.github.com/en/actions)!
 
-## What is Postman?
+## What is Postman? 📭
 As mentioned before, Postman is a popular platform for building and using APIs. In addition to building APIs, Postman can also be used for testing, documentation, and even the creation of workflows using a visual designer. If you want to know more check out this [blog](https://blog.postman.com/10-postman-features-everyone-should-know/) post for more information regarding Postman's features.
 
-## Creating API tests in Postman
+## Creating API tests in Postman 🧪
 We are going to test an weather API from [weatherapi.com](https://www.weatherapi.com/). However you can use your own built or another third party service. WaeatherApi.com offers an free tier and once you have your account, you can generate an API Key and follow along.
 
 In our case we want test & validate that the some of the provided APIs, and make sure the following is working as intended:
@@ -84,7 +84,7 @@ pm.test("UV index is a non-negative number", function () {
 ```
 Once we have all our test cases and the code is ready, we can begin to have automated testing in our pipelines!
 
-## Automate Postman Test with Github Actions
+## Automate Postman Test with Github Actions ⚙️
 Before diving into the setup process, there are a few prerequisites to fix:
 - __Generate Postman API Key__
 - __Set up a GitHub Project:__ Create a project in GitHub and set up an Environment within your project.
@@ -187,4 +187,4 @@ For anyone thinking of integrating Postman into their CI/CD process, I think the
 
 These are just some questions that come to mind, but regardless, it is a pretty awesome tool for API-related tasks, whether it is testing or consuming APIs.
 
-What are your preferred tools for testing APIs?
+What are your preferred tools for testing APIs? What do you use Postman for? Drop your insights, questions, or ideas below. 
