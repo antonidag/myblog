@@ -12,18 +12,18 @@ Testing software is an important part of its lifecycle and a big factor of its s
 Integrating testing into your CI pipeline can help improve the overall quality and productivity. Therefore, in this blog post, we will explore how Postman can be used to automate API testing using <a href="https://docs.github.com/en/actions" target="_blank" rel="noopener noreferrer">GitHub Actions</a>!
 
 ## What is Postman? 📭
-As mentioned before, Postman is a popular platform for building and using APIs. In addition to building APIs, Postman can also be used for testing, documentation, and even the creation of workflows using a visual designer. If you want to know more check out this <a href="https://blog.postman.com/10-postman-features-everyone-should-know/" target="_blank" rel="noopener noreferrer">blog</a> post for more information regarding Postman's features.
+As mentioned before, Postman is a popular platform for building and using APIs. In addition to building APIs, Postman can also be used for testing, documentation, and even the creation of workflows using a visual designer. If you want to know more check out this <a href="https://blog.postman.com/10-postman-features-everyone-should-know/" target="_blank" rel="noopener noreferrer">blog</a> for more information regarding Postman's features.
 
 ## Creating API tests in Postman 🧪
 We are going to test an weather API from <a href="https://www.weatherapi.com/" target="_blank" rel="noopener noreferrer">weatherapi.com</a>. However you can use any another HTTP API or third party service. Weatherapi.com offers an free tier and once you have your account, you can generate an API Key and follow along.
 
-In our case we want test & validate that the some of the provided APIs functionality works as intended:
+In our case we want test & validate that the APIs works as intended:
 - Authentication
 - Expected HTTP headers
 - JSON payloads
 - Fields are in the correct format & values
 
-But before we can jump into writing tests, we first need to work inside of Postman a bit. Start by creating a new Collection and name it appropriately for the API you are testing. There are several ways to import collections and APIs into Postman, for instance by an Open API specification, cURL, raw text and etc. Depending on your API, there might be parameters, headers, and authentication, that you will need to setup before continuing.
+But before we can jump into writing tests, we first need to work inside of Postman a bit. Start by creating a new Collection and name it appropriately for the API you are testing. There are several ways to import collections and APIs into Postman, for instance by an Open API specification, cURL and raw text to mention a few. Depending on your API, there might be parameters, headers, and authentication, that you will need to setup before continuing.
 
 To create tests for an API, we need to navigate to the "Test" menu. This menu is found under the API operation itself. Tests in Postman are written in JavaScript and there is a lot <a href="https://learning.postman.com/docs/writing-scripts/script-references/script-reference-overview/" target="_blank" rel="noopener noreferrer">documentation</a>, test examples, and how-tos to help you get started. Once you have some basic knowledge, it will become quite easy!
 
@@ -33,9 +33,9 @@ pm.test("Successful authentication", function () {
   pm.expect(pm.response).to.have.status(200);
 });
 ```
-This code above will evaluate that we got an response code of `200`, basically checking that the authentication method is working as it should. To run the test, we need to right-click the collection and enter the "Run collection" menu. Then, we can click on "Run {Collection name}", wait a few seconds and view the results.
+This code above will evaluate that we got an response code of `200`. To run the test, we need to right-click the collection and enter the "Run collection" menu. Then, we can click on "Run {Collection name}", wait a few seconds and view the results.
 
-If you get stuck or are having difficulties writing test cases, you can get help from the <a href="https://www.postman.com/product/postbot/" target="_blank" rel="noopener noreferrer">Postbot</a>. The bot can assist you with writing tests, fixing tests, and even writing documentation for the API. It has an similar interface as ChatGPT where you write prompts on what you need help with and then the changes will be added to your code.
+If you get stuck or are having difficulties writing test cases, you can get help from the <a href="https://www.postman.com/product/postbot/" target="_blank" rel="noopener noreferrer">Postbot</a>. The bot can assist you with writing tests, fixing tests, and even writing documentation. It has an similar interface as ChatGPT where you write prompts on what you need help with and then the changes will be added to your code.
 
 After some editing and help from the bot, the tests for all off the API operations could easily be written within an hour and here is an example of what that can look like:
 ```
@@ -90,7 +90,7 @@ Before diving into the setup process, there are a few prerequisites to fix:
 - __Set up a GitHub Project:__ Create a project in GitHub and set up an Environment within your project.
 - __Add GitHub Secrets:__ Store credentials securely as GitHub secrets to ensure they are not exposed in your repository.
 
-Worth mentioning is that there could be more to configuration to think about if you where to use Postman in a production environment.
+Worth mentioning is that there could be more to configuration and think about if you where to use Postman in a production environment.
 
 When you have configured both Postman and Github, setting up the Github actions is the simple part. Open up Postman, go to the "Run Collection" menu and under the "Run on CI/CD". From here you can configure the CI/CD settings such as environments, if you are using Github or Azure DevOps, Linux or Windows machine and etc. When you are ready, simply copy the CLI commands and paste the code into your project. For Github Actions it will look similar to this:   
 ```
@@ -176,7 +176,9 @@ Here you can see the result of each individual API tests, response time and payl
 
 ## Reflections
 
-Postman has made it really simple and easy to both write and test APIs within their platform. Integrating the tests into the CI/CD pipeline is also ridiculously simple; all the code can be generated by Postman, and it works out of the box. I also briefly mention the Postbot in the section <a href="#creating-api-tests-in-postman-">Creating API tests in Postman 🧪</a>. If you have not tried it out, it is worth testing and playing around with because it is well-integrated and gives instant feedback. For instance, adding additional tests is a prompt away: "cover more test cases," and the bot will add more code. Even though you still might need to manually edit and review the code, it definitely saves you some time.
+Postman has made it really simple and easy to both write and test APIs within their platform. Integrating the tests into the CI/CD pipeline is also ridiculously simple; all the code can be generated by Postman, and it works out of the box. 
+
+I also briefly mention the Postbot in the section <a href="#creating-api-tests-in-postman-">Creating API tests in Postman 🧪</a>. If you have not tried it out, it is worth testing and playing around with because it is well-integrated and gives instant feedback. For instance, adding additional tests is a prompt away: "cover more test cases," and the bot will add more code. Even though you still might need to manually edit and review the code, it definitely saves you some time.
 
 For anyone thinking of integrating Postman into their CI/CD process, I think there are a few things to consider:
 
