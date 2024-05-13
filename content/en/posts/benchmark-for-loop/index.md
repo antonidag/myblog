@@ -10,6 +10,13 @@ Benchmark on For and Javascript.
 
 Explain the difference between the to actions
 
+Limitations of each action:
+- 100 000 iteration
+- Parallisme 
+- Size? 
+
+
+https://techcommunity.microsoft.com/t5/azure-integration-services-blog/using-inline-code-instead-of-a-foreach-loop-for-better/ba-p/3369587
 Method
 
 How the benchmark is made.
@@ -20,7 +27,7 @@ Workflow settings
 
 Some diagram 
 workflow - for loop link to workflow
-Read file 
+HTTP input loop elements
 for each line
     write line to new file
 
