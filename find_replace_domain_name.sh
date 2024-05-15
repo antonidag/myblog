@@ -7,7 +7,7 @@ folder="./public"
 old_word="https://antonidag.github.io"
 
 # Define the new word
-new_word="https://antonbjorkman.com"
+new_word="https://www.antonbjorkman.com"
 
 # Use find to recursively search for files in the folder and replace the word
 find "$folder" -type f -exec sed -i "s|$old_word|$new_word|g" {} +
