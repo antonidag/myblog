@@ -11,23 +11,25 @@ Benchmark on For, Javascript & Liquid template.
 There is a bit of noise around how performant the Logic App for loop really is, 
 Looping over an array and preforming operations on each item, is a quite common task.
 
-We will conduct a benchmark between the Logic Apps [For each](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-loops?tabs=consumption#foreach-loop), [Inline code](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-add-run-inline-code?tabs=consumption) and [Liquid Operation](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-enterprise-integration-liquid-transform?tabs=consumption) action, inorder to get somewhat more insight on how the different actions perform.
+We will conduct a benchmark between the Logic Apps, and [Liquid Operation](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-enterprise-integration-liquid-transform?tabs=consumption) action, inorder to get more insight on how the different methods perform.
 
 ## Exploring options For loops
-
-### For Each action
+Loop over an array of elements is one of bread and butter when it comes programming, in Logic Apps this is normally perform by the [For each](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-loops?tabs=consumption#foreach-loop) action. However there are many ways to interact with a collection such as [Inline code](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-add-run-inline-code?tabs=consumption), [Liquid Transformation](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-enterprise-integration-liquid-transform?tabs=consumption), [Data Operations](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-perform-data-operations?tabs=consumption) and even [Expressions](https://learn.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference). Some of mentions actions are more limited and others are more free on what you can dom, so depending on the operation you would like to perform some method might more suitable than others. 
+For example if you would like to filter an collection based on property the Filter Actions is good, if you would like to reverse the order of in an array you can simply use the [reverse](https://learn.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference#reverse) Expression. 
+In this benchmark we will take an extra look that the following actions.
+### For Each
 Limitations of each action:
 - 100 000 iteration
 - Parallisme 
 - Size? 
 
-### Inline code action
+### Inline code
 Limitations of each action:
 - 100 000 iteration
 - Parallisme 
 - Size? 
 
-### De-batching - which should we choose? JavaScript or For each? 
+### Liquid Operation
 Limitations of each action:
 - 100 000 iteration
 - Parallisme 
@@ -56,6 +58,7 @@ workflow - JavaScript loop to workflow
 HTTP input loop elements
 JavaScript Action
     new {}
+    push to array
 return JavaScript output
 
 __Liquid Transformation__
