@@ -16,18 +16,11 @@ We will conduct a benchmark between the Logic Apps, and [Liquid Operation](https
 ## Exploring options For loops
 Loop over an array of elements is one of bread and butter when it comes programming, in Logic Apps this is normally perform by the [For each](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-loops?tabs=consumption#foreach-loop) action. But there are many ways to interact with a collection such as [Inline code](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-add-run-inline-code?tabs=consumption), [Liquid Transformation](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-enterprise-integration-liquid-transform?tabs=consumption), [Data Operations](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-perform-data-operations?tabs=consumption) and even [Expressions](https://learn.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference). Some of mentions actions are more limited and others are more free on what you can dom, so depending on the operation you would like to perform some method might more suitable than others. 
 For example if you would like to filter an collection based on property the Filter Actions is a good option, if you would like to reverse the order of in an array you can simply use the [reverse](https://learn.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference#reverse) Expression. 
-In this benchmark we will take an extra look that the following actions.
-
+In this benchmark we will take an extra look that the following actions:
 - For Each
-As mention the For each action works similar to for-loop, the action will loop over each element in a collection. By default the For each action will process elements in parallel, this can be limited to 1 but the performance will be drastically worse. There are some limitation in terms of how many iterations and amount of parallel processing, read more about that [here]().
-
-- Data Operations (Filter Array )
-
+- Filter Array
 - Inline code
-Allows you to run "vanilla" JavaScript code within Logic Apps and can be used for a vast variety of tasks. The action can utilize outputs from other actions and can also `return` the output of the code, which, in turn, can be used in other actions in your workflows.[Book](https://www.antonbjorkman.com/posts/benchmark-condition/#inline-code-action)
-
-- Liquid Transformation
-For those who does not know what Liquid Templates is, its a template language created by Shopify. Logic Apps has ported their own version of this called [DotLiquid](), with Liquid you can perform complex mappings, Json-to-Json, Json-to-XML/Xml-to-Json and Json-to-Text. How it works is that you define your template and then pass in the data and your get the transformed data.
+- Liquid Json to Json
 
 ## The Benchmark
 This benchmark will center around a use case on data filtering and enriching elements. To get a better data sample of the performance, we will increase the amount of elements by 500, up to 10,000 elements. Except for the performance we will also try and rate how eazy/hard it is to debug and development.
