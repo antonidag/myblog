@@ -56,13 +56,15 @@ __Inline code__
 View my github [project]() for more details!
 
 ### Environment settings
-App service plans settings WS1, 1 pre-warmed instance and the burst is set to 1.  
+App service plans settings WS1, 1 pre-warmed instance and the burst was set to 1.  
 Logic App for each default settings
 
 ## Result
 Present the results
 ### Time per element in seconds
+![Time_per_element_in_seconds](time_per_element.svg)
 ### Difference compared to For each action in seconds
+![time_per_element_difference](time_per_element_difference.svg)
 ### Average time per element in seconds
 - For each: __0.231__
 - Inline code: __0.264__
