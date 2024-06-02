@@ -1,6 +1,3 @@
 User-agent: *
 Disallow: 
-Disallow: /categories/
-Disallow: /pages/
-Disallow: /tags/
 Sitemap: https://www.antonbjorkman.com/sitemap
