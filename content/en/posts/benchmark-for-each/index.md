@@ -90,12 +90,13 @@ __Inline code__ using JavaScript to filter and loop over the collection
 Want more details, make sure to view my github [project](https://github.com/antonidag/logic-app-for-each-benchmark)!
 
 ### Environment settings
-All the benchmarks will use the same resource set up: 
+All the benchmarks will use the same resource setup: 
 - WS1 App Service Plan. The scale out burst and minimum were set to 1 instances.
 - Logic Apps Standard, scale out setting was set to 1 Always Ready Instances. 
 - Workflow mode was set to the `Stateful` mode, and the concurrency settings remained at default, meaning that Logic App will process several elements simultaneously.
 
 ## Result
+
 ### Time per element in seconds
 ![Time_per_element_in_seconds](time_per_element.svg)
 ### Difference compared to For Each action in seconds
@@ -107,7 +108,14 @@ All the benchmarks will use the same resource set up:
 
 ## Reflections
 
-Except for the performance we will also try and rate how eazy/hard it is to debug and development.
+Before the results are to be analyzed it is important to mention, as I have done in an other benchmark [Choosing the Quickest Logic App Condition!🏎️](https://www.antonbjorkman.com/posts/benchmark-condition), that the results are not to be seen at good or bad, there are many factor to consider and that can affect the performance. As for this benchmark we only focused on the duration of the workflows, this only gives us one slice of the pie. 
+
+Right out the bat, the JavaScript implementation crushes its competition by being chockingly 194x faster than the For Each, and 134x faster than Filter Array implementation.  and to put this into prespective, if you have x amount of elements and on avg it takes y this means that you will endup with z. We can then calculate that the amount of time that could be saved by implementing JavaScript is around 99%. Should a Logic App process a lot of data? Perhaps no, but in a case where it is need the Javascript implementation should atleast be considered. 
+
+Reason for this: JavaScript runs within a single execution context, minimizing the overhead associated with action-by-action processing.
+
+Speedup of JavaScript compared to For Each: 193.88
+Speedup of JavaScript compared to Filter Array: 136.73
 
 For each action performs quite stable.
 Filter array with For Each action seems to be more effective with lesser elements and the gradely decreases in performance.
@@ -115,5 +123,9 @@ Filter array with For Each action seems to be more effective with lesser element
 The result from the benchmark tells us that JavaScript was the clear winner in terms of the performance. 
 in an blog post from Microsoft it gives you tips in ways you can optimizes your workflow and etc...
 https://techcommunity.microsoft.com/t5/azure-integration-services-blog/using-inline-code-instead-of-a-foreach-loop-for-better/ba-p/3369587
+
+Does this mean that you always should do everything with JavaScript? No, probably you do want that and with a very large sized collection, consider chunking the array to smaler piecies and etc. 
+
+Except for the performance we will also try and rate how eazy/hard it is to debug and development.
 
 For anyone more interested in benchmark, I have made a similar test on a another topic rather condition actions [blog](/posts/benchmark-condition/). 
