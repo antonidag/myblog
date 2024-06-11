@@ -128,4 +128,4 @@ Microsoft recommends to have no more than 10-15 workflows per Logic App resource
 I do see a space for running Logic Apps as a web app. One of the biggest arguments of using Logic Apps is all the built-in connectors that come out of the box. Creating simple request forms, triggering Logic Apps workflows, or an admin interface are just some of the use cases where Logic Apps can be useful 💡. Another point to be made is that we as Integration Developers can work with the tools we know and like. 
 
 
-Could Logic Apps and web development be the next big thing in the integration space? 🤔 Drop your insights, questions, or ideas below. 
+Could Logic Apps and web development be the next big thing in the integration space? 🤔

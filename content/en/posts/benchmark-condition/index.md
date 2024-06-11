@@ -95,5 +95,3 @@ Keeping this in mind, the diagrams show that the Expression implementation resul
 A pattern that seams to correlates with the number of elements is: the time per element gradually decreases. This trend is seen across all implementations especially around 8000 to 10,000 elements point and is not isolated to a single workflow. I think this is related to the Logic Apps scale-out mechanism, and at a certain number of elements, we begin to "win back" and really take advantage of the feature, hence why we are seeing this trend.
 
 I think a interesting next steps would be to create a complex nested if statement, and see if we get similar results. Perhaps in such cases, the Inline Code action would perform better? Another step would be to increase the number of elements in the input arrays up to 100,000 elements to explore how Logic App behaves; whether the trend shown will flatten or continue improving?
-
-What are your thoughts on the different methods of implementing if statements? Have you had similar experiences with performance differences? 🤖Share your insights and experiences in the comments below!
