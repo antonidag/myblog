@@ -1,7 +1,7 @@
 ---
 title: "Foreach loop vs performances"
 date: 2024-05-13T00:00:00+00:00
-draft: false
+draft: true
 description: 
 image: "posts/benchmark-for-each/preview.gif"
 ---
@@ -106,16 +106,16 @@ All the benchmarks will use the same resource setup:
 
 Before the results are to be analyzed it is important to mention that the results are not to be seen at good or bad, there are many factor to consider that can affect the performance. As for this benchmark we only focused on the duration of the workflows.
 
-Just by a quick screening we can see that the JavaScript implementation crushes its competition by being chocking 194x faster than the For Each, and 137x faster than Filter Array implementation.  If we put this into perspective, lets say you have x amount of elements and on avg it takes y this means that you will ends up with z. We can then calculate that the amount of time that could be saved by implementing JavaScript is around 99%. How come we get this get these results? One of the reason for this could be that JavaScript action runs within a single execution context, minimizing the overhead associated with action-by-action processing. 
+Just by a quick screening we can see that the JavaScript implementation crushes its competition by being chocking 194x faster than the For Each, and 137x faster than Filter Array implementation. How come we get this get these results? One of the reason for this could be that JavaScript action runs within a single execution context, minimizing the overhead associated with action-by-action processing. 
 
 The Filter Array combined with For Each action defiantly falls under shadow compared with Inline Code implementation, however if we run the numbers and by just adding a filter and only let the For Each action run with a subset of elements we can get an average performance increase of x amount. 
 
 For each action performs quite stable.
 Filter array with For Each action seems to be more effective with lesser elements and the gradely decreases in performance.
 
-Does this mean that you always should do everything with JavaScript? No, probably you do want that and with a very large sized collection, consider chunking the array to smaler piecies and etc. 
+Does this mean that you always should do everything with JavaScript? No, probably you do want that and with a very large sized collection, consider chunking the array to smaller pieces and etc. 
 
-Should a Logic App process a lot of data? Perhaps no, but in a case where it is need the Javascript implementation should atleast be considered. 
+Should a Logic App process a lot of data? Perhaps no, but in a case where it is need the Javascript implementation should at least be considered. 
 
 
 in an blog post from Microsoft it gives you tips in ways you can optimizes your workflow and etc...
