@@ -188,5 +188,3 @@ For anyone thinking of integrating Postman into their CI/CD process, I think the
 - And the pricing?
 
 These are just some questions that come to mind, but regardless, it is a pretty awesome tool for API-related tasks, whether it is testing or consuming APIs.
-
-What are your preferred tools for testing APIs? What do you use Postman for? Drop your insights, questions, or ideas below. 

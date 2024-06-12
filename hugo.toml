@@ -21,7 +21,7 @@ ignoreErrors = ["additional-script-loading-error"] # ignore error of loading add
 
 # To enable Disqus comments, provide Disqus Shortname below.
 # To disable Disqus comments, simply leave the field empty or remove the next line
-disqusShortname = 'Disqus'
+disqusShortname = ''
 
 # set markup.highlight.noClasses=false to enable code highlight
 [markup]
@@ -112,6 +112,10 @@ url = "https://github.com/antonidag"
 [[params.socialIcons]]
 name = "linkedin"
 url = "https://se.linkedin.com/in/anton-bj%C3%B6rkman-447a1a1b1"
+
+[[params.socialIcons]]
+name = "buymeacoffee"
+url = "https://www.buymeacoffee.com/antonbjorkman"
 
 [[params.socialIcons]]
 name = "Rss"

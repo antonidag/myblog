@@ -191,4 +191,4 @@ That's it! We have managed to create a what-if pipeline!
 ## Reflections
 Some key take away are that using Azure CLI together with Bicep to build, validate and preform a what-if deployment is an excellent way to setting yourself up for success. It might feel like much work and many steps, but if we can mitigate failures we will probably save a lot of time and hassle! With a creative mind, the information given from what-if deployments could easily turn into documentation, change logs or release notes. 
 
-Have you integrated what-if deployments in your pipeline? What is your experience with CI/CD in your organizations? Share your insights and experiences in the comments below!
+What-if deployments to Azure never failed? 🌈
