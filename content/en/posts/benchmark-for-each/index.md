@@ -111,7 +111,7 @@ Just by a quick screening we can see that the JavaScript implementation crushes 
 If we look over to the Filter Array implementation combined with For Each action, it defiantly falls a bit under shadow when compared with Inline Code implementation. As the [time per element chart](#time-per-element-in-seconds) is indicating is some kind of performance decrease over time as the numbers of elements grows. Why is the trend? 
 Anyway, if we compared this to the For Each we can calculate the speed up by `0.095 / 0.067 ≈ 1.4`. Around 1.4x times faster just adding a filter and only letting the For Each action run with a subset of elements. As for the performance gain on average in reduced execution time it is approximately __29.0%__, calculated with the following `(0.095 - 0.067) / 0.095 * 100 ≈ 29.0`.
 
-For each action performs quite stable.
+Lastly the elephant in the room For each action. It was impressive to see that it had such stable performance regardless of the amount of elements. Unfortunately it performed the worse out the three methods, it somewhat excepted since we know that there is a lot of over head the actions.  
 
 Does this mean that you always should do everything with JavaScript? No, probably you do want that and with a very large sized collection, consider chunking the array to smaller pieces and etc. 
 
