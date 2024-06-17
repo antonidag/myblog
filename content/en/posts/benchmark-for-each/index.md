@@ -108,19 +108,12 @@ Before the results are to be analyzed it is important to mention that the result
 
 Just by a quick screening we can see that the Inline Code implementation crushes its competition by being chocking `0.095 / 0.00049 ≈ 194.0` 194x times faster than the For Each, and `0.067 / 0.00049 ≈ 137.0` 137x times faster than Filter Array implementation. I do not think we need to calculate any more numbers, just by having these metrics and the an average time per elements of __0.00049__ seconds, it tells us its quite fast in this context! How come we get this get these results? One of the reason for this could be that JavaScript action runs within a single execution context, minimizing the overhead associated with action-by-action processing.
 
-If we look over to the Filter Array implementation combined with For Each action, it defiantly falls a bit under shadow when compared with Inline Code implementation. As the [time per element chart](#time-per-element-in-seconds) is indicating is some kind of performance decrease over time as the numbers of elements grows. Why is the trend? 
-Anyway, if we compared this to the For Each we can calculate the speed up by `0.095 / 0.067 ≈ 1.4`. Around 1.4x times faster just adding a filter and only letting the For Each action run with a subset of elements. As for the performance gain on average in reduced execution time it is approximately __29.0%__, calculated with the following `(0.095 - 0.067) / 0.095 * 100 ≈ 29.0`.
+If we look over to the Filter Array implementation combined with For Each action, it defiantly falls a bit under shadow when compared with Inline Code implementation. As the [time per element chart](#time-per-element-in-seconds) is indicating is some kind of performance decrease over time as the numbers of elements grows. When compared to the For Each implementation we can calculate that is is around `0.095 / 0.067 ≈ 1.4` 1.4x times faster. As for the performance gain on average in reduced execution time it is approximately __29.0%__, calculated with the following `(0.095 - 0.067) / 0.095 * 100 ≈ 29.0`.
 
-Lastly the elephant in the room For each action. It was impressive to see that it had such stable performance regardless of the amount of elements. Unfortunately it performed the worse out the three methods, it somewhat excepted since we know that there is a lot of over head the actions.  
+Lastly the elephant (literary) in the room For Each implementation. It had an impressive stable performance regardless of the amount of elements. Unfortunately it performed the worse out the three methods.
 
-Does this mean that you always should do everything with JavaScript? No, probably you do want that and with a very large sized collection, consider chunking the array to smaller pieces and etc. 
+Does this mean that you always should inject JavaScript everywhere whenever you can? Probably not, but it has its place when you need to iterate large sized collections and other task that require a more promatic approach there are also limitations that needs to be considered before jumping on the JavaScript hype train. Because JavaScript option is limited in what you can do and it also requires your team to have good knowledge around JavaScript. There is also the considerations where the you are more Pro-code or Pro-Low code.
 
-Should a Logic App process a lot of data? Perhaps no, but in a case where it is need the Javascript implementation should at least be considered. 
+Start with Filter and if there are a possibility to chunk down the collection, offload the workload on to other Logic Apps. 
 
-
-in an blog post from Microsoft it gives you tips in ways you can optimizes your workflow and etc...
-
-
-Except for the performance we will also try and rate how eazy/hard it is to debug and development.
-
-Did you enjoy read this? Interested in more benchmarks make sure to check my post about [Choosing the Quickest Logic App Condition!🏎️](/posts/benchmark-condition)!
+Interested in more benchmarks make sure to check my post about [Choosing the Quickest Logic App Condition!🏎️](/posts/benchmark-condition)!
