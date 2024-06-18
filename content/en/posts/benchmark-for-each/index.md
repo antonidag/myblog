@@ -1,6 +1,6 @@
 ---
 title: "Which Logic App Loop Saves You the Most Time?⏱️"
-date: 2024-05-13T00:00:00+00:00
+date: 2024-06-18T00:00:00+00:00
 draft: false
 description: 
 image: "posts/benchmark-for-each/time_per_element.svg"
