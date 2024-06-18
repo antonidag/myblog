@@ -1,5 +1,5 @@
 ---
-title: "Foreach loop vs performances"
+title: "Which Logic App Loop Saves You the Most Time?⏱️"
 date: 2024-05-13T00:00:00+00:00
 draft: false
 description: 
