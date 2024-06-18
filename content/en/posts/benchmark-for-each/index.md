@@ -3,7 +3,7 @@ title: "Which Logic App Loop Saves You the Most Time?⏱️"
 date: 2024-05-13T00:00:00+00:00
 draft: false
 description: 
-image: "posts/benchmark-for-each/preview.gif"
+image: "posts/benchmark-for-each/time_per_element.svg"
 ---
 
 ## Background
@@ -118,4 +118,4 @@ Key take away from this benchmark is:
 
 Interested in more benchmarks? Make sure to check my post about [Choosing the Quickest Logic App Condition!🏎️](/posts/benchmark-condition)!
 
-During the writing of this blog post, Microsoft announced <a href="https://techcommunity.microsoft.com/t5/azure-integration-services-blog/announcement-introducing-net-8-custom-code-support-for-azure/ba-p/4167893" target="_blank" rel="noopener noreferrer">Custom C# Code</a>. I will do a benchmark on this as well once the documentation is a bit more comprehensive!
+During the writing of this blog post, Microsoft announced <a href="https://techcommunity.microsoft.com/t5/azure-integration-services-blog/announcement-introducing-net-c-inline-action-for-azure-logic/ba-p/4160541" target="_blank" rel="noopener noreferrer">Custom C# Code</a>. I will do a benchmark on this as well once the documentation is a bit more comprehensive!
