@@ -9,7 +9,7 @@ image: "posts/benchmark-for-each/time_per_element.svg"
 ## Background
 Optimizing your Logic App for better performance is a hot topic, and there are many best practices and resources available. This blog  <a href="https://techcommunity.microsoft.com/t5/azure-integration-services-blog/using-inline-code-instead-of-a-foreach-loop-for-better/ba-p/3369587" target="_blank" rel="noopener noreferrer">post</a> from Microsoft explains that Inline Code could be used as an option instead of the For Each action. To get more clarity we will conduct a benchmark between the Logic Apps actions For Each, Filter Array, and Inline Code in order to gain more insight into how the different actions perform!
 
-## Exploring options For loops
+## Exploring options For loops 🔁
 Looping over an array of elements is fundamental in programming. In Logic Apps, this is typically performed by the <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-loops?tabs=consumption#foreach-loop" target="_blank" rel="noopener noreferrer">For Each action</a>. However, there are many ways to interact with a collection, such as <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-add-run-inline-code?tabs=consumption" target="_blank" rel="noopener noreferrer">Inline Codde</a>, <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-enterprise-integration-liquid-transform?tabs=consumption" target="_blank" rel="noopener noreferrer">Liquid Transformation</a>, <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-perform-data-operations?tabs=consumption" target="_blank" rel="noopener noreferrer">Data Operations</a>, and even <a href="https://learn.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference" target="_blank" rel="noopener noreferrer">Expressions</a>. Some of these methods are more limited, while others offer greater flexibility depending on the logic you wish to implement. For example, if you want to filter a collection based on a property, the Filter action is a good option. On the other hand, if you want to reverse an array, you can simply use the `reverse` Expression.
 
 ### For Each
@@ -21,7 +21,7 @@ The Filter array action is a part of the Data Operations family. It allows you t
 ### Inline Code action
 Allows you to run "vanilla" JavaScript code within Logic Apps and can be used for a vast variety of tasks. The action can utilize outputs from other actions and can also `return` the output of the code, which, in turn, can be used in other actions in your workflows.
 
-## The Benchmark
+## The Benchmark 📏
 This benchmark focuses on a use case where there is a need to filter a collection and add a property to the remaining items. We will increase the number of elements by 500, starting at 500 and going up to 10.000 elements. The benchmark will be performed on three different implementations, each focusing on a different Logic App action:
 - For Each with Condition action
 - Filter Array with For Each action
@@ -88,7 +88,8 @@ All the benchmarks will use the same resource setup:
 - WS1 App Service Plan. The scale-out burst and minimum were set to 1 instance.
 - Logic Apps Standard, with the scale-out setting set to 1 `Always Ready Instance`.
 - Workflow mode was set to `Stateful` mode, and the concurrency settings remained at default, meaning that Logic App will process several elements simultaneously.
-## Result
+
+## Result 📈
 
 ### Time per element in seconds
 ![Time_per_element_in_seconds](time_per_element.svg)
