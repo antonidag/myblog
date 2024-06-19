@@ -117,6 +117,6 @@ Key take away from this benchmark is:
 - Use JavaScript when you need to iterate a big collection, because its really fast!
 - For Each action, really stable performance.
 
-During the writing of this blog post, Microsoft announced <a href="https://techcommunity.microsoft.com/t5/azure-integration-services-blog/announcement-introducing-net-c-inline-action-for-azure-logic/ba-p/4160541" target="_blank" rel="noopener noreferrer">Custom C# Code</a>. I will do a benchmark on this as well once the documentation is a bit more comprehensive!
+During the writing of this blog post, Microsoft announced <a href="https://techcommunity.microsoft.com/t5/azure-integration-services-blog/announcement-introducing-net-c-inline-action-for-azure-logic/ba-p/4160541" target="_blank" rel="noopener noreferrer">Custom C# Code</a> for the Inline Code Action. I will do a benchmark on this as well once the documentation is a bit more comprehensive!
 
 Interested in more benchmarks? Make sure to check my post about [Choosing the Quickest Logic App Condition!🏎️](/posts/benchmark-condition)!
