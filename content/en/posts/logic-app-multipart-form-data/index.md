@@ -45,8 +45,44 @@ If it is still unclare head over this this source to read [more](https://develop
 
 ## Multipart/form-data with Logic Apps
 Now we pretty much know a bunch of things, but how does it work within Logic Apps? 
-Logic Apps likes to talks in HTTP and JSON/XML, but mostly HTTP and JSON.
+Logic Apps likes to talks in JSON, which can make things a bit confusing but let's break it down. 
 
+I have made a simple workflow using Logic App Standard. See here: 
+![workflow](workflow.png)
 
-SOme examples: 
+Whats now really intresting is if we can this workflow and look in history and output of the trigger it will look something like this: 
+
+```
+{
+    "headers": {
+        "Content-Type": "multipart/form-data; boundary=--------------------------148554401543748170006481"
+    },
+    "body": {
+        "$content-type": "multipart/form-data; boundary=--------------------------148554401543748170006481",
+        "$content": "LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTE0ODU1NDQwMTU0Mzc0ODE3MDAwNjQ4MQ0KQ29udGVudC1EaXNwb3NpdGlvbjogZm9ybS1kYXRhOyBuYW1lPSJMYXN0TmFtZSINCg0KQmFyDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tMTQ4NTU0NDAxNTQzNzQ4MTcwMDA2NDgxDQpDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9IkFkZGl0aW9uYWxJbmZvIg0KDQpIZWxsbyBXb3JsZCENCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0xNDg1NTQ0MDE1NDM3NDgxNzAwMDY0ODEtLQ0K",
+        "$multipart": [
+            {
+                "headers": {
+                    "Content-Disposition": "form-data; name=\"LastName\"",
+                    "Content-Length": "3"
+                },
+                "body": {
+                    "$content-type": "application/octet-stream",
+                    "$content": "QmFy"
+                }
+            },
+            {
+                "headers": {
+                    "Content-Disposition": "form-data; name=\"AdditionalInfo\"",
+                    "Content-Length": "12"
+                },
+                "body": {
+                    "$content-type": "application/octet-stream",
+                    "$content": "SGVsbG8gV29ybGQh"
+                }
+            }
+        ]
+    }
+}
+```
 ## Reflections
