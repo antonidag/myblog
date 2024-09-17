@@ -106,18 +106,11 @@ Created a simple HTTP trigger workflow using Logic App Standard. If we post the 
 }
 ```
 
+This might look a bit cryptic at first glance and as you noticed it does not entrily look like the raw HTTP request that was sent. But acually Logic Apps has already converted the payload into a `JSON` format, and made things a bit easier for us. The blocks in the mulitpart-form data has been converted into array can be found in the `$multipart` property. The objects in the array has a `header` and `body`. The `header` you view the field name which can be helpful when you want to filter on a specifc field. In this case the body is an `application/octet-stream`, but that because Logic Apps is keeping the content "intatct". 
 
-This might look a bit cryptic in at first glance and as you noticed it does not entrily look like the raw HTTP request that was sent. But acually Logic Apps has already converted the payload into JSON format, and made things a bit easier for us. The blocks in the mulitpart-form data has been converted into array can be found in the `$multipart` property.  
+Worth mention is that if you base64 decode the value in the `$content` property you will find the raw HTTP body. 
 
-If we break it down the triger output object:
-- `$content` property contains the full body, its encoded with base64
-- `$content-type` you can the boundary value
-- `$multipart` this property continas and array with objects containg the data. In this case the body property is as an `application/octet-stream`
-
+There is two ways to read the data from this kind of payload, either you loop over the `$mulitpart` array and retieve the values from there. Or by using one of the functions `triggerMultipartBody` or `multipartBody` which requires an index. I have extened to show case both methods:  
 ![workflow](workflow.png)
-
-
-The workflow has two different paths, one where we get the mulitpart data by index and other where we loop over the data. 
-
 
 ## Reflections
