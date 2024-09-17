@@ -47,20 +47,30 @@ If it is still unclare head over this this source to read [more](https://develop
 Now we pretty much know a bunch of things, but how does it work within Logic Apps? 
 Logic Apps likes to talks in JSON, which can make things a bit confusing but let's break it down. 
 
-I have made a simple workflow using Logic App Standard. See here: 
-![workflow](workflow.png)
-
-Whats now really intresting is if we can this workflow and look in history and output of the trigger it will look something like this: 
+Created a simple HTTP trigger workflow using Logic App Standard. If we post the same request describe in the section [What is multipart/form-data?](#what-is-multipartform-data) but now we instead call this workflow and look in trigger output, you will have something similar to this: 
 
 ```
+// Some fields in the output has been removed for readablity. 
 {
     "headers": {
-        "Content-Type": "multipart/form-data; boundary=--------------------------148554401543748170006481"
+        "Accept": "*/*",
+        "Content-Length": "506",
+        "Content-Type": "multipart/form-data; boundary=--------------------------493073486649885477988289"
     },
     "body": {
-        "$content-type": "multipart/form-data; boundary=--------------------------148554401543748170006481",
-        "$content": "LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTE0ODU1NDQwMTU0Mzc0ODE3MDAwNjQ4MQ0KQ29udGVudC1EaXNwb3NpdGlvbjogZm9ybS1kYXRhOyBuYW1lPSJMYXN0TmFtZSINCg0KQmFyDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tMTQ4NTU0NDAxNTQzNzQ4MTcwMDA2NDgxDQpDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9IkFkZGl0aW9uYWxJbmZvIg0KDQpIZWxsbyBXb3JsZCENCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0xNDg1NTQ0MDE1NDM3NDgxNzAwMDY0ODEtLQ0K",
+        "$content-type": "multipart/form-data; boundary=--------------------------493073486649885477988289",
+        "$content": "LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTQ5MzA3MzQ4NjY0OTg4NTQ3Nzk4ODI4OQ0KQ29udGVudC1EaXNwb3NpdGlvbjogZm9ybS1kYXRhOyBuYW1lPSJGaXJzdE5hbWUiDQoNCkZvbw0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTQ5MzA3MzQ4NjY0OTg4NTQ3Nzk4ODI4OQ0KQ29udGVudC1EaXNwb3NpdGlvbjogZm9ybS1kYXRhOyBuYW1lPSJMYXN0TmFtZSINCg0KQmFyDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tNDkzMDczNDg2NjQ5ODg1NDc3OTg4Mjg5DQpDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9IkFnZSINCg0KMzANCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS00OTMwNzM0ODY2NDk4ODU0Nzc5ODgyODkNCkNvbnRlbnQtRGlzcG9zaXRpb246IGZvcm0tZGF0YTsgbmFtZT0iQWRkaXRpb25hbEluZm8iDQoNCkhlbGxvIFdvcmxkIQ0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTQ5MzA3MzQ4NjY0OTg4NTQ3Nzk4ODI4OS0tDQo=",
         "$multipart": [
+            {
+                "headers": {
+                    "Content-Disposition": "form-data; name=\"FirstName\"",
+                    "Content-Length": "3"
+                },
+                "body": {
+                    "$content-type": "application/octet-stream",
+                    "$content": "Rm9v"
+                }
+            },
             {
                 "headers": {
                     "Content-Disposition": "form-data; name=\"LastName\"",
@@ -69,6 +79,16 @@ Whats now really intresting is if we can this workflow and look in history and o
                 "body": {
                     "$content-type": "application/octet-stream",
                     "$content": "QmFy"
+                }
+            },
+            {
+                "headers": {
+                    "Content-Disposition": "form-data; name=\"Age\"",
+                    "Content-Length": "2"
+                },
+                "body": {
+                    "$content-type": "application/octet-stream",
+                    "$content": "MzA="
                 }
             },
             {
@@ -85,4 +105,19 @@ Whats now really intresting is if we can this workflow and look in history and o
     }
 }
 ```
+
+
+This might look a bit cryptic in at first glance and as you noticed it does not entrily look like the raw HTTP request that was sent. But acually Logic Apps has already converted the payload into JSON format, and made things a bit easier for us. The blocks in the mulitpart-form data has been converted into array can be found in the `$multipart` property.  
+
+If we break it down the triger output object:
+- `$content` property contains the full body, its encoded with base64
+- `$content-type` you can the boundary value
+- `$multipart` this property continas and array with objects containg the data. In this case the body property is as an `application/octet-stream`
+
+![workflow](workflow.png)
+
+
+The workflow has two different paths, one where we get the mulitpart data by index and other where we loop over the data. 
+
+
 ## Reflections
