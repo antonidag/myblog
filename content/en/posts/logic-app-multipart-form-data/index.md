@@ -1,15 +1,15 @@
 ---
-title: "How to send and read multipart/form-data with Logic Apps? "
+title: "How to send and read multipart/form-data with Logic Apps?📄"
 date: 2024-09-12T00:00:00+00:00
 draft: false
-description: ""
+description: "Learn how to handle multipart/form-data in Azure Logic Apps Standard. Reading and sending multipart data using HTTP connectors, with step-by-step examples."
 image: "posts/postman-api-testing-github-actions/postman-api-testing.gif"
 ---
 
 ## Background 
 The support for working with plain `json`, `xml` or text files is great in Logic Apps, however sometimes you need send a customized message or a request to a service, in some cases you need to be available handle a different content type than your typical JSON or XML payloads and those can be a bit more challenging. In this guide we will a specially look into the less used media content type  `multipart/form-data` payloads! 
 
-## What is the Content-Type HTTP header? 📭
+## What is the Content-Type HTTP header?🏷️
 The `Content-type` HTTP header is used to describe the payload format. in the HTTP request and response so that the recevning side can decode/parse the payload correctly. There are many different content types, most commonly seen in REST APIs are usually `application/json` or `application/xml`. The `Content-Type` should not be confused with the encoding of the payload, the HTTP header `Content-Encoding` describes the applied encoding on the resource. 
 
 ### What is multipart/form-data?
@@ -43,7 +43,7 @@ If it is still unclare head over this this source to read [more](https://develop
 Now we pretty much know a bunch of things, but how does it work within Logic Apps? 
 Logic Apps likes to talks in JSON, which can make things a bit confusing but let's break it down. 
 
-### Read the data
+### Read the data 👀
 Created a simple HTTP trigger workflow using Logic App Standard. If we post the same request describe in the section [What is multipart/form-data?](#what-is-multipartform-data) but now we instead call this workflow and look in trigger output, you will have something similar to this: 
 
 ```
@@ -103,7 +103,7 @@ The full code can be viewed at my [github project]()
 
 Great, we now know how to get the data! Next stop sending... 
 
-### Send the data
+### Send the data ✉️
 
 Start by creating a new workflow in the existing Logic App. To send a `multipart/form-data` payload we need to use the HTTP connector and compose a similar body that was seen in the [Read the data](#read-the-data) section, a `json` body with the `$multipart` & `$content-type` properties and pass in the the content in array. You can copy the code below and paste into HTTP connector body: 
 
