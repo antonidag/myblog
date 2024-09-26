@@ -42,8 +42,7 @@ If it is still unclare head over this this source to read [more](https://develop
 
 
 ## Multipart/form-data with Logic Apps
-Now we pretty much know a bunch of things, but how does it work within Logic Apps? 
-Logic Apps likes to talks in JSON, which can make things a bit confusing but let's break it down. 
+How does it work with Logic Apps? Logic Apps primarily talks in `json`, which can make things a bit confusing. Let’s break it down.
 
 ### Read the data 👀
 Created a simple HTTP trigger workflow using Logic App Standard. If we post the same request describe in the section [What is multipart/form-data?](#what-is-multipartform-data) but now we instead call this workflow and look in trigger output, you will have something similar to this: 
@@ -56,7 +55,7 @@ Created a simple HTTP trigger workflow using Logic App Standard. If we post the 
     },
     "body": {
         "$content-type": "multipart/form-data; boundary=--------------------------493073486649885477988289",
-        "$content": "LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTQ5MzA3MzQ4NjY0OTg4NTQ3Nzk4ODI4OQ0KQ29udGVudC1EaXNwb3NpdGlvbjogZm9ybS1kYXRhOyBuYW1lPSJGaXJzdE5hbWUiDQoNCkZvbw0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTQ5MzA3MzQ4NjY0OTg4NTQ3Nzk4ODI4OQ0KQ29udGVudC1EaXNwb3NpdGlvbjogZm9ybS1kYXRhOyBuYW1lPSJMYXN0TmFtZSINCg0KQmFyDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tNDkzMDczNDg2NjQ5ODg1NDc3OTg4Mjg5DQpDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9IkFnZSINCg0KMzANCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS00OTMwNzM0ODY2NDk4ODU0Nzc5ODgyODkNCkNvbnRlbnQtRGlzcG9zaXRpb246IGZvcm0tZGF0YTsgbmFtZT0iQWRkaXRpb25hbEluZm8iDQoNCkhlbGxvIFdvcmxkIQ0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTQ5MzA3MzQ4NjY0OTg4NTQ3Nzk4ODI4OS0tDQo=",
+        "$content": "LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTQ5MzA3MzQ4NjY0OTg4NTQ3Nzk4ODI4OQpDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9IkZpcnN0TmFtZSIKCkZvbwotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tNDkzMDczNDg2NjQ5ODg1NDc3OTg4Mjg5CkNvbnRlbnQtRGlzcG9zaXRpb246IGZvcm0tZGF0YTsgbmFtZT0iTGFzdE5hbWUiCgpCYXIKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTQ5MzA3MzQ4NjY0OTg4NTQ3Nzk4ODI4OQpDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9IkFnZSIKCjMwCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS00OTMwNzM0ODY2NDk4ODU0Nzc5ODgyODktLQ==",
         "$multipart": [
             {
                 "headers": {
