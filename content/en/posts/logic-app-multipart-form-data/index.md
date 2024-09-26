@@ -7,7 +7,7 @@ image: "posts/postman-api-testing-github-actions/postman-api-testing.gif"
 ---
 
 ## Background 
-The support for working with plain `json`, `xml` or text files is great in Logic Apps, however sometimes you need send a customized message or a request to a service, in some cases you need to be available handle a different content type than your typical JSON or XML payloads and those can be a bit more challenging. In this guide we will a specially look into the less used media content type  `multipart/form-data` payloads! 
+The support for working with `json`, `xml`, or text files is great in Logic Apps. However, sometimes you need to send a customized message or a request to a service. In some cases, you need to be able to handle a different content types than your typical `json` or `xml` payloads, and those can be a bit more challenging. In this guide, we will specifically look into the less commonly used media content type: `multipart/form-data` payloads!
 
 ## What is the Content-Type HTTP header?🏷️
 The `Content-type` HTTP header is used to describe the payload format. in the HTTP request and response so that the recevning side can decode/parse the payload correctly. There are many different content types, most commonly seen in REST APIs are usually `application/json` or `application/xml`. The `Content-Type` should not be confused with the encoding of the payload, the HTTP header `Content-Encoding` describes the applied encoding on the resource. 
