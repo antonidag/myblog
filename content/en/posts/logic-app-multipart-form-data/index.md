@@ -44,7 +44,7 @@ If it is still unclare head over this this source to read [more](https://develop
 ## Multipart/form-data with Logic Apps
 How does it work with Logic Apps? Logic Apps primarily talks in `json`, which can make things a bit confusing. Let’s break it down.
 
-### Read the data 👀
+### Read data 👀
 Created a simple HTTP trigger workflow using Logic App Standard. If we post the same request describe in the section [What is multipart/form-data?](#what-is-multipartform-data) but now we instead call this workflow and look in trigger output, you will have something similar to this: 
 
 ```
@@ -92,19 +92,21 @@ Created a simple HTTP trigger workflow using Logic App Standard. If we post the 
 }
 ```
 
-This might look a bit cryptic at first glance and as you noticed it does not entrily look like the raw HTTP request that was sent. But acually Logic Apps has already converted the payload into a `JSON` format, and made things a bit easier for us. The blocks in the mulitpart-form data has been converted into array can be found in the `$multipart` property. The objects in the array has a `header` and `body`. The `header` provides the field name which can be helpful when you want to filter on a specifc field. The `body` is in this case an `application/octet-stream`, but that because Logic Apps is keeping the content "intatct". 
+At first glance, this might look a bit cryptic, and as you have likely noticed, it does not exactly remind you of the raw HTTP request that was sent. However, Logic Apps has already converted the payload into a `json` format. The blocks in the `multipart-form` data have been converted into an array, which can be found in the `$multipart` property.
 
-Worth mention is that the value in the `$content` property is the raw HTTP body and can be decoded using `base64`. 
+Each object in the array contains a `header` and a `body`. The `header` provides the field name, which is useful when you want to filter out specific fields. The `body` in this case is represented as `application/octet-stream`, which simply means Logic Apps is keeping the content "intact."
 
-There is two ways to read the data from this kind of payload, either you loop over the `$mulitpart` array and get the values from there. Or by using one of the functions [multipartBody](https://learn.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference#multipartBody)  or [triggerMultipartBody](https://learn.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference#triggerMultipartBody) which requires an index. I have extened the workflow to show case both methods:  
+It's worth mentioning that the value in the `$content` property is the raw HTTP body and can be decoded using base64.
+
+There are two ways to read the data from this type of payload in Logic Apps: you can either loop over the `$multipart` array to extract the values, or you can use one of the functions, multipartBody or triggerMultipartBody, which require an index. I have extended the workflow to showcase both methods:
 
 ![workflow](workflow.png)
 
-The full code can be viewed at my [github project]()
+The full code can be viewed in my GitHub project.
 
-Great, we now know how to get the data! Next stop sending... 
+Great! Now we know how to retrieve the data. Next stop: sending...
 
-### Send the data ✉️
+### Send data ✉️
 
 Start by creating a new workflow in the existing Logic App. To send a `multipart/form-data` payload we need to use the HTTP connector and compose a similar body that was seen in the [Read the data](#read-the-data) section, a `json` body with the `$multipart` & `$content-type` properties and pass in the the content in array. You can copy the code below and paste into HTTP connector body: 
 
