@@ -137,9 +137,6 @@ Notice that we did not set the `boundary` value since this gets auto generated b
 
 Below is the final code configuration for sending `multipart/form-data`: 
 ![workflow_send](workflow_send.png)
-
-Awesome, we can to now send and read `multipart/form-data` content!
-
 ## Reflections
 
 Even tho the support for sending multipart content with Logic App Standard is the greatest, is defentely possilbe. Ofcourse there is some additional qvierks that you probably needs to investage if you need to implement this. 
