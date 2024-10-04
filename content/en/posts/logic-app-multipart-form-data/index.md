@@ -10,17 +10,17 @@ image: "posts/postman-api-testing-github-actions/postman-api-testing.gif"
 The support for working with `json`, `xml`, or text files is great in Logic Apps. However, sometimes there is a need to send a customized message or a request to a service, and those can be a bit more challenging. In this guide, we will specifically look into the content type known as `multipart/form-data`!
 
 ## What is the Content-Type HTTP header?🏷️
-The `Content-Type` HTTP header describes the format of the payload in both HTTP requests and responses, allowing the receiving side to correctly decode or parse the data. There are differnt content types, with `application/json` and `application/xml` being the most common in REST APIs. It is important not to confuse `Content-Type` with `Content-Encoding`, which refers to how the resource is encoded.
+The `Content-Type` HTTP header describes the format of the payload in both HTTP requests and responses, allowing the receiving side to correctly decode or parse the data. There are different content types, with `application/json` and `application/xml` being the most common in REST APIs. It is important not to confuse `Content-Type` with `Content-Encoding`, which refers to how the resource is encoded.
 
 ### What is multipart/form-data?
 Let’s continue with the content type `multipart/form-data`. You will likely encounter this when working with HTML forms. For example, a user may need to submit their first and last name while also attaching a file. There are other implementations where the `multipart/form-data` content type is used, but this should give you an idea of where you might encounter it.
 
-Let's say we have HTML form that will submit the following fields to our backend service: 
+Let's say that we have HTML form that will submit the following fields to our backend service: 
 - Age 
 - First name
 - and Last name
 
-How does it look and work? Below is a raw HTTP post request example with `multipart/form-data` using the Postman client:
+How does it look and work? Below is an example of a raw HTTP post request with `multipart/form-data` using the Postman client:
 ```
 POST /anything HTTP/1.1
 Host: httpbin.org
@@ -98,11 +98,15 @@ It is worth mentioning that the value of the `$content` property is the raw HTTP
 
 There are two ways to read these kinds of payloads in Logic Apps:  
 - you can either loop over the `$multipart` array to extract the data. 
-- or you can use one of the functions, multipartBody or triggerMultipartBody, which require an index as input to get the data. 
+- or you can use one of the expression, multipartBody or triggerMultipartBody, which require an index as input to get the data. 
 
-Showcase of both methods:
 
-![workflow](workflow.png)
+Using the For each action and looping over the `$multipart` property: 
+![workflow_read_by_for_each](workflow_for_each.png)
+
+And an example of using the expression `triggerMultipartBody` and selecting the index `0` in the multipart array:
+![workflow_read_by_index](workflow_read_by_index.png)
+
 
 ### Send data ✉️
 In order to send a `multipart/form-data` payload we need to use the HTTP connector and compose a similar body that was seen in the [Read the data](#read-the-data) section, a `json` body with the `$content-type` and `$multipart` array properties. Create another workflow and copy in the code below and paste into HTTP connector body: 
@@ -137,6 +141,7 @@ Notice that we did not set the `boundary` value since this gets auto generated b
 
 Below is the final code configuration for sending `multipart/form-data`: 
 ![workflow_send](workflow_send.png)
+
 ## Reflections
 
-Even tho the support for sending multipart content with Logic App Standard is the greatest, is defentely possilbe. Ofcourse there is some additional qvierks that you probably needs to investage if you need to implement this. 
+Once you figure out how the HTTP connector works for sending and reading multipart the content, it works quite well. You will probably need to do some additional quirks and fixes to make sure the data is sent correctly. Next stop will be how to read and send the content type `application/x-www-form-urlencoded`!  
