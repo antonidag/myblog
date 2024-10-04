@@ -1,6 +1,6 @@
 ---
 title: "How to send and read multipart/form-data with Logic Apps?📄"
-date: 2024-09-12T00:00:00+00:00
+date: 2024-10-03T00:00:00+00:00
 draft: false
 description: "Learn how to handle multipart/form-data in Azure Logic Apps Standard. Reading and sending multipart data using HTTP connectors, with step-by-step examples."
 image: "posts/postman-api-testing-github-actions/postman-api-testing.gif"
