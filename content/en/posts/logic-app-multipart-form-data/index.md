@@ -3,7 +3,7 @@ title: "How to send and read multipart/form-data with Logic Apps?📄"
 date: 2024-10-03T00:00:00+00:00
 draft: false
 description: "Learn how to handle multipart/form-data in Azure Logic Apps Standard. Reading and sending multipart data using HTTP connectors, with step-by-step examples."
-image: "posts/postman-api-testing-github-actions/postman-api-testing.gif"
+image: "posts/logic-app-multipart-form-data/logic-app-multipart-data.gif"
 ---
 
 ## Background 
@@ -144,4 +144,6 @@ Below is the final code configuration for sending `multipart/form-data`:
 
 ## Reflections
 
-Once you figure out how the HTTP connector works for sending and reading multipart the content, it works quite well. You will probably need to do some additional quirks and fixes to make sure the data is sent correctly. Next stop will be how to read and send the content type `application/x-www-form-urlencoded`!  
+Once you figure out how the HTTP connector works with its syntax for sending and reading multipart the content, it works quite well. You will probably need to do some additional quirks and fixes to make sure the data is sent correctly. 
+
+Next stop will be how to read and send the content type `application/x-www-form-urlencoded`!  
