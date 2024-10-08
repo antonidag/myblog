@@ -7,7 +7,7 @@ image: "posts/logic-app-multipart-form-data/logic-app-multipart-data.gif"
 ---
 
 ## Background 
-The support for working with `json`, `xml`, or text files is great in Logic Apps. However, sometimes there is a need to send a customized message or a request to a service, and those can be a bit more challenging. In this guide, we will specifically look into the content type known as `multipart/form-data`!
+The support for working with `json`, `xml`, or text files is great in Logic Apps. However, sometimes there may be a need to send a customized message or a request to a service, and those can be a bit more challenging. In this guide, we will specifically look into the content type known as `multipart/form-data`!
 
 ## What is the Content-Type HTTP header?🏷️
 The `Content-Type` HTTP header describes the format of the payload in both HTTP requests and responses, allowing the receiving side to correctly decode or parse the data. There are different content types, with `application/json` and `application/xml` being the most common in REST APIs. It is important not to confuse `Content-Type` with `Content-Encoding`, which refers to how the resource is encoded.
@@ -15,7 +15,7 @@ The `Content-Type` HTTP header describes the format of the payload in both HTTP 
 ### What is multipart/form-data?
 Let’s continue with the content type `multipart/form-data`. You will likely encounter this when working with HTML forms. For example, a user may need to submit their first and last name while also attaching a file. There are other implementations where the `multipart/form-data` content type is used, but this should give you an idea of where you might encounter it.
 
-Let's say that we have HTML form that will submit the following fields to our backend service: 
+Let's say that we have an HTML form that will submit the following fields to our backend service: 
 - Age 
 - First name
 - and Last name
@@ -43,7 +43,7 @@ It is also important to mention that the `boundary` value is part of the specifi
 
 ## Multipart/form-data with Logic Apps
 ### Read data 👀
-Start by creating a simple workflow using the <a href="https://learn.microsoft.com/en-us/azure/connectors/connectors-native-reqres?tabs=consumption" target="_blank" rel="noopener noreferrer">Request trigger</a> connector. If we post the same request describe in the section [What is multipart/form-data?](#what-is-multipartform-data) but now we instead call this workflow and head into to the trigger output, you will have something similar to this: 
+Start by creating a simple workflow using the <a href="https://learn.microsoft.com/en-us/azure/connectors/connectors-native-reqres?tabs=consumption" target="_blank" rel="noopener noreferrer">Request trigger</a> connector. If we post the same request described in the section [What is multipart/form-data?](#what-is-multipartform-data) but now we instead call this workflow and head into to the trigger output, you will have something similar to this: 
 
 ```
 // Some fields in the output has been removed for readability. 
@@ -92,7 +92,7 @@ Start by creating a simple workflow using the <a href="https://learn.microsoft.c
 
 At first glance, this might look a bit cryptic, and it does not exactly remind you of the request that was sent from the Postman client. This is because Logic Apps has converted the payload into a `json` format and the blocks in the `multipart-form` have been converted into an array, which can be found under the `$multipart` property.
 
-Each object in the multipart array contains a `header` and a `body`. The `header` provides the meta data such as field name, which is useful when you want to filter out on specific fields. The `body` contains the data and in this case is represented as `application/octet-stream`, which simply means that Logic Apps is keeping the content "intact". 
+Each object in the multipart array contains a `header` and a `body`. The `header` provides the metadata such as field name, which is useful when you want to filter out on specific fields. The `body` contains the data and in this case is represented as `application/octet-stream`, which simply means that Logic Apps is keeping the content "intact". 
 
 It is worth mentioning that the value of the `$content` property is the raw HTTP body and can be decoded using base64.
 
@@ -109,7 +109,7 @@ And an example of using the expression `triggerMultipartBody` and selecting the 
 
 
 ### Send data ✉️
-In order to send a `multipart/form-data` payload we need to use the <a href="https://learn.microsoft.com/en-us/azure/connectors/connectors-native-http?tabs=standard" target="_blank" rel="noopener noreferrer">HTTP connector</a> and compose a similar body that was seen in the [Read the data](#read-the-data) section, a `json` body with the `$content-type` and `$multipart` array properties. Create another workflow and copy in the code below and paste into HTTP connector body: 
+In order to send a `multipart/form-data` payload we need to use the <a href="https://learn.microsoft.com/en-us/azure/connectors/connectors-native-http?tabs=standard" target="_blank" rel="noopener noreferrer">HTTP connector</a> and compose a similar body that was seen in the [Read the data](#read-the-data) section, a `json` body with the `$content-type` and `$multipart` array property. Create another workflow and copy in the code below and paste into HTTP connector body: 
 
 ```
 {
