@@ -1,5 +1,5 @@
 ---
-title: "How to send and read url-encoded data with Logic Apps?📄"
+title: "Working with url-encoded data in Logic Apps?🔢"
 date: 2024-10-07T00:00:00+00:00
 draft: false
 description: "Learn how to handle multipart/form-data in Azure Logic Apps Standard. Reading and sending multipart data using HTTP connectors, with step-by-step examples."
