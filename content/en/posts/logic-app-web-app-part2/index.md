@@ -8,7 +8,7 @@ image: "posts/logic-app-web-app/clientwebserver.gif"
 
 
 ## Background
-Last year I wrote an blog post about how Logic Apps Standard can be used to build an web application, you can find the blog [here](/posts/logic-app-web-app). But that was more or less a proof of concept, idea, is this really possible. I did not look into other layers that is typical needed in your web application, and how these requirements can be solved to meet a more of an enterprise level. So in this blog post we will explore different topics of an web application and how these can be solved with Azure Services! 
+Last year I wrote an blog post about how Logic Apps Standard can be used as framework to build an web application, you can find the blog [here](/posts/logic-app-web-app). But that was more or less a proof of concept, idea, is this really possible. I did not look into other layers that is typical needed in your web application, and how these requirements can be solved to meet a more of an enterprise level. So in this blog post we will explore different topics of an web application and how these can be solved with Azure Services! 
 
 ## Digesting a web application 💻
 At its core, a web application is simply `HTML` and `JavaScript` code hosted on a web server. However, when you look deeper, you'll see that a web app consists of multiple technical components, such as:
