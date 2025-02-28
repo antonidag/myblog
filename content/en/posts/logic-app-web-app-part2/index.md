@@ -35,30 +35,52 @@ Each service plays an important role in this architecture:
 
 - __API Management__ handles APIs, routing, authentication, and caching for optimized response times.
 
-- __Logic App Standard__ acts as both the front-end and back-end of the application. It delivers `HTML` and `JavaScript` while also handling business APIs. All pages are generated and rendered by the server (SSR), with some being more dynamic than others.
+- __Logic App Standard__ handles both the front-end and back-end code of the application. It delivers `HTML` and `JavaScript` to the client while also implementing business APIs. All pages are generated and rendered by the server [(SSR)](/posts/logic-app-web-app/#server-side-rendering), with some being more dynamic than others.
 
-This structured separation ensures security, efficiency, and scalability—starting with secure traffic handling, followed by authentication and caching, and concluding with the application logic itself.
+By following this structure we ensure clear separations:
+- Fist layer handles incoming traffic in a secure way. 
+- Second layer deals with APIs, authentication and caching. 
+- Last layer is the application logic itself.
 
 ## Front-end & Back-end
-The concept of front-end and back-end still exists within this context. However, the lines are bit more blurry. But even modern framework like next.js utilize this kind of mixing front and back-ends into one application, some funcunallity runs on the server while other runs on client. The same principle can be applied here, it more or less a matter of how creative you want to be. The method I found to quite straight was to build that one page would be one workflow. 
+For those of you who have read my first blog post about Logic Apps as a Web App, you probably already know how it’s done, but let’s do a quick recap anyway.
+Essentially, we use the request trigger together with the response action, making sure the ``Content-Type`` is set to ``text/html`` so the content displays properly in the browser—and that’s pretty much it. If you want a more detailed breakdown, check out the implementation section here.
 
-Something about liquid  
+The whole front-end/back-end concept is a bit mixed here since Logic Apps handles everything, but in some ways, this isn’t anything new or totally-crazy. Server-side rendering has been around for years, and if you look at frameworks like Blazor or Next.js, they play around with the same idea in their own way. One core difference is that modern tools like Blazor are built with this functionality in mind, offering a structured and integrated way to handle rendering and interactivity. In our case, it’s more of an old-school approach to creating a web application—leveraging Logic Apps in a way it wasn’t originally designed for.
 
-### Routing
-Correct routing is a big part of making this work
+### Defining the Structure
+With this in mind, the method that I have put together follows a few core principles:
+
+- __Treat each page as a workflow__ – Every page corresponds to a Logic Apps workflow, ensuring clear separation.
+- __Shared components__ can be created as separate workflow and load thru an `<iframe>`.  
+- __Load dynamic content via an iframe__ – If a page requires dynamic content, use an iframe and create a separate sub-workflow for that specific content.
+- __Separate workflows for actions__ – Any action that is not an the typical `GET` method like edit, create, or delete should be handled in its own dedicated workflow, keeping page logic clean.
+- __One Liquid template per page__ – Each page should have only one Liquid template to keep things structured and avoid unnecessary complexity.
+- Utilize the templates for more than basic headers, css, and body.
+- __Never invoke and return a page by the index workflow from another workflow__, a workflow should always return its own page instead the user should be redirected. 
+
+### Navigation
+Logic Apps request trigger generates a quite lengthy url we can examin it here: 
+```
+&sig=sadaslödkqlöwkedlqkwdlkasdaslödksa
+```
+This is one of the reasons why navigation is quite tricky with Logic Apps, because the signature is in some way a secret that should not be exposed. The other issue is that we can not predict these values meaning that hard to work with. Bascilly we just want to have simple linking between the pages like `<a href="/posts">Go to posts</a>`
+Correct is a big part of making this work. It would not look very clean if we had to include the whole Logic app url here. Luckly with the propoesed architecture this is solved at the Application Gateway and API Management layers, thus enabling us to a simple `<a href="/posts"></a> `with out any hassle for example. This is also with it is important to never invoke another pages workflow and retuning it from because it will create disorientation and lead to utter failure.  
 
 ### Redirecting
 
-### Authentication
+## Authentication
 Cookies are sent in the HTTP header, and they are domain specific. 
 Best practice is to HTTP-only cookies
-Cookies & APIM policy jwt 
+Cookies & APIM policy jwt
 
-
+the best way to do this ia doing a Federation login with your OICD Identify, this way credentials never have to enter your application. 
 
 ## Performance 
 Cache APIM internal/ Stateless / avoid to much complexity within liquid.
 There is of course many ways to improve the page load, one example of this to utilizes the cache, is to load dynamic content as within iframes or embed tags. Is is because then html elements will be cache rather than the content.   
+
+
 ## Assets 
 Dealing with assets is also a bit tricky since you can not do any direct pointing the server since it is a Logic App service, but the way you would do it is to in Azure expose a storage account on a specific path. Like domain.se/assets/**.img/jpg 
 
