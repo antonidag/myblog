@@ -64,10 +64,20 @@ Logic Apps request trigger generates a quite lengthy url we can examin it here:
 ```
 &sig=sadaslödkqlöwkedlqkwdlkasdaslödksa
 ```
-This is one of the reasons why navigation is quite tricky with Logic Apps, because the signature is in some way a secret that should not be exposed. The other issue is that we can not predict these values meaning that hard to work with. Bascilly we just want to have simple linking between the pages like `<a href="/posts">Go to posts</a>`
-Correct is a big part of making this work. It would not look very clean if we had to include the whole Logic app url here. Luckly with the propoesed architecture this is solved at the Application Gateway and API Management layers, thus enabling us to a simple `<a href="/posts"></a> `with out any hassle for example. This is also with it is important to never invoke another pages workflow and retuning it from because it will create disorientation and lead to utter failure.  
+This is one of the reasons why navigation is quite tricky with Logic Apps, because the signature is in some way a secret that should not be exposed. The other issue is that we can not predict these values meaning that hard to work with. Basically we just want to have simple linking between the pages like `<a href="/posts">Go to posts</a>`
+Correct is a big part of making this work. It would not look very clean if we had to include the whole Logic app url here. Luckily with the proposed architecture this is solved at the Application Gateway and API Management layers, thus enabling us to a simple `<a href="/posts"></a> `with out any hassle for example. This is also with it is important to never invoke another pages workflow and retuning it from because it will create disorientation and lead to utter failure.  
 
 ### Redirecting
+Is a technical term used in web applications to when the application is automatically directing you to and another part of the site. An example of this could you are making a purchase on a e-shop and then the actual payment is direct to Klara site and once the payment is completed you are redirected back to the e-shop. 
+
+
+The way that I found to was to create a simple `HTML` with some `JavaScript`, shown here: 
+
+```
+
+```  
+
+One of the reason we have to do it like this is because Logic App Request connector does not support the redirect HTTP 302 and Loction.  
 
 ## Authentication
 Cookies are sent in the HTTP header, and they are domain specific. 
@@ -86,8 +96,10 @@ Dealing with assets is also a bit tricky since you can not do any direct pointin
 
 ## Reflections
 
-I think the most hassles you will have working with Logic Apps for a website is probably the routing since there is any direct integration between Azure API Management and Logic App Standard. 
+The more and more I started to working on this I have realized that no matter which technology stack, framework you choose or method. Making a successful application requires a thought through architecture and it is actually less dependent on what tools you are using. Yes, ofcourse some things are easier to build while others are harder but in the end it is still the same issues you are trying to tackle. In some sense you are trying to create away to easily manipulate the html code while presenting content quickly. Like a Single Page Application is not a silver bullet solving every problem. 
 
-The more and more I started to working on this I have realized that no matter which technology stack, framework you choose or method. Making a successful application requires a thought through architecture and it is actually less dependent on what platform you are using. Yes, ofcourse some things are easier to build while others are harder but in the end it is still the same issues you are trying to tackle. In some sense you are trying to create away to easily manipulate the html code while presenting content quickly. Like a Single Page Application is not a silver bullet solving every problem. 
+After a project like this I do have to say that it works really well, you would really noised that it is a Logic App "running" in the show. You also get a quite good understanding of the an web application works and its challenges, and apprichiachgen for new tools like React, and Blazor. 
+
+I think the most hassles you will have working with Logic Apps for a website is probably the routing since there is any direct integration between Azure API Management and Logic App Standard. The developer experience is pretty OK, depending on who you are asking it might be really bad since running the project locally is not really an option, you need API Management to fix the routing. But if you are used to a bit of mix of local and cloud development building, debugging, is straight forward.  
 
 When you are dealing low complexity such as just a simple create, update, list and delete operations something something
