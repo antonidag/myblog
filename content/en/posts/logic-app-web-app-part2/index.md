@@ -1,6 +1,6 @@
 ---
 title: "Logic App Web App v2"
-date: 2025-01-27T00:00:00+01:00
+date: 2025-03-01T00:00:00+01:00
 draft: false
 description: 
 image: "posts/logic-app-web-app/clientwebserver.gif"
@@ -60,21 +60,45 @@ With this in mind, the method that I have put together follows a few core princi
 - __Never invoke and return a page by the index workflow from another workflow__, a workflow should always return its own page instead the user should be redirected. 
 
 ### Navigation
-Logic Apps request trigger generates a quite lengthy url we can examin it here: 
+Navigation in Logic Apps is challenging for two main reasons: the workflow name and the signature. A standard URL for an HTTP trigger looks like this:
 ```
-&sig=sadaslödkqlöwkedlqkwdlkasdaslödksa
+https://myLogicApp.azurewebsites.net:443/api/myWorkflow/triggers/my_http_trigger/invoke?api-version=2022-05-01&sp=%2Ftriggers%my_http_trigger%2Frun&sv=1.0&sig=123abc456def
+``` 
+This complexity makes navigation tricky because the signature (sig) acts as a secret that should not be exposed. Additionally, these values are dynamically generated, making them unpredictable and difficult to work with.
+
+Ideally, we want simple, clean navigation between pages. However, if we had to include the full Logic App URL in every link, it would look like this:
 ```
-This is one of the reasons why navigation is quite tricky with Logic Apps, because the signature is in some way a secret that should not be exposed. The other issue is that we can not predict these values meaning that hard to work with. Basically we just want to have simple linking between the pages like `<a href="/posts">Go to posts</a>`
-Correct is a big part of making this work. It would not look very clean if we had to include the whole Logic app url here. Luckily with the proposed architecture this is solved at the Application Gateway and API Management layers, thus enabling us to a simple `<a href="/posts"></a> `with out any hassle for example. This is also with it is important to never invoke another pages workflow and retuning it from because it will create disorientation and lead to utter failure.  
+<a href="https://myLogicApp.azurewebsites.net:443/api/myWorkflow/triggers/my_http_trigger/invoke?api-version=2022-05-01&sp=%2Ftriggers%2Fmy_http_trigger%2Frun&sv=1.0&sig=123abc456def">
+    Go to posts
+</a>
+
+```
+Using such URLs for every link would make the implementation cumbersome and messy. Fortunately, with our proposed architecture, this problem is solved at the Application Gateway and API Management layers, allowing us to use clean URLs like:
+```
+<a href="/posts">Go to posts</a>
+```
+This approach enables seamless navigation without exposing sensitive details or dealing with long, complex URLs.
+
+Lastly, it is crucial never to invoke another page's workflow and return its response directly, as this can lead to disoriented navigation and potential failure.
 
 ### Redirecting
-Is a technical term used in web applications to when the application is automatically directing you to and another part of the site. An example of this could you are making a purchase on a e-shop and then the actual payment is direct to Klara site and once the payment is completed you are redirected back to the e-shop. 
+Redirecting is a technical term used in web applications when the application automatically directs you to another part of the site. For example, when making a purchase on an web site, the actual payment might be handled by a third-party service like Klarna. Once the payment is completed, you are redirected back to the web site.
 
 
-The way that I found to was to create a simple `HTML` with some `JavaScript`, shown here: 
+The approach I found to handle redirection is by creating a simple HTML page with some JavaScript, as shown below:
 
 ```
-
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Redirecting...</title>
+  </head>
+  <body>
+    <script>
+      window.location.replace('/posts');
+    </script>
+  </body>
+</html>
 ```  
 
 One of the reason we have to do it like this is because Logic App Request connector does not support the redirect HTTP 302 and Loction.  
@@ -86,13 +110,14 @@ Cookies & APIM policy jwt
 
 the best way to do this ia doing a Federation login with your OICD Identify, this way credentials never have to enter your application. 
 
+## Assets 
+Dealing with assets is also a bit tricky since you can not do any direct pointing the server since it is a Logic App service, but the way you would do it is to in Azure expose a storage account on a specific path. Like domain.se/assets/**.img/jpg 
 ## Performance 
 Cache APIM internal/ Stateless / avoid to much complexity within liquid.
 There is of course many ways to improve the page load, one example of this to utilizes the cache, is to load dynamic content as within iframes or embed tags. Is is because then html elements will be cache rather than the content.   
 
 
-## Assets 
-Dealing with assets is also a bit tricky since you can not do any direct pointing the server since it is a Logic App service, but the way you would do it is to in Azure expose a storage account on a specific path. Like domain.se/assets/**.img/jpg 
+
 
 ## Reflections
 
