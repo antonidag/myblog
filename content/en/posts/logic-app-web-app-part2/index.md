@@ -116,9 +116,6 @@ Dealing with assets is also a bit tricky since you can not do any direct pointin
 Cache APIM internal/ Stateless / avoid to much complexity within liquid.
 There is of course many ways to improve the page load, one example of this to utilizes the cache, is to load dynamic content as within iframes or embed tags. Is is because then html elements will be cache rather than the content.   
 
-
-
-
 ## Reflections
 
 The more and more I started to working on this I have realized that no matter which technology stack, framework you choose or method. Making a successful application requires a thought through architecture and it is actually less dependent on what tools you are using. Yes, ofcourse some things are easier to build while others are harder but in the end it is still the same issues you are trying to tackle. In some sense you are trying to create away to easily manipulate the html code while presenting content quickly. Like a Single Page Application is not a silver bullet solving every problem. 
