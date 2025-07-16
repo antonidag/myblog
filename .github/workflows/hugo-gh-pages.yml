@@ -54,7 +54,7 @@ jobs:
       - name: Find and replace domain name
         run: ./find_replace_domain_name.sh
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
       - name: Use Node.js
