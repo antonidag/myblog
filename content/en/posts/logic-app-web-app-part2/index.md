@@ -19,7 +19,7 @@ At its core, a web application is simply `HTML` and `JavaScript` code hosted on 
 - Authentication & Authorization
 - Performance & Scalability
 - Security
-- ...and so on.
+- ...and so on
 
 All these components must come together to create a fully functional web application.
 
@@ -43,7 +43,7 @@ This approach keeps sensitive information, like the Logic App signature `sig` an
 
 ## Frontend, backend or a bit of mix?
 For those of you who have read my first blog post about Logic Apps as a Web App, you probably already know how it is done, but let's do a quick recap anyway.
-Essentially, we use the request trigger together with the response action, making sure the ``Content-Type`` is set to ``text/html`` so the content displays properly in the browser—and that is pretty much it.
+Essentially, we use the request trigger together with the response action, making sure the `Content-Type` is set to `text/html` so the content displays properly in the browser—and that is pretty much it.
 
 The whole frontend/backend separation is sort of lost here, but that is not necessarily a bad thing. Server-side rendering (SSR) has been around for years. Frameworks like Blazor or Next.js are built on similar concepts, just with more structure. In our case, it is a more old-school approach to web development using Logic Apps in a way they were not originally intended for.
 
@@ -68,7 +68,7 @@ With this in mind, the method that I have put together follows a few core princi
 
 
 ### Redirecting
-Redirecting is when you automatically send the user to another part of the site, such as after a payment with a third-party provider. Since Logic App Request connector does not support HTTP 302 redirects and the `Location` header, the workaround is to return a simple ``HTML`` page with ``JavaScript``:
+Redirecting is when you automatically send the user to another part of the site, such as after a payment with a third-party provider. Since Logic App Request connector does not support HTTP 302 redirects and the `Location` header, the workaround is to return a simple `HTML` page with `JavaScript`:
 
 ```html
 <!DOCTYPE html>
@@ -91,7 +91,7 @@ Response times and overall performance are critical for web applications—if yo
 
 * **Caching:** Use APIM caching policies wherever possible.
 * **Stateless workflows:** Less overhead and better performance.
-* **Dynamic loading:** Load data only when needed using ``iframes`` or `embed` tags.
+* **Dynamic loading:** Load data only when needed using `iframes` or `embed` tags.
 
 When implemented correctly, these optimizations will have big impact on the responsiveness.
 
@@ -99,7 +99,7 @@ When implemented correctly, these optimizations will have big impact on the resp
 
 The more I worked on this project, the more I realized that success is not tied to any specific technology, it is about the architecture.
 
-Every web stack has its tradeoffs. Some parts are easy to implement, others are painful. But the challenge is always the same: serve content fast and manage ``HTML`` in a maintainable way.
+Every web stack has its tradeoffs. Some parts are easy to implement, others are painful. But the challenge is always the same: serve content fast and manage `HTML` in a maintainable way.
 
 Logic Apps did surprisingly well. You would not notice that Logic Apps are "running the show", which was the goal. It also gave me a much deeper appreciation for how modern web applications are structured.
 
@@ -107,4 +107,4 @@ The biggest hassle with Logic Apps for a web application is the **routing**, sin
 
 There are things that I am skipping in this article, for instance how to handle cookies, session, and other default types of behavior that come with a web application. For this you will need to look at APIM policies.
 
-Anyway, for low complexity scenarios, such as ``CRUD`` apps and demos, using Logic Apps to build web applications could be an option. When you over-engineer, you can actually get quite good performance and user experience. With the right architecture in place, you can also meet enterprise-level requirements such as authentication, security, and scaling. However, if your application requires alot of changes or complex user interfaces, you might find yourself going down a deep rabbit hole!
+Anyway, for low complexity scenarios, such as `CRUD` apps and demos, using Logic Apps to build web applications could be an option. When you over-engineer, you can actually get quite good performance and user experience. With the right architecture in place, you can also meet enterprise-level requirements such as authentication, security, and scaling. However, if your application requires alot of changes or complex user interfaces, you might find yourself going down a deep rabbit hole!
